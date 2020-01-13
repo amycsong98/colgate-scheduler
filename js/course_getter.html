@@ -1,0 +1,56 @@
+
+
+<script>
+  console.log("hello");
+  /*
+  time: list
+  days: list
+  openOnly = t/f {
+  core string
+  inquiry string
+
+  }
+  */
+  // var history201802 = searchCourses("history", "201802", []);
+  // var computerscience = searchCourses("computer+science", null, []);
+  var programstesting = searchCourses("", "201902", ["ALS2", "ALST"])
+
+  // requestSearch(history201802);
+  // requestSearch(computerscience);
+  requestSearch(programstesting);
+
+  function searchCourses(keyword, term="201902", programs, core="", inquiry="", days, morning, afternoon, evening, openOnly=false) {
+    var prefix = "https://api.colgate.edu/v1/courses/search?";
+    var keywordCode = "keyword=" + keyword;
+    var termCode = term == "&termCode=" + term;
+
+    var programCode = "";
+    for (program of programs) {
+      programCode += "&program[]=" + program;
+    }
+
+    var coreCode = core == "&coreArea=" + core;
+    var inquiryCode = "&inquiryArea=" + inquiry;
+
+    var dayCode = "";
+    for (day of days) {
+      dayCode += "&meetDays[]=" + program;
+    }
+
+    var timeCode = "&meetTimeMorning=" + (morning == true)? "Y" : "false";
+    timeCode += "&meetTimeAfternoon=" + (afternoon == true)? "Y" : "false";
+    timeCode += "&&meetTimeEvening=" + (afternoon == true)? "Y" : "";
+
+    var openOnlyCode = openOnly? "&openCoursesOnly=" : "&openCoursesOnly=Y";
+
+    return prefix + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
+  }
+
+  function requestSearch(url) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, false);
+    xhttp.send(null);
+    console.log(xhttp.responseText);
+  }
+
+</script>
