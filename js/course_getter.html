@@ -2,34 +2,28 @@
 
 <script>
   console.log("hello");
-  /*
-  time: list
-  days: list
-  openOnly = t/f {
-  core string
-  inquiry string
 
-  }
-  */
-  // var history201802 = searchCourses("history", "201802", []);
-  // var computerscience = searchCourses("computer+science", null, []);
-  var programstesting = searchCourses("", "201902", ["ALS2", "ALST"])
+  // var history201802 = searchCourses("history", "201802", [], "", "", [], false, false, false, false);
+  // var computerscience = searchCourses("computer+science", "201902", [], "", "", [], false, false, false, true);
+  var programstesting = searchCourses("", "201902", ["ALS2", "ALST"], "", "", [], false, false, false, true);
 
+  console.log("url: " + programstesting);
   // requestSearch(history201802);
   // requestSearch(computerscience);
   requestSearch(programstesting);
 
-  function searchCourses(keyword, term="201902", programs, core="", inquiry="", days, morning, afternoon, evening, openOnly=false) {
+
+  function searchCourses(keyword, term, programs, core, inquiry, days, morning, afternoon, evening, openOnly) {
     var prefix = "https://api.colgate.edu/v1/courses/search?";
     var keywordCode = "keyword=" + keyword;
-    var termCode = term == "&termCode=" + term;
+    var termCode = "&termCode=" + term;
 
     var programCode = "";
     for (program of programs) {
       programCode += "&program[]=" + program;
     }
 
-    var coreCode = core == "&coreArea=" + core;
+    var coreCode = "&coreArea=" + core;
     var inquiryCode = "&inquiryArea=" + inquiry;
 
     var dayCode = "";
@@ -37,11 +31,11 @@
       dayCode += "&meetDays[]=" + program;
     }
 
-    var timeCode = "&meetTimeMorning=" + (morning == true)? "Y" : "false";
-    timeCode += "&meetTimeAfternoon=" + (afternoon == true)? "Y" : "false";
-    timeCode += "&&meetTimeEvening=" + (afternoon == true)? "Y" : "";
+    var timeCode = morning? "&meetTimeMorning=Y" : "&meetTimeMorning=false";
+    timeCode += afternoon? "&meetTimeAfternoon=Y" : "&meetTimeAfternoon=false";
+    timeCode += evening? "&meetTimeEvening=Y" : "&meetTimeEvening=";
 
-    var openOnlyCode = openOnly? "&openCoursesOnly=" : "&openCoursesOnly=Y";
+    var openOnlyCode = openOnly? "&openCoursesOnly=Y" : "&openCoursesOnly=";
 
     return prefix + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
   }
