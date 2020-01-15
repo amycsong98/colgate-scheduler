@@ -1,0 +1,6 @@
+<div class="box {{day}} {{time}}">
+    <!-- displaying days -->
+    <p *ngIf="day!='time' && time==0">{{ fullDayName(day) }}</p>
+    <!-- displaying time -->
+    <p *ngIf="day=='time' && time!=0">{{ time < 13 ? time + ' am' : time - 12 + ' pm' }}</p>
+</div>

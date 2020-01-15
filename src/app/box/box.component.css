@@ -1,0 +1,15 @@
+.M, .T, .W, .Th, .F {
+    float: left;
+    height: 40px;
+    width: 100px;
+    border: 1px solid;
+}
+
+.time {
+    float: left;
+    clear: both;
+
+    height: 40px;
+    width: 50px;
+    border: 1px solid;
+}

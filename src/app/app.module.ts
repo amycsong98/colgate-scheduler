@@ -3,10 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BoxComponent } from './box/box.component';
+import { TimeTableComponent } from './time-table/time-table.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BoxComponent,
+    TimeTableComponent
   ],
   imports: [
     BrowserModule,

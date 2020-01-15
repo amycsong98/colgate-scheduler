@@ -1,0 +1,9 @@
+<div>
+    <div *ngFor='let time of times'>
+        <div *ngFor='let day of days'>
+            <app-box id="{{day}}-{{time}}" [day]="day" [time]="time"></app-box>
+        </div>
+    </div>
+</div>
+
+<button (click)="test()">test</button>
