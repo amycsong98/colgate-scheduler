@@ -1,11 +1,16 @@
-.M, .T, .W, .Th, .F {
+/* .M, .T, .W, .Th, .F,  */
+.day-row {
+    background-color: gray;
+}
+
+.day-col {
     float: left;
     height: 40px;
     width: 100px;
     border: 1px solid;
 }
 
-.time {
+.time-col {
     float: left;
     clear: both;
 

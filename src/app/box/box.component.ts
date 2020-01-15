@@ -6,9 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./box.component.css']
 })
 export class BoxComponent implements OnInit {
-  @Input() day;
-  @Input() time;
-  @Input() color;
+  @Input() color: string;
+  @Input() index: number;
+
+  numOfCol = 6;
 
   constructor() { }
 
@@ -16,17 +17,25 @@ export class BoxComponent implements OnInit {
 
   }
 
-  fullDayName(day: string) {
-    switch(day) {
-      case 'M':
+  isDayRow(index) {
+    return index < this.numOfCol;
+  }
+
+  isTimeCol(index) {
+    return index % this.numOfCol == 0;
+  }
+
+  ind2day(index) {
+    switch(index) {
+      case 1:
         return 'Monday';
-      case 'T':
+      case 2:
         return 'Tuesday';
-      case 'W':
+      case 3:
         return 'Wednesday';
-      case 'Th':
+      case 4:
         return 'Thursday';
-      case 'F':
+      case 5:
         return 'Friday';
       default:
         return 'ERROR';
