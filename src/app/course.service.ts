@@ -10,25 +10,34 @@ export class CourseService {
 
   }
 
-  // need to check for duplicates
+  getCourses() {
+    return this.str2list(this.cookieService.get('courses'));
+  }
+
   addCourse(DISPLAY_KEY: string) {
     let courses = this.getCourses();
     // courses is empty
-    if (courses === '') {
-      courses = DISPLAY_KEY;
+    if (this.isCoursesEmpty(courses)) {
+      courses = [DISPLAY_KEY];
+      console.log('test:' + courses);
     } else {
       if (this.isDuplicate(courses, DISPLAY_KEY)) {
         return 'fail';
       }
-      courses = courses + ',' + DISPLAY_KEY;
+      courses.push(DISPLAY_KEY);
     }
-    this.cookieService.set('courses', courses, 365, '/');
+    this.cookieService.set('courses', courses.join('|'), 365, '/');
     return 'success';
   }
 
-  isDuplicate(courses: string, newCourse: string) {
-    const coursesList = courses.split(',');
-    for (const course of coursesList) {
+  // helper functions
+  isCoursesEmpty(courses: string[]) {
+    return courses === undefined || courses.length === 0 || courses[0] === '';
+  }
+
+  // checks if newCourse is in courses
+  isDuplicate(courses: string[], newCourse: string) {
+    for (const course of courses) {
       if (course === newCourse) {
         return true;
       }
@@ -36,7 +45,8 @@ export class CourseService {
     return false;
   }
 
-  getCourses() {
-    return this.cookieService.get('courses');
+  // delimiter: '|'
+  str2list(str: string) {
+    return str.split('|');
   }
 }
