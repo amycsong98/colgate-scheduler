@@ -21,7 +21,7 @@ export class TimeTableComponent implements OnInit {
   }
 
   test() {
-    console.log(this.courseService.addCourse('COSC 101 A'));
+    console.log(this.courseService.removeCourse('COSC 101 A'));
     // this.courseService.addCourse('COSC 102 B');
     // console.log(this.courseService.getCourses());
   }

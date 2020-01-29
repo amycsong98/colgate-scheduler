@@ -26,11 +26,22 @@ export class CourseService {
       }
       courses.push(DISPLAY_KEY);
     }
-    this.cookieService.set('courses', courses.join('|'), 365, '/');
+    this.setCourses(courses);
     return 'success';
   }
 
+  removeCourse(DISPLAY_KEY: string) {
+    let courses = this.getCourses();
+
+    courses = courses.filter(e => e !== DISPLAY_KEY);
+    this.setCourses(courses);
+  }
+
   // helper functions
+  setCourses(courses: string[]) {
+    this.cookieService.set('courses', courses.join('|'), 365, '/');
+  }
+
   isCoursesEmpty(courses: string[]) {
     return courses === undefined || courses.length === 0 || courses[0] === '';
   }
