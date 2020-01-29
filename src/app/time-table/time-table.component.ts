@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-time-table',
@@ -13,19 +14,28 @@ export class TimeTableComponent implements OnInit {
 
   colors: string[] = new Array<string>(this.numOfBoxes);
 
-  constructor() { }
+  constructor(private courseService: CourseService) { }
 
   ngOnInit() {
-    
+    console.log(this.courseService.getCourses());
   }
 
   test() {
-    // console.log('hello');
-    // var element = document.getElementById("Th-10");
+    // this.courseService.addCourse('COSC 101 A');
+    // this.courseService.addCourse('COSC 102 B');
+    console.log(this.courseService.getCourses());
+  }
+
+  /*
+  test() {
+    console.log('hello');
+    var element = document.getElementById("box-9");
     // element.setAttribute('ng-reflect-color', 'green');
-    // console.log(element)
+    console.log(element.children[0])
+    var child = element.children[0] as HTMLElement;
+    child.style.backgroundColor = 'green';
     this.colors[14]='green';
     this.colors[15]='red';
     console.log(this.numOfBoxes)
-  }
+  }*/
 }

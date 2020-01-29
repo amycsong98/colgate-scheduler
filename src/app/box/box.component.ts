@@ -17,6 +17,10 @@ export class BoxComponent implements OnInit {
 
   }
 
+  indexToTime(index) {
+    return index / 6 + 6 < 13 ? index / 6 + 6 + ' am' : index / 6 + 6 - 12 + ' pm';
+  }
+
   isDayRow(index) {
     return index < this.numOfCol;
   }
@@ -25,7 +29,7 @@ export class BoxComponent implements OnInit {
     return index % this.numOfCol == 0;
   }
 
-  ind2day(index) {
+  indToday(index) {
     switch(index) {
       case 1:
         return 'Monday';

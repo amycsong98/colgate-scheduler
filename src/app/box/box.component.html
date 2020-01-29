@@ -8,8 +8,8 @@
 
 <div class="box {{ isTimeCol(index) ? 'time-col' : 'day-col' }} {{ isDayRow(index) ? 'day-row' : ''}}">
     <!-- displaying days -->
-    <p *ngIf="isDayRow(index) && index != 0">{{ ind2day(index) }}</p>
+    <p *ngIf="isDayRow(index) && index != 0">{{ indToday(index) }}</p>
     <!-- displaying time -->
-    <p *ngIf="isTimeCol(index) && index != 0">{{ index / 6 + 6 < 13 ? index / 6 + 6 + ' am' : index / 6 + 6 - 12 + ' pm'}} </p>
+    <p *ngIf="isTimeCol(index) && index != 0">{{ indexToTime(index) }} </p>
     <p *ngIf="color">{{ color }}</p>
 </div>
