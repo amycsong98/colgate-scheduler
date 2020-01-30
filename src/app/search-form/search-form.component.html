@@ -4,7 +4,19 @@
             <input matInput id="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
         </mat-form-field>
         <br>
+    
+        <mat-form-field>
+            <mat-label>TERM</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let term of terms" [value]="term">
+                    {{ term }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br>
+
+        <button type="submit" mat-raised-button>Search</button>
     </form>
 
-    <button type="submit" mat-raised-button>Search</button>
+    <!-- {{terms | json}} -->
 </div>

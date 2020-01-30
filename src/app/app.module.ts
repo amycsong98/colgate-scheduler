@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 // angular material
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 import { CookieService } from 'ngx-cookie-service';
@@ -28,7 +30,9 @@ import { SearchFormComponent } from './search-form/search-form.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    HttpClientModule,
+    MatCheckboxModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
