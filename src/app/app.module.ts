@@ -16,6 +16,7 @@ import { BoxComponent } from './box/box.component';
 import { TimeTableComponent } from './time-table/time-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
+import { ApiUrl } from './api-url';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,10 @@ import { SearchFormComponent } from './search-form/search-form.component';
     HttpClientModule,
     MatCheckboxModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    ApiUrl
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

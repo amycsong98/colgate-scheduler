@@ -8,8 +8,8 @@
         <mat-form-field>
             <mat-label>TERM</mat-label>
             <mat-select>
-                <mat-option *ngFor="let term of terms" [value]="term">
-                    {{ term }}
+                <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
+                    {{ term.TERM_DESC }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
