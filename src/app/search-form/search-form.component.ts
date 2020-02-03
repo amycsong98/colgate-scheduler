@@ -13,7 +13,9 @@ import { ApiUrl } from '../api-url';
 })
 export class SearchFormComponent implements OnInit {
   // array of {TERM_CODE: "201902", TERM_DESC: "Spring 2020"}
-  terms: string[];
+  terms: any[];
+
+  programs: any[];
 
   constructor(
     private httpClient: HttpClient,
@@ -27,9 +29,29 @@ export class SearchFormComponent implements OnInit {
         this.terms = res;
       }
     );
+
+    // initialize department / program
+    this.getPrograms().subscribe(
+      res => {
+        this.programs = res;
+        console.log(this.programs);
+      }
+    )
   }
 
   getTerms(): Observable<any> {
     return this.httpClient.get(this.apiUrl.termsUrl);
+  }
+
+  getPrograms(): Observable<any> {
+    return this.httpClient.get(this.apiUrl.programAreasUrl);
+  }
+
+  getInquiryAreas(): Observable<any> {
+    return this.httpClient.get(this.apiUrl.inquiryAreasUrl);
+  }
+
+  getCoreAreas(): Observable<any> {
+    return this.httpClient.get(this.apiUrl.coreAreasUrl);
   }
 }
