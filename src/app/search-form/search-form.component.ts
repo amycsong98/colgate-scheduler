@@ -18,7 +18,10 @@ export class SearchFormComponent implements OnInit {
 
   // search form variables
   keyword: string;
-  termCode: string;
+  termSelected: string;
+  programsSelected = [];
+  //
+  panelOpenState = false;
 
   constructor(
     private httpClient: HttpClient,
@@ -62,5 +65,15 @@ export class SearchFormComponent implements OnInit {
 
   onSubmit(data: any) {
     console.log(data);
+    console.log(this.programsSelected);
+  }
+
+  updateCheckedPrograms(program: any, event: any) {
+    // checkbox checked
+    if (event.checked) {
+      this.programsSelected.push(program.AREA_CODE);
+    } else { // checkbox unchecked: delete the item
+      this.programsSelected = this.programsSelected.filter(programCode => programCode !== program.AREA_CODE);
+    }
   }
 }

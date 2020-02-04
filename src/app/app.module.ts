@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 
@@ -39,7 +41,8 @@ import { ApiUrl } from './api-url';
     HttpClientModule,
     MatCheckboxModule,
     FormsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatFormFieldModule
   ],
   providers: [
     CookieService,

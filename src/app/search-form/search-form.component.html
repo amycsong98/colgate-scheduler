@@ -7,7 +7,7 @@
     
         <mat-form-field>
             <mat-label>TERM</mat-label>
-            <mat-select name="term" [(ngModel)]="term">
+            <mat-select name="term" [(ngModel)]="termSelected">
                 <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
                     {{ term.TERM_DESC }}
                 </mat-option>
@@ -15,7 +15,15 @@
         </mat-form-field>
         <br>
 
-        
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Department/Program</mat-panel-title>
+            </mat-expansion-panel-header>
+            
+            <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
+        </mat-expansion-panel>
+        <br>
 
         <button type="submit" mat-raised-button>Search</button>
     </form>
