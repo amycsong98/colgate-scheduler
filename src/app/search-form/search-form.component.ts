@@ -18,11 +18,14 @@ export class SearchFormComponent implements OnInit {
   programs: any[];
 
   // search form variables
-  keyword: string;
-  termSelected: string;
+  // keyword: string;
+  // termSelected: string;
   programsSelected = [];
   daysSelected = [];
   timesSelected = [];
+  levelsSelected = [];
+  creditsSelected = [];
+  // isOpenCourseOnly: boolean;
 
   //
   panelOpenState = false;
@@ -34,19 +37,19 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit() {
     // initialize terms
-    this.getTerms().subscribe(
-      res => {
-        this.terms = res;
-      }
-    );
+    // this.getTerms().subscribe(
+    //   res => {
+    //     this.terms = res;
+    //   }
+    // );
 
     // initialize department / program
-    this.getPrograms().subscribe(
-      res => {
-        this.programs = res;
-        console.log(this.programs);
-      }
-    );
+    // this.getPrograms().subscribe(
+    //   res => {
+    //     this.programs = res;
+    //     console.log(this.programs);
+    //   }
+    // );
 
     console.log('keyword: ' + this.keyword);
   }
@@ -72,8 +75,11 @@ export class SearchFormComponent implements OnInit {
     console.log(this.programsSelected);
     console.log(this.daysSelected);
     console.log(this.timesSelected);
+    console.log(this.levelsSelected);
+    console.log(this.creditsSelected);
   }
 
+  // checked box updates
   updateCheckedPrograms(program: any, event: any) {
     // checkbox checked
     if (event.checked) {
@@ -88,7 +94,7 @@ export class SearchFormComponent implements OnInit {
     if (event.checked) {
       this.daysSelected.push(day);
     } else { // checkbox unchecked: delete the item
-      this.daysSelected = this.daysSelected.filter(_day => _day !== day);
+      this.daysSelected = this.daysSelected.filter(e => e !== day);
     }
   }
 
@@ -96,7 +102,23 @@ export class SearchFormComponent implements OnInit {
     if (event.checked) {
       this.timesSelected.push(time);
     } else { // checkbox unchecked: delete the item
-      this.timesSelected = this.timesSelected.filter(_time => _time !== time);
+      this.timesSelected = this.timesSelected.filter(e => e !== time);
+    }
+  }
+
+  updateCheckedLevels(level: string, event: any) {
+    if (event.checked) {
+      this.levelsSelected.push(level);
+    } else { // checkbox unchecked: delete the item
+      this.levelsSelected = this.levelsSelected.filter(e => e !== level);
+    }
+  }
+
+  updateCheckedCredits(credit: string, event: any) {
+    if (event.checked) {
+      this.creditsSelected.push(credit);
+    } else { // checkbox unchecked: delete the item
+      this.creditsSelected = this.creditsSelected.filter(e => e !== credit);
     }
   }
 }
