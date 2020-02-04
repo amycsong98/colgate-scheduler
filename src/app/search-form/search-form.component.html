@@ -1,19 +1,21 @@
 <div class="container">
-    <form action="">
+    <form (ngSubmit)="onSubmit(search.value)" #search="ngForm">
         <mat-form-field style="width: 500px">
-            <input matInput id="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
+            <input matInput name="keyword" [(ngModel)]="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
         </mat-form-field>
         <br>
     
         <mat-form-field>
             <mat-label>TERM</mat-label>
-            <mat-select>
+            <mat-select name="term" [(ngModel)]="term">
                 <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
                     {{ term.TERM_DESC }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
         <br>
+
+        
 
         <button type="submit" mat-raised-button>Search</button>
     </form>

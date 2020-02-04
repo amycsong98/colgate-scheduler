@@ -14,8 +14,11 @@ import { ApiUrl } from '../api-url';
 export class SearchFormComponent implements OnInit {
   // array of {TERM_CODE: "201902", TERM_DESC: "Spring 2020"}
   terms: any[];
-
   programs: any[];
+
+  // search form variables
+  keyword: string;
+  termCode: string;
 
   constructor(
     private httpClient: HttpClient,
@@ -36,7 +39,9 @@ export class SearchFormComponent implements OnInit {
         this.programs = res;
         console.log(this.programs);
       }
-    )
+    );
+
+    console.log('keyword: ' + this.keyword);
   }
 
   getTerms(): Observable<any> {
@@ -53,5 +58,9 @@ export class SearchFormComponent implements OnInit {
 
   getCoreAreas(): Observable<any> {
     return this.httpClient.get(this.apiUrl.coreAreasUrl);
+  }
+
+  onSubmit(data: any) {
+    console.log(data);
   }
 }
