@@ -1,10 +1,12 @@
 <div class="container">
     <form (ngSubmit)="onSubmit(search.value)" #search="ngForm">
+        <!-- Keyword -->
         <mat-form-field style="width: 500px">
             <input matInput name="keyword" [(ngModel)]="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
         </mat-form-field>
         <br>
     
+        <!-- Term -->
         <mat-form-field>
             <mat-label>TERM</mat-label>
             <mat-select name="term" [(ngModel)]="termSelected">
@@ -15,15 +17,37 @@
         </mat-form-field>
         <br>
 
-
+        <!-- Department/Program -->
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>Department/Program</mat-panel-title>
             </mat-expansion-panel-header>
-            
+
             <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
         </mat-expansion-panel>
         <br>
+
+        <!-- Day and Time -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Day and Time</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-label>DAY</mat-label><br>
+            <mat-checkbox (change)="updateCheckedDays('M', $event)">Monday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('T', $event)">Tuesday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('W', $event)">Wednesday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('R', $event)">Thursday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('F', $event)">Friday</mat-checkbox>
+            <br>
+            
+            <mat-label>TIME</mat-label><br>
+            <mat-checkbox (change)="updateCheckedTimes('Morning', $event)">Morning (before noon)</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedTimes('Afternoon', $event)">Afternoon (12–5 p.m.)</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedTimes('Evening', $event)">Evening (after 5 p.m.)</mat-checkbox>
+        </mat-expansion-panel>
+        <br>
+
 
         <button type="submit" mat-raised-button>Search</button>
     </form>

@@ -12,6 +12,7 @@ import { ApiUrl } from '../api-url';
   styleUrls: ['./search-form.component.css']
 })
 export class SearchFormComponent implements OnInit {
+  // data
   // array of {TERM_CODE: "201902", TERM_DESC: "Spring 2020"}
   terms: any[];
   programs: any[];
@@ -20,6 +21,9 @@ export class SearchFormComponent implements OnInit {
   keyword: string;
   termSelected: string;
   programsSelected = [];
+  daysSelected = [];
+  timesSelected = [];
+
   //
   panelOpenState = false;
 
@@ -66,6 +70,8 @@ export class SearchFormComponent implements OnInit {
   onSubmit(data: any) {
     console.log(data);
     console.log(this.programsSelected);
+    console.log(this.daysSelected);
+    console.log(this.timesSelected);
   }
 
   updateCheckedPrograms(program: any, event: any) {
@@ -74,6 +80,23 @@ export class SearchFormComponent implements OnInit {
       this.programsSelected.push(program.AREA_CODE);
     } else { // checkbox unchecked: delete the item
       this.programsSelected = this.programsSelected.filter(programCode => programCode !== program.AREA_CODE);
+    }
+  }
+
+  updateCheckedDays(day: string, event: any) {
+    // checkbox checked
+    if (event.checked) {
+      this.daysSelected.push(day);
+    } else { // checkbox unchecked: delete the item
+      this.daysSelected = this.daysSelected.filter(_day => _day !== day);
+    }
+  }
+
+  updateCheckedTimes(time: string, event: any) {
+    if (event.checked) {
+      this.timesSelected.push(time);
+    } else { // checkbox unchecked: delete the item
+      this.timesSelected = this.timesSelected.filter(_time => _time !== time);
     }
   }
 }
