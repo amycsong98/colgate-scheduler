@@ -59,11 +59,27 @@
             <br>
 
             <!-- Core Area -->
-            <mat-label>CORE AREA</mat-label>
+            <mat-form-field>
+                <mat-label>CORE AREA</mat-label>
+                <mat-select name="core_area" [(ngModel)]="core_area">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option *ngFor="let area of coreAreas" [value]="area.CORE_AREA">
+                        {{ area.CORE_AREA }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <br>
 
             <!-- Area of Inquiry -->
-            <mat-label>AREA OF INQUIRY</mat-label>
+            <mat-form-field>
+                <mat-label>AREA OF INQUIRY</mat-label>
+                <mat-select name="inquiry_area" [(ngModel)]="inquiry_area">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option *ngFor="let area of inquiryAreas" [value]="area.INQUIRY_AREA">
+                        {{ area.INQUIRY_AREA }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
             <br>
 
             <!-- Course Level -->

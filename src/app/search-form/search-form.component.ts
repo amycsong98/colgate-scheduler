@@ -13,9 +13,10 @@ import { ApiUrl } from '../api-url';
 })
 export class SearchFormComponent implements OnInit {
   // data
-  // array of {TERM_CODE: "201902", TERM_DESC: "Spring 2020"}
-  terms: any[];
-  programs: any[];
+  terms: any[]; // array of {TERM_CODE: "201902", TERM_DESC: "Spring 2020"}
+  programs: any[]; // array of {"AREA_CODE":"ALS1","AREA_DESC":"African American Studies"}
+  coreAreas: any[]; // array of {CORE_AREA: "Challenges of Modernity"}
+  inquiryAreas: any[]; //
 
   // search form variables
   // keyword: string;
@@ -51,7 +52,22 @@ export class SearchFormComponent implements OnInit {
     //   }
     // );
 
-    console.log('keyword: ' + this.keyword);
+    // initialize core area
+    this.getCoreAreas().subscribe(
+      res => {
+        this.coreAreas = res;
+        console.log(this.coreAreas);
+      }
+    );
+
+    // initialize area of inquiry
+    this.getInquiryAreas().subscribe(
+      res => {
+        this.inquiryAreas = res;
+        console.log(this.inquiryAreas);
+      }
+    );
+
   }
 
   getTerms(): Observable<any> {
