@@ -1,0 +1,24 @@
+TERM_CODE: "201902"                     <- don't need to display
+CRN: "10088"                            <- display in Course
+DISPLAY_KEY: "COSC 101 A"               <- display in Course
+TITLE: "Intro to Computing I"           <- display in Title
+INSTRUCTOR1_NAME: "Gember-Jacobson A."  <- display in Title
+INSTRUCTOR2_NAME: null                  <- display in Title
+INSTRUCTOR3_NAME: null                  <- display in Title
+MEET1_DAYS: "MWF"                       
+MEET1_BEGIN_TIME12: "10:20"
+MEET1_END_TIME12: "11:10"
+MEET2_DAYS: null
+MEET2_BEGIN_TIME12: null
+MEET2_END_TIME12: null
+MEET3_DAYS: null
+MEET3_BEGIN_TIME12: null
+MEET3_END_TIME12: null
+PRE_REQS: null
+CLASS_YEAR_RESTRICTIONS: "No 2020"
+MAJOR_RESTRICTIONS: null
+SPECIAL_APPROVAL: "Instr sign req during Drop/Add"
+CATALOG_RESTRICTIONS: null
+STATUS: "Reserved Seats"
+SEATS: "26/24"
+RESERVED_SEATS: "2021 : 4/2, 2022 : 8/8, 2023 : 14/12, General: 0/2"
