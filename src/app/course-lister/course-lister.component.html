@@ -1,0 +1,36 @@
+<div class="example-container mat-elevation-z8">
+    <table mat-table [dataSource]="courses">
+  
+        <!-- Course Column -->
+        <ng-container matColumnDef="Course">
+            <th mat-header-cell *matHeaderCellDef> Course </th>
+            <td mat-cell *matCellDef="let course"> {{course.DISPLAY_KEY}} </td>
+        </ng-container>
+        
+        <!-- Title Column -->
+        <ng-container matColumnDef="Title">
+            <th mat-header-cell *matHeaderCellDef> Title </th>
+            <td mat-cell *matCellDef="let course"> {{course.TITLE}} </td>
+        </ng-container>
+
+        <!-- Meets Column -->
+        <ng-container matColumnDef="Meets">
+            <th mat-header-cell *matHeaderCellDef> Meets </th>
+            <td mat-cell *matCellDef="let course"> {{course.MEET1_DAYS}} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="Status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let course"> {{course.STATUS}} </td>
+        </ng-container>
+
+        <!-- Restrictions Column -->
+        <ng-container matColumnDef="Restrictions">
+            <th mat-header-cell *matHeaderCellDef> Pre-Req/Restrictions </th>
+            <td mat-cell *matCellDef="let course"> {{course.PRE_REQS}} </td>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>

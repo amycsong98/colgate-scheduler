@@ -1,3 +1,4 @@
+// anguular imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,12 +11,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
-
+import { MatTableModule } from '@angular/material/table';
 
 import { CookieService } from 'ngx-cookie-service';
 
+// local imports
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BoxComponent } from './box/box.component';
@@ -23,13 +23,15 @@ import { TimeTableComponent } from './time-table/time-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ApiUrl } from './api-url';
+import { CourseListerComponent } from './course-lister/course-lister.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoxComponent,
     TimeTableComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    CourseListerComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { ApiUrl } from './api-url';
     MatCheckboxModule,
     FormsModule,
     MatExpansionModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatTableModule
   ],
   providers: [
     CookieService,
