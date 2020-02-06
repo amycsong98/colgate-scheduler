@@ -22,8 +22,8 @@ export class CourseService {
   }
 
   // Gets course list from cookie
-  getCourses() {
-    return this.strToList(this.cookieService.get(COURSES));
+  getCourses(): any[] {
+    return this.parseCourseCookie(this.cookieService.get(COURSES));
   }
 
   // Adds a course to course list (cookie)
@@ -75,7 +75,12 @@ export class CourseService {
 
   // Converts string to list (cookie)
   // delimiter: '|'
-  strToList(str: string) {
-    return str.split('|');
+  parseCourseCookie(str: string) {
+    const strArray = str.split('|');
+    const courses = [];
+    for (const e of strArray) {
+      courses.push(JSON.parse(e));
+    }
+    return courses;
   }
 }

@@ -57,6 +57,8 @@ export class TimeTableComponent implements OnInit {
       if (days1 != null) {
         const beginTime1 = course[COURSE_STIME1];
         const endTime1 = course[COURSE_ETIME1];
+
+        
       }
     }
   }

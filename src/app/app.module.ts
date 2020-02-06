@@ -22,13 +22,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { CourseListerComponent } from './course-lister/course-lister.component';
 import { TimeTableComponent } from './time-table/time-table.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchFormComponent,
     CourseListerComponent,
-    TimeTableComponent
+    TimeTableComponent,
+    MyCoursesComponent
   ],
   imports: [
     BrowserModule,
