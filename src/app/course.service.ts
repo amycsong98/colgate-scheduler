@@ -78,8 +78,12 @@ export class CourseService {
   parseCourseCookie(str: string) {
     const strArray = str.split('|');
     const courses = [];
+    console.log(strArray)
     for (const e of strArray) {
-      courses.push(JSON.parse(e));
+      console.log(JSON.stringify(e));
+      if (e) {
+        courses.push(JSON.parse(e));
+      }
     }
     return courses;
   }
