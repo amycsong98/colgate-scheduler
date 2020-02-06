@@ -21,9 +21,7 @@ export class MyCoursesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-
-    // initialize datapass service 
+    // initialize datapass service
     // same as my time-table (modularize this)
     this.dataPassService.currentData.subscribe(
       data => {
@@ -32,7 +30,7 @@ export class MyCoursesComponent implements OnInit {
         } else if (data[ACTION] === ACTION_UNHOVER) {
           console.log(data);
         } else if (data[ACTION] === ACTION_ADD) {
-          this.courses.push(data);
+          this.courses = this.courses.concat([data[DATA]]); // 
         } else {
           console.log(data);
         }

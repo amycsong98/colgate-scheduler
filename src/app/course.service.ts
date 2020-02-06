@@ -23,7 +23,12 @@ export class CourseService {
 
   // Gets course list from cookie
   getCourses(): any[] {
-    return this.parseCourseCookie(this.cookieService.get(COURSES));
+    if (this.isCookieExist(COURSES)) {
+      console.log('cookie exists');
+      return this.parseCourseCookie(this.cookieService.get(COURSES));
+    } else {
+      return [];
+    }
   }
 
   // Adds a course to course list (cookie)
@@ -57,8 +62,14 @@ export class CourseService {
     this.cookieService.set(COURSES, JSON.stringify(courses), 365, '/');
   }
 
+  // Checks if cookie exists
+  isCookieExist(name: string) {
+    const cookie = this.cookieService.get(name);
+    return cookie !== '';
+  }
+
   // Checks if course list is empty (cookie)
-  isCoursesEmpty(courses: string[]) {
+  isCoursesEmpty(courses: any[]) {
     return courses === undefined || courses.length === 0 || courses[0] === '';
   }
 
