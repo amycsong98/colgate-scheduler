@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
+import { COURSES, SUCCESS, FAIL } from './constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +23,7 @@ export class CourseService {
 
   // Gets course list from cookie
   getCourses() {
-    return this.strToList(this.cookieService.get('courses'));
+    return this.strToList(this.cookieService.get(COURSES));
   }
 
   // Adds a course to course list (cookie)
@@ -30,15 +32,14 @@ export class CourseService {
     // courses is empty
     if (this.isCoursesEmpty(courses)) {
       courses = [DISPLAY_KEY];
-      console.log('test:' + courses);
     } else {
       if (this.isDuplicate(courses, DISPLAY_KEY)) {
-        return 'fail';
+        return FAIL;
       }
       courses.push(DISPLAY_KEY);
     }
     this.setCourses(courses);
-    return 'success';
+    return SUCCESS;
   }
 
   // Removes a course from course list (cookie)
@@ -52,7 +53,7 @@ export class CourseService {
   // helper functions
   // Sets courses to cookie
   setCourses(courses: string[]) {
-    this.cookieService.set('courses', courses.join('|'), 365, '/');
+    this.cookieService.set(COURSES, courses.join('|'), 365, '/');
   }
 
   // Checks if course list is empty (cookie)
