@@ -27,16 +27,18 @@ export class CourseService {
   }
 
   // Adds a course to course list (cookie)
-  addCourse(DISPLAY_KEY: string) {
+  // course: object
+  addCourse(course: any) {
+    const courseJSON = JSON.stringify(course);
     let courses = this.getCourses();
     // courses is empty
     if (this.isCoursesEmpty(courses)) {
-      courses = [DISPLAY_KEY];
+      courses = [courseJSON];
     } else {
-      if (this.isDuplicate(courses, DISPLAY_KEY)) {
+      if (this.isDuplicate(courses, courseJSON)) {
         return FAIL;
       }
-      courses.push(DISPLAY_KEY);
+      courses.push(courseJSON);
     }
     this.setCourses(courses);
     return SUCCESS;

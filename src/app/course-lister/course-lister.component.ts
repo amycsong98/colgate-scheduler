@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { URL_TEST } from '../constants';
+import { URL_TEST, ACTION_ADD } from '../constants';
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
 import { ACTION_HOVER, ACTION_UNHOVER } from '../constants';
@@ -30,7 +30,7 @@ export class CourseListerComponent implements OnInit {
   }
 
   addCourse(course: any) {
-    console.log(course);
+    this.dataPassService.sendData({ action: ACTION_ADD, data: course });
   }
 
   hoverCourse(course: any) {

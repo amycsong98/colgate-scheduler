@@ -4,6 +4,7 @@ import { DataPassService } from '../data-pass.service';
 import { 
   COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA
 } from '../constants';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-time-table',
@@ -14,25 +15,50 @@ export class TimeTableComponent implements OnInit {
   displayedColumns = ['time', 'mon', 'tues', 'wed', 'thurs', 'fri'];
   dataSource = TIME_DATA;
 
+  courses: any[];
+
   constructor(
-    private dataPassService: DataPassService
+    private dataPassService: DataPassService,
+    private courseService: CourseService
   ) { }
 
   ngOnInit() {
+    // initialize datapass service
     this.dataPassService.currentData.subscribe(
       data => {
         if (data[ACTION] === ACTION_HOVER) {
           console.log(data);
           this.displayCourse(data[DATA]);
         } else if (data[ACTION] === ACTION_UNHOVER) {
-
+          console.log(data);
         } else if (data[ACTION] === ACTION_ADD) {
-
+          console.log(data);
+          this.addCourse(data[DATA]);
         } else {
           console.log(data);
         }
       }
     );
+    // this.courseService.addCourse('COSC 102 A');
+    this.displayCourses();
+  }
+
+  addCourse(data: any) {
+    console.log(data);
+    this.courseService.addCourse(data);
+  }
+
+  displayCourses() {
+    this.courses = this.courseService.getCourses();
+
+    for (const course of this.courses) {
+      const days1 = course[COURSE_DAYS1];
+
+      if (days1 != null) {
+        const beginTime1 = course[COURSE_STIME1];
+        const endTime1 = course[COURSE_ETIME1];
+      }
+    }
   }
 
   displayCourse(course: any) {
