@@ -18,20 +18,18 @@ import { CookieService } from 'ngx-cookie-service';
 // local imports
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BoxComponent } from './box/box.component';
-import { TimeTableComponent } from './time-table/time-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { ApiUrl } from './api-url';
 import { CourseListerComponent } from './course-lister/course-lister.component';
+import { TimeTableComponent } from './time-table/time-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoxComponent,
-    TimeTableComponent,
     SearchFormComponent,
-    CourseListerComponent
+    CourseListerComponent,
+    TimeTableComponent
   ],
   imports: [
     BrowserModule,

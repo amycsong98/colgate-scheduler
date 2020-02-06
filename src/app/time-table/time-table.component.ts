@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-time-table',
@@ -7,16 +6,31 @@ import { CourseService } from '../course.service';
   styleUrls: ['./time-table.component.css']
 })
 export class TimeTableComponent implements OnInit {
-  days: string[] = ['time', 'M', 'T', 'W', 'Th', 'F'];
-  times: number[] = [0, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
-  
-  numOfBoxes: number = this.days.length * this.times.length;
+  displayedColumns = ['time', 'mon', 'tues', 'wed', 'thurs', 'fri'];
+  dataSource = TIME_DATA;
 
-  colors: string[] = new Array<string>(this.numOfBoxes);
-
-  constructor(private courseService: CourseService) { }
+  constructor() { }
 
   ngOnInit() {
-    console.log(this.courseService.getCourses());
   }
+
 }
+
+const TIME_DATA = [
+  {time: '7 am', m: '', t: '', w: '', r: '', f: ''},
+  {time: '8 am', m: '', t: '', w: '', r: '', f: ''},
+  {time: '9 am', m: '', t: '', w: '', r: '', f: ''},
+  {time: '10 am', m: '', t: '', w: '', r: '', f: ''},
+  {time: '11 am', m: '', t: '', w: '', r: '', f: ''},
+  {time: '12 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '1 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '2 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '3 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '4 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '5 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '6 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '7 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '8 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '9 pm', m: '', t: '', w: '', r: '', f: ''},
+  {time: '10 pm', m: '', t: '', w: '', r: '', f: ''},
+];

@@ -1,10 +1,44 @@
-<div>
-    <!-- <div *ngFor='let time of times'>
-        <div *ngFor='let day of days'>
-            <app-box id="{{day}}-{{time}}" [day]="day" [time]="time" [color]="colors[0]"></app-box>
-        </div>
-    </div> -->
-    <div *ngFor='let item of colors; let i = index;'>
-        <app-box id="box-{{i}}" [index]="i" [color]="colors[i]"></app-box>
-    </div>
-</div>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+  
+    <!-- time Column -->
+    <ng-container matColumnDef="time">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+    </ng-container>
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="mon">
+        <th mat-header-cell *matHeaderCellDef> Monday </th>
+        <td mat-cell *matCellDef="let element"> {{element.m}} </td>
+    </ng-container>
+  
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="tues">
+        <th mat-header-cell *matHeaderCellDef> Tuesday </th>
+        <td mat-cell *matCellDef="let element"> {{element.t}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="wed">
+        <th mat-header-cell *matHeaderCellDef> Wednesday </th>
+        <td mat-cell *matCellDef="let element"> {{element.w}} </td>
+    </ng-container>    
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="thurs">
+        <th mat-header-cell *matHeaderCellDef> Wednesday </th>
+        <td mat-cell *matCellDef="let element"> {{element.t}} </td>
+    </ng-container>    
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="fri">
+        <th mat-header-cell *matHeaderCellDef> Friday </th>
+        <td mat-cell *matCellDef="let element"> {{element.f}} </td>
+    </ng-container>   
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
