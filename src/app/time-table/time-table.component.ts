@@ -19,23 +19,4 @@ export class TimeTableComponent implements OnInit {
   ngOnInit() {
     console.log(this.courseService.getCourses());
   }
-
-  test() {
-    console.log(this.courseService.removeCourse('COSC 101 A'));
-    // this.courseService.addCourse('COSC 102 B');
-    // console.log(this.courseService.getCourses());
-  }
-
-  /*
-  test() {
-    console.log('hello');
-    var element = document.getElementById("box-9");
-    // element.setAttribute('ng-reflect-color', 'green');
-    console.log(element.children[0])
-    var child = element.children[0] as HTMLElement;
-    child.style.backgroundColor = 'green';
-    this.colors[14]='green';
-    this.colors[15]='red';
-    console.log(this.numOfBoxes)
-  }*/
 }
