@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ApiUrl } from '../api-url';
 import { CourseService } from '../course.service';
+import { DataPassService } from '../data-pass.service';
 
 @Component({
   selector: 'app-course-lister',
@@ -16,6 +17,7 @@ export class CourseListerComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private apiUrl: ApiUrl,
+    private dataPassService: DataPassService
   ) { }
 
   ngOnInit() {
@@ -32,10 +34,10 @@ export class CourseListerComponent implements OnInit {
   }
 
   hoverCourse(course: any) {
-    console.log(course);
+    this.dataPassService.sendData({ action: 'hover', data: course });
   }
 
   unhoverCourse(course: any) {
-    console.log('leave: ' + course);
+    this.dataPassService.sendData({ action: 'unhover', data: course });
   }
 }
