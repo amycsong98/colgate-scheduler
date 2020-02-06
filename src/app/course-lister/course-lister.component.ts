@@ -30,6 +30,7 @@ export class CourseListerComponent implements OnInit {
   }
 
   addCourse(course: any) {
+    this.courseService.addCourse(course);
     this.dataPassService.sendData({ action: ACTION_ADD, data: course });
   }
 

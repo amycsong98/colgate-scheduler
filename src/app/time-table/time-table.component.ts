@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataPassService } from '../data-pass.service';
-import { 
+import {
   COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA
 } from '../constants';
 import { CourseService } from '../course.service';
@@ -23,7 +23,8 @@ export class TimeTableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // initialize datapass service
+    // initialize datapass service 
+    // same as my courses (modularize this)
     this.dataPassService.currentData.subscribe(
       data => {
         if (data[ACTION] === ACTION_HOVER) {
@@ -45,7 +46,6 @@ export class TimeTableComponent implements OnInit {
 
   addCourse(data: any) {
     console.log(data);
-    this.courseService.addCourse(data);
   }
 
   displayCourses() {
@@ -57,8 +57,6 @@ export class TimeTableComponent implements OnInit {
       if (days1 != null) {
         const beginTime1 = course[COURSE_STIME1];
         const endTime1 = course[COURSE_ETIME1];
-
-        
       }
     }
   }

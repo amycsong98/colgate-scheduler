@@ -29,16 +29,15 @@ export class CourseService {
   // Adds a course to course list (cookie)
   // course: object
   addCourse(course: any) {
-    const courseJSON = JSON.stringify(course);
     let courses = this.getCourses();
     // courses is empty
     if (this.isCoursesEmpty(courses)) {
-      courses = [courseJSON];
+      courses = [course];
     } else {
-      if (this.isDuplicate(courses, courseJSON)) {
+      if (this.isDuplicate(courses, course)) {
         return FAIL;
       }
-      courses.push(courseJSON);
+      courses.push(course);
     }
     this.setCourses(courses);
     return SUCCESS;
@@ -54,8 +53,8 @@ export class CourseService {
 
   // helper functions
   // Sets courses to cookie
-  setCourses(courses: string[]) {
-    this.cookieService.set(COURSES, courses.join('|'), 365, '/');
+  setCourses(courses: any[]) {
+    this.cookieService.set(COURSES, JSON.stringify(courses), 365, '/');
   }
 
   // Checks if course list is empty (cookie)
@@ -64,9 +63,9 @@ export class CourseService {
   }
 
   // Checks if the newCourse is in course list (cookie)
-  isDuplicate(courses: string[], newCourse: string) {
+  isDuplicate(courses: any[], newCourse: any) {
     for (const course of courses) {
-      if (course === newCourse) {
+      if (course['CRN'] === newCourse['CRN']) {
         return true;
       }
     }
@@ -76,15 +75,16 @@ export class CourseService {
   // Converts string to list (cookie)
   // delimiter: '|'
   parseCourseCookie(str: string) {
-    const strArray = str.split('|');
-    const courses = [];
-    console.log(strArray)
-    for (const e of strArray) {
-      console.log(JSON.stringify(e));
-      if (e) {
-        courses.push(JSON.parse(e));
-      }
-    }
-    return courses;
+    return JSON.parse(str);
+    // const strArray = str.split('|');
+    // const courses = [];
+    // console.log(strArray)
+    // for (const e of strArray) {
+    //   if (e) {
+    //     console.log(JSON.parse(e));
+    //     courses.push(JSON.parse(e));
+    //   }
+    // }
+    // return courses;
   }
 }
