@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DataPassService } from '../data-pass.service';
+import { 
+  COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA
+} from '../constants';
 
 @Component({
   selector: 'app-time-table',
@@ -18,12 +21,12 @@ export class TimeTableComponent implements OnInit {
   ngOnInit() {
     this.dataPassService.currentData.subscribe(
       data => {
-        if (data['action'] === 'hover') {
+        if (data[ACTION] === ACTION_HOVER) {
           console.log(data);
-          this.displayCourse(data['data']); 
-        } else if (data['action'] === 'unhover') {
+          this.displayCourse(data[DATA]);
+        } else if (data[ACTION] === ACTION_UNHOVER) {
 
-        } else if (data['action'] === 'add') {
+        } else if (data[ACTION] === ACTION_ADD) {
 
         } else {
           console.log(data);
@@ -34,13 +37,13 @@ export class TimeTableComponent implements OnInit {
 
   displayCourse(course: any) {
     // parse data
-    const days1 = course['MEET1_DAYS'];
-    const days2 = course['MEET2_DAYS'];
-    const dayt3 = course['MEET3_DAYS'];
+    const days1 = course[COURSE_DAYS1];
+    const days2 = course[COURSE_DAYS2];
+    const dayt3 = course[COURSE_DAYS3];
 
     if (days1 != null) {
-      const beginTime1 = course['MEET1_BEGIN_TIME12'];
-      const endTime1 = course['MEET1_END_TIME12'];
+      const beginTime1 = course[COURSE_STIME1];
+      const endTime1 = course[COURSE_ETIME1];
 
       console.log(days1);
       console.log(beginTime1);

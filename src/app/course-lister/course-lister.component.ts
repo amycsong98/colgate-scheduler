@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiUrl } from '../api-url';
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
+import { ACTION_HOVER, ACTION_UNHOVER } from '../constants';
 
 @Component({
   selector: 'app-course-lister',
@@ -34,10 +35,10 @@ export class CourseListerComponent implements OnInit {
   }
 
   hoverCourse(course: any) {
-    this.dataPassService.sendData({ action: 'hover', data: course });
+    this.dataPassService.sendData({ action: ACTION_HOVER, data: course });
   }
 
   unhoverCourse(course: any) {
-    this.dataPassService.sendData({ action: 'unhover', data: course });
+    this.dataPassService.sendData({ action: ACTION_UNHOVER, data: course });
   }
 }
