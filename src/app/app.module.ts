@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 
 import { CookieService } from 'ngx-cookie-service';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 // local imports
 import { AppRoutingModule } from './app-routing.module';
@@ -44,7 +45,8 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
     FormsModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    StorageServiceModule
   ],
   providers: [
     CookieService,
