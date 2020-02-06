@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiUrl } from '../api-url';
+import { URL_TEST } from '../constants';
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
 import { ACTION_HOVER, ACTION_UNHOVER } from '../constants';
@@ -17,12 +17,11 @@ export class CourseListerComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private apiUrl: ApiUrl,
     private dataPassService: DataPassService
   ) { }
 
   ngOnInit() {
-    this.courseService.searchCourses(this.apiUrl.testSearch).subscribe(
+    this.courseService.searchCourses(URL_TEST).subscribe(
       res => {
         console.log(res);
         this.courses = res;
