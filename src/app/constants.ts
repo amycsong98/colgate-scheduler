@@ -33,3 +33,7 @@ export const COURSES = 'courses';
 // Responses
 export const SUCCESS = 'success';
 export const FAIL = 'fail';
+
+// Time-table
+export const BOX_MIN = 60; // one box = 60 minutes
+export const BOX_HEIGHT = 50;
