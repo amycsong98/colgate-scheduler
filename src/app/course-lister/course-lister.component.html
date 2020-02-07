@@ -23,19 +23,34 @@
         <!-- Meets Column -->
         <ng-container matColumnDef="Meets">
             <th mat-header-cell *matHeaderCellDef> Meets </th>
-            <td mat-cell *matCellDef="let course"> {{course.MEET1_DAYS}} </td>
+            <td mat-cell *matCellDef="let course"> 
+                <p *ngIf="course.MEET1_DAYS"> {{course.MEET1_DAYS}} <br> {{course.MEET1_BEGIN_TIME12}} - {{course.MEET1_END_TIME12}} </p> 
+                <p *ngIf="!course.MEET1_DAYS">TBD</p>
+            </td>
+            <ng-template #elsespan>"TBD"</ng-template>
         </ng-container>
+
 
         <!-- Status Column -->
         <ng-container matColumnDef="Status">
             <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let course"> {{course.STATUS}} </td>
+            <td mat-cell *matCellDef="let course"> {{course.STATUS}} 
+                <p *ngIf="course.SEATS">{{course.SEATS}}</p>
+                <p *ngIf="course.RESERVED_SEATS">{{course.RESERVED_SEATS}} </p>
+            </td>
+
         </ng-container>
 
         <!-- Restrictions Column -->
         <ng-container matColumnDef="Restrictions">
             <th mat-header-cell *matHeaderCellDef> Pre-Req/Restrictions </th>
-            <td mat-cell *matCellDef="let course"> {{course.PRE_REQS}} </td>
+            <td mat-cell *matCellDef="let course"> 
+                <p *ngIf="course.PRE_REQS">{{course.PRE_REQS}} <br> </p>
+                <p *ngIf="course.CLASS_YEAR_RESTRICTIONS">{{course.CLASS_YEAR_RESTRICTIONS}} <br> </p>
+                <p *ngIf="course.MAJOR_RESTRICTIONS">{{course.MAJOR_RESTRICTIONS}} <br> </p>
+                <p *ngIf="course.SPECIAL_APPROVAL">{{course.SPECIAL_APPROVAL}} <br> </p>
+                <p *ngIf="course.CATALOG_RESTRICTIONS">{{course.CATALOG_RESTRICTIONS}} <br> </p>
+            </td>
         </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -38,19 +38,19 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit() {
     // initialize terms
-    // this.getTerms().subscribe(
-    //   res => {
-    //     this.terms = res;
-    //   }
-    // );
+    this.getTerms().subscribe(
+      res => {
+        this.terms = res;
+      }
+    );
 
     // initialize department / program
-    // this.getPrograms().subscribe(
-    //   res => {
-    //     this.programs = res;
-    //     console.log(this.programs);
-    //   }
-    // );
+    this.getPrograms().subscribe(
+      res => {
+        this.programs = res;
+        console.log(this.programs);
+      }
+    );
 
     // initialize core area
     this.getCoreAreas().subscribe(
