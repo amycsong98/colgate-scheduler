@@ -12,6 +12,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 import { CookieService } from 'ngx-cookie-service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -21,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
-import { CourseListerComponent } from './course-lister/course-lister.component';
+import { CourseListerComponent, DialogAmPmComponent } from './course-lister/course-lister.component';
 import { TimeTableComponent } from './time-table/time-table.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 
@@ -31,7 +34,11 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
     SearchFormComponent,
     CourseListerComponent,
     TimeTableComponent,
-    MyCoursesComponent
+    MyCoursesComponent,
+    DialogAmPmComponent
+  ],
+  entryComponents: [
+    DialogAmPmComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +53,9 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
     MatExpansionModule,
     MatFormFieldModule,
     MatTableModule,
-    StorageServiceModule
+    StorageServiceModule,
+    MatDialogModule,
+    MatRadioModule
   ],
   providers: [
     CookieService,
