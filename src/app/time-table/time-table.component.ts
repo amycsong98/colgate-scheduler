@@ -55,23 +55,37 @@ export class TimeTableComponent implements AfterViewInit {
   }
 
   addCourseToDisplay(course: any) {
-    const days1 = course[COURSE_DAYS1];
+    const days = [];
+    const sTimes = [];
+    const eTimes = [];
+    if (course[COURSE_DAYS1] !== null) {
+      days.push(course[COURSE_DAYS1]);
+      sTimes.push(this.parseTime(course[COURSE_STIME1]));
+      eTimes.push(this.parseTime(course[COURSE_ETIME1]));
+    }
+    if (course[COURSE_DAYS2] !== null) {
+      days.push(course[COURSE_DAYS2]);
+      sTimes.push(this.parseTime(course[COURSE_STIME2]));
+      eTimes.push(this.parseTime(course[COURSE_ETIME2]));
+    }
+    if (course[COURSE_DAYS3] !== null) {
+      days.push(course[COURSE_DAYS3]);
+      sTimes.push(this.parseTime(course[COURSE_STIME3]));
+      eTimes.push(this.parseTime(course[COURSE_ETIME3]));
+    }
 
-    if (days1 != null) {
-      // beginTime = [hour, min]: string[]
-      const beginTime1 = this.parseTime(course[COURSE_STIME1]);
-      const endTime1 = this.parseTime(course[COURSE_ETIME1]);
-
+    for (let i = 0; i < days.length; i++) {
       // calculate box height
-      const duration = this.calcDuration(beginTime1, endTime1);
+      const duration = this.calcDuration(sTimes[i], eTimes[i]);
       const boxHeight = this.calcBoxHeight(duration);
 
       // prepare text inside the box
       const innerHTML = this.prepareInnerHTML(course[DISPLAY_KEY]);
 
+
       // calculate where the box starts
-      const top = this.calcTop(beginTime1);
-      this.colorTable(days1, top, boxHeight, innerHTML);
+      const top = this.calcTop(sTimes[i]);
+      this.colorTable(days[i], top, boxHeight, innerHTML);
     }
   }
 
@@ -80,38 +94,7 @@ export class TimeTableComponent implements AfterViewInit {
     console.log(this.courses);
 
     for (const course of this.courses) {
-      const days = [];
-      const sTimes = [];
-      const eTimes = [];
-      if (course[COURSE_DAYS1] !== null) {
-        days.push(course[COURSE_DAYS1]);
-        sTimes.push(this.parseTime(course[COURSE_STIME1]));
-        eTimes.push(this.parseTime(course[COURSE_ETIME1]));
-      }
-      if (course[COURSE_DAYS2] !== null) {
-        days.push(course[COURSE_DAYS2]);
-        sTimes.push(this.parseTime(course[COURSE_STIME2]));
-        eTimes.push(this.parseTime(course[COURSE_ETIME2]));
-      }
-      if (course[COURSE_DAYS3] !== null) {
-        days.push(course[COURSE_DAYS3]);
-        sTimes.push(this.parseTime(course[COURSE_STIME3]));
-        eTimes.push(this.parseTime(course[COURSE_ETIME3]));
-      }
-
-      for (let i = 0; i < days.length; i++) {
-        // calculate box height
-        const duration = this.calcDuration(sTimes[i], eTimes[i]);
-        const boxHeight = this.calcBoxHeight(duration);
-
-        // prepare text inside the box
-        const innerHTML = this.prepareInnerHTML(course[DISPLAY_KEY]);
-
-
-        // calculate where the box starts
-        const top = this.calcTop(sTimes[i]);
-        this.colorTable(days[i], top, boxHeight, innerHTML);
-      }
+      this.addCourseToDisplay(course);
     }
   }
 
