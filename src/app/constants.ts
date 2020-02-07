@@ -8,6 +8,7 @@ export const URL_INQUIRY_AREAS = 'https://api.colgate.edu/v1/courses/search/inqu
 export const URL_TEST = 'https://api.colgate.edu/v1/courses/search?keyword=&termCode=201902&coreArea=&inquiryArea=&meetTimeMorning=&meetTimeAfternoon=&meetTimeEvening=&openCoursesOnly=';
 
 // Course fields
+export const DISPLAY_KEY = 'DISPLAY_KEY';
 export const COURSE_DAYS1 = 'MEET1_DAYS';
 export const COURSE_DAYS2 = 'MEET2_DAYS';
 export const COURSE_DAYS3 = 'MEET3_DAYS';
@@ -35,5 +36,8 @@ export const SUCCESS = 'success';
 export const FAIL = 'fail';
 
 // Time-table
+export const TIME_START = 7;
+export const TIME_END = 23;
 export const BOX_MIN = 60; // one box = 60 minutes
 export const BOX_HEIGHT = 50;
+export const NUM_ROW = 17;

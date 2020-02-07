@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewChildren, 
 import { DOCUMENT } from '@angular/common';
 import { CourseService } from '../course.service';
 import {
-  COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1,
-  ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN
+  COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, TIME_START,
+  ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
+  DISPLAY_KEY
 } from '../constants';
+import { DataPassService } from '../data-pass.service';
 
 @Component({
   selector: 'app-time-table',
@@ -13,14 +15,64 @@ import {
 })
 export class TimeTableComponent implements AfterViewInit {
   courses: any[];
+  colorCols = [];
 
   constructor(
+    private dataPassService: DataPassService,
     private renderer: Renderer2,
     private courseService: CourseService,
   ) { }
 
   ngAfterViewInit(): void {
+    // initialize datapass service
+    // same as my courses (modularize this)
+    this.dataPassService.currentData.subscribe(
+      data => {
+        if (data[ACTION] === ACTION_HOVER) {
+          console.log(data);
+          // this.displayCourse(data[DATA]);
+        } else if (data[ACTION] === ACTION_UNHOVER) {
+          console.log(data);
+        } else if (data[ACTION] === ACTION_ADD) {
+          console.log(data);
+          this.addCourseToDisplay(data[DATA]);
+        } else {
+          console.log(data);
+        }
+      }
+    );
+
+    this.initializeColorCols();
     this.displayCourses();
+  }
+
+  initializeColorCols() {
+    for (const col of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']) {
+      const colorColId = '#color-col-' + col;
+      const x = this.renderer.selectRootElement(colorColId);
+      this.colorCols.push(x);
+    }
+  }
+
+  addCourseToDisplay(course: any) {
+    const days1 = course[COURSE_DAYS1];
+
+    if (days1 != null) {
+      // beginTime = [hour, min]: string[]
+      const beginTime1 = this.parseTime(course[COURSE_STIME1]);
+      const endTime1 = this.parseTime(course[COURSE_ETIME1]);
+
+      // calculate box height
+      const duration = this.calcDuration(beginTime1, endTime1);
+      const boxHeight = this.calcBoxHeight(duration);
+
+      // prepare text inside the box
+      const innerHTML = this.prepareInnerHTML(course[DISPLAY_KEY]);
+
+      // calculate where the box starts
+      const top = this.calcTop(beginTime1);
+      this.colorTable(days1, top, boxHeight, innerHTML);
+    }
   }
 
   displayCourses() {
@@ -35,35 +87,43 @@ export class TimeTableComponent implements AfterViewInit {
         const beginTime1 = this.parseTime(course[COURSE_STIME1]);
         const endTime1 = this.parseTime(course[COURSE_ETIME1]);
 
+        // calculate box height
         const duration = this.calcDuration(beginTime1, endTime1);
         const boxHeight = this.calcBoxHeight(duration);
 
-        this.colorTable(days1, beginTime1, boxHeight);
+        // prepare text inside the box
+        const innerHTML = this.prepareInnerHTML(course[DISPLAY_KEY]);
+
+        // calculate where the box starts
+        const top = this.calcTop(beginTime1);
+        this.colorTable(days1, top, boxHeight, innerHTML);
       }
     }
   }
 
-  colorTable(days: string, begin: number[], boxHeight: number) {
-    let x = this.renderer.selectRootElement('#color-col-Thursday');
-    const colorBox = this.renderer.createElement('div');
-    this.renderer.setAttribute(colorBox, 'style', 'background-color: black; height:50px; position: absolute; width: 100px;');
-    this.renderer.addClass(colorBox, 'color-box');
-    this.renderer.appendChild(x, colorBox);
+  prepareInnerHTML(displayKey: string) {
+    return displayKey;
+  }
 
-    const colorBox2 = this.renderer.createElement('div');
-    this.renderer.setAttribute(colorBox2, 'style', 'background-color: green; top: 5.88%; height:50px; position: absolute; width: 100px;');
-    this.renderer.appendChild(x, colorBox2);
+  calcTop(beginTime: number[]) {
+    const beginMin = (beginTime[0] - TIME_START) * 60 + beginTime[1];
+    const totalMin = BOX_MIN * NUM_ROW;
+    return beginMin / totalMin * 100;
+  }
 
-    let y = this.renderer.selectRootElement('#color-col-Monday');
-    const colorBox3 = this.renderer.createElement('div');
-    this.renderer.setAttribute(colorBox3, 'style', 'background-color: red; top: 5.88%; height:50px; position: absolute; width: 100px;');
-    this.renderer.addClass(colorBox3, 'color-box');
-    this.renderer.appendChild(y, colorBox3);
+  colorTable(days: string, top: number, boxHeight: number, displayKey: string) {
+    console.log(displayKey);
+    for (const day of days) {
+      const colorBox = this.renderer.createElement('div');
+      this.renderer.addClass(colorBox, 'color-box');
+      this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, 'green', top));
+      this.renderer.setProperty(colorBox, 'innerHTML', displayKey);
+      this.renderer.appendChild(this.colorCols[this.dayToIndex(day)], colorBox);
+    }
+  }
 
-    console.log(x);
-    
-    // x.style.background = 'black';
-    // console.log(x);
+  formStyle(boxHeight: number, backgroundColor: string, top: number) {
+    return 'background-color: ' + backgroundColor + '; height: ' + boxHeight + 'px; top: ' + top + '%;';
   }
 
   dayToIndex(day: string) {
