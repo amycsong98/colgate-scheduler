@@ -1,8 +1,32 @@
-.mat-cell{
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
+.color {
+    position: absolute;
+    height: 100%;
 }
 
-/* hard coded need to be fixed */
-table {
-    width: 1000px; 
+.color-box {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    height: 50px;
+    width: 100px;
+    position: relative;
+    top: 50%;
+}
+
+.col {
+    float: left;
+}
+
+.reg-box {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    height: 50px;
+    width: 100px;
+}
+
+.time-box {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    height: 50px;
+    width: 50px;
+}
+
+.header {
+    height: 25px;
 }

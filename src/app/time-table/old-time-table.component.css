@@ -1,0 +1,13 @@
+.mat-cell{
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+/* hard coded need to be fixed */
+table {
+    width: 1000px; 
+}
+
+#M-7 {
+    background-color: red;
+    grid-row: 260 / 310; opacity: 1;
+}
