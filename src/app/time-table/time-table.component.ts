@@ -157,7 +157,16 @@ export class TimeTableComponent implements AfterViewInit {
     return endToMin - beginToMin;
   }
 
-  parseTime(time: string) {
-    return time.split(':').map(Number);
+  // [hour, min, 'am' or 'pm']
+  parseTime(time: any) {
+    const parsedTime = time.split(':');
+    parsedTime[0] = +parsedTime[0];
+    parsedTime[1] = +parsedTime[1];
+    if (parsedTime[2] === 'pm' && parsedTime[0] !== 12) {
+      parsedTime[0] += 12;
+    }
+    parsedTime.splice(2, 1);
+    console.log(parsedTime);
+    return parsedTime;
   }
 }
