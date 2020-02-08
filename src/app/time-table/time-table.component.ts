@@ -4,7 +4,7 @@ import { CourseService } from '../course.service';
 import {
   COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, TIME_START,
   ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
-  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3
+  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN
 } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
@@ -14,7 +14,6 @@ import { DataPassService } from '../data-pass.service';
   styleUrls: ['./time-table.component.css']
 })
 export class TimeTableComponent implements AfterViewInit {
-  courses: any[];
   colorCols = [];
 
   constructor(
@@ -36,6 +35,9 @@ export class TimeTableComponent implements AfterViewInit {
         } else if (data[ACTION] === ACTION_ADD) {
           console.log(data);
           this.addCourseToDisplay(data[DATA]);
+        } else if (data[ACTION] === ACTION_DELETE ) {
+          const course = data[DATA];
+          this.removeCourseFromDisplay(course);
         } else {
           console.log(data);
         }
@@ -54,7 +56,22 @@ export class TimeTableComponent implements AfterViewInit {
     }
   }
 
+  removeCourseFromDisplay(course: any) {
+    const crn = course[CRN];
+    for (let i = 0; i < this.colorCols.length; i++) {
+      if (this.colorCols[i].childNodes.length > 0) {
+        for (let j = 0; j < this.colorCols[i].childNodes.length; j++) {
+          if (this.colorCols[i].childNodes[j].id === crn) {
+            console.log('delete: ' + crn);
+            this.renderer.removeChild(this.colorCols[i], this.colorCols[i].childNodes[j]);
+          }
+        }
+      }
+    }
+  }
+
   addCourseToDisplay(course: any) {
+    const crn = course[CRN];
     const days = [];
     const sTimes = [];
     const eTimes = [];
@@ -74,6 +91,7 @@ export class TimeTableComponent implements AfterViewInit {
       eTimes.push(this.parseTime(course[COURSE_ETIME3]));
     }
 
+    // Loop through meet time 1, 2, 3
     for (let i = 0; i < days.length; i++) {
       // calculate box height
       const duration = this.calcDuration(sTimes[i], eTimes[i]);
@@ -85,15 +103,14 @@ export class TimeTableComponent implements AfterViewInit {
 
       // calculate where the box starts
       const top = this.calcTop(sTimes[i]);
-      this.colorTable(days[i], top, boxHeight, innerHTML);
+      this.colorTable(days[i], top, boxHeight, innerHTML, crn);
     }
   }
 
   displayCourses() {
-    this.courses = this.courseService.getCourses();
-    console.log(this.courses);
+    const courses = this.courseService.getCourses();
 
-    for (const course of this.courses) {
+    for (const course of courses) {
       this.addCourseToDisplay(course);
     }
   }
@@ -108,11 +125,11 @@ export class TimeTableComponent implements AfterViewInit {
     return beginMin / totalMin * 100;
   }
 
-  colorTable(days: string, top: number, boxHeight: number, displayKey: string) {
-    console.log(displayKey);
+  colorTable(days: string, top: number, boxHeight: number, displayKey: string, crn: string) {
     for (const day of days) {
       const colorBox = this.renderer.createElement('div');
       this.renderer.addClass(colorBox, 'color-box');
+      this.renderer.setProperty(colorBox, 'id', crn); // to make deleting easy
       this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, 'green', top));
       this.renderer.setProperty(colorBox, 'innerHTML', displayKey);
       this.renderer.appendChild(this.colorCols[this.dayToIndex(day)], colorBox);

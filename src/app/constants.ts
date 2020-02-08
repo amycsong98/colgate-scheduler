@@ -8,6 +8,7 @@ export const URL_INQUIRY_AREAS = 'https://api.colgate.edu/v1/courses/search/inqu
 export const URL_TEST = 'https://api.colgate.edu/v1/courses/search?keyword=&termCode=201902&coreArea=&inquiryArea=&meetTimeMorning=&meetTimeAfternoon=&meetTimeEvening=&openCoursesOnly=';
 
 // Course fields
+export const CRN = 'CRN';
 export const DISPLAY_KEY = 'DISPLAY_KEY';
 export const COURSE_DAYS1 = 'MEET1_DAYS';
 export const COURSE_DAYS2 = 'MEET2_DAYS';
@@ -27,6 +28,7 @@ export const ACTION = 'action';
 export const ACTION_HOVER = 'hover';
 export const ACTION_UNHOVER = 'unhover';
 export const ACTION_ADD = 'add';
+export const ACTION_DELETE = 'delete';
 
 // Cookie
 export const COURSES = 'courses';

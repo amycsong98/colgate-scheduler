@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
-import { COURSES, SUCCESS, FAIL } from './constants';
+import { COURSES, SUCCESS, FAIL, CRN } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -51,12 +51,11 @@ export class CourseService {
     return SUCCESS;
   }
 
-  // Removes a course from course list (cookie)
+  // Deletes a course from course list (cookie)
   // needs to be done again
-  removeCourse(DISPLAY_KEY: string) {
+  deleteCourse(course: any) {
     let courses = this.getCourses();
-
-    courses = courses.filter(e => e !== DISPLAY_KEY);
+    courses = courses.filter(e => e[CRN] !== course[CRN]);
     this.setCourses(courses);
   }
 
