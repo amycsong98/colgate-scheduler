@@ -1,0 +1,10 @@
+<mat-toolbar color="primary">
+    <mat-form-field>
+        <mat-label>TERM</mat-label>
+        <mat-select name="term" [(ngModel)]="termSelected">
+            <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
+                {{ term.TERM_DESC }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-toolbar>

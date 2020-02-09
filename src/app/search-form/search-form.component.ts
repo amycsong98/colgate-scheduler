@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
-import { URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS } from '../constants';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-search-form',
@@ -32,27 +28,27 @@ export class SearchFormComponent implements OnInit {
   panelOpenState = false;
 
   constructor(
-    private httpClient: HttpClient,
+    private courseService: CourseService,
   ) { }
 
   ngOnInit() {
     // initialize terms
-    // this.getTerms().subscribe(
-    //   res => {
-    //     this.terms = res;
-    //   }
-    // );
+    this.courseService.getTerms().subscribe(
+      res => {
+        this.terms = res;
+      }
+    );
 
     // initialize department / program
-    // this.getPrograms().subscribe(
-    //   res => {
-    //     this.programs = res;
-    //     console.log(this.programs);
-    //   }
-    // );
+    this.courseService.getPrograms().subscribe(
+      res => {
+        this.programs = res;
+        console.log(this.programs);
+      }
+    );
 
     // initialize core area
-    this.getCoreAreas().subscribe(
+    this.courseService.getCoreAreas().subscribe(
       res => {
         this.coreAreas = res;
         console.log(this.coreAreas);
@@ -60,7 +56,7 @@ export class SearchFormComponent implements OnInit {
     );
 
     // initialize area of inquiry
-    this.getInquiryAreas().subscribe(
+    this.courseService.getInquiryAreas().subscribe(
       res => {
         this.inquiryAreas = res;
         console.log(this.inquiryAreas);
@@ -68,23 +64,7 @@ export class SearchFormComponent implements OnInit {
     );
 
   }
-
-  getTerms(): Observable<any> {
-    return this.httpClient.get(URL_TERMS);
-  }
-
-  getPrograms(): Observable<any> {
-    return this.httpClient.get(URL_PROGRAM_AREAS);
-  }
-
-  getInquiryAreas(): Observable<any> {
-    return this.httpClient.get(URL_INQUIRY_AREAS);
-  }
-
-  getCoreAreas(): Observable<any> {
-    return this.httpClient.get(URL_CORE_AREAS);
-  }
-
+  
   onSubmit(data: any) {
     console.log(data);
     console.log(this.programsSelected);

@@ -5,7 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
-import { COURSES, SUCCESS, FAIL, CRN } from './constants';
+import { COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -68,10 +68,27 @@ export class CourseService {
   // Checks if the newCourse is in course list
   isDuplicate(courses: any[], newCourse: any) {
     for (const course of courses) {
-      if (course['CRN'] === newCourse['CRN']) {
+      if (course[CRN] === newCourse[CRN]) {
         return true;
       }
     }
     return false;
+  }
+
+
+  getTerms(): Observable<any> {
+    return this.httpClient.get(URL_TERMS);
+  }
+
+  getPrograms(): Observable<any> {
+    return this.httpClient.get(URL_PROGRAM_AREAS);
+  }
+
+  getInquiryAreas(): Observable<any> {
+    return this.httpClient.get(URL_INQUIRY_AREAS);
+  }
+
+  getCoreAreas(): Observable<any> {
+    return this.httpClient.get(URL_CORE_AREAS);
   }
 }

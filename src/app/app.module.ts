@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { CookieService } from 'ngx-cookie-service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -27,6 +27,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { CourseListerComponent, DialogAmPmComponent } from './course-lister/course-lister.component';
 import { TimeTableComponent } from './time-table/time-table.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
+import { HeaderMenuComponent } from './header-menu/header-menu.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
     CourseListerComponent,
     TimeTableComponent,
     MyCoursesComponent,
-    DialogAmPmComponent
+    DialogAmPmComponent,
+    HeaderMenuComponent
   ],
   entryComponents: [
     DialogAmPmComponent
@@ -55,7 +57,8 @@ import { MyCoursesComponent } from './my-courses/my-courses.component';
     MatTableModule,
     StorageServiceModule,
     MatDialogModule,
-    MatRadioModule
+    MatRadioModule,
+    MatToolbarModule
   ],
   providers: [
     CookieService,
