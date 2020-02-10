@@ -4,7 +4,7 @@ import { CourseService } from '../course.service';
 import {
   COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, TIME_START,
   ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
-  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN
+  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE
 } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
@@ -38,6 +38,10 @@ export class TimeTableComponent implements AfterViewInit {
         } else if (data[ACTION] === ACTION_DELETE ) {
           const course = data[DATA];
           this.removeCourseFromDisplay(course);
+        } else if (data[ACTION] === ACTION_TERM_CHANGE) { // optimize this?
+          this.colorCols = [];
+          this.initializeColorCols();
+          this.displayCourses();
         } else {
           console.log(data);
         }

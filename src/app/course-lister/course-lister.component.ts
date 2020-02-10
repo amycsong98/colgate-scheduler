@@ -4,7 +4,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { URL_TEST, ACTION_ADD } from '../constants';
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
-import { 
+import {
   ACTION_HOVER, ACTION_UNHOVER, COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3,
   COURSE_STIME1, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME1, COURSE_ETIME2, COURSE_ETIME3,
 
@@ -56,7 +56,6 @@ export class CourseListerComponent implements OnInit {
             console.log(res);
             this.appendAmPm(course, res);
             this.courseService.addCourse(course);
-            this.dataPassService.sendData({ action: ACTION_ADD, data: course });
           }
         }
       );

@@ -1,3 +1,6 @@
+// variables
+export const LASTEST_TERM = '201902';
+
 // URLS
 export const URL_PROGRAM_AREAS = 'https://api.colgate.edu/v1/courses/search/program-areas';
 export const URL_CORE_AREAS = 'https://api.colgate.edu/v1/courses/search/core-areas';
@@ -29,6 +32,7 @@ export const ACTION_HOVER = 'hover';
 export const ACTION_UNHOVER = 'unhover';
 export const ACTION_ADD = 'add';
 export const ACTION_DELETE = 'delete';
+export  const ACTION_TERM_CHANGE = 'term';
 
 // Cookie
 export const COURSES = 'courses';
@@ -43,3 +47,4 @@ export const TIME_END = 23;
 export const BOX_MIN = 60; // one box = 60 minutes
 export const BOX_HEIGHT = 50;
 export const NUM_ROW = 17;
+

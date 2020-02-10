@@ -5,18 +5,30 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
-import { COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS } from './constants';
+import { COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE } from './constants';
+import { DataPassService } from './data-pass.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
+  currentTerm: string;
 
   constructor(
     @Inject(SESSION_STORAGE) private storage: StorageService,
     private cookieService: CookieService,
     private httpClient: HttpClient,
+    private dataPassService: DataPassService,
   ) { }
+
+  setCurrentTerm(term: string) {
+    this.currentTerm = term;
+    this.dataPassService.sendData({ action: ACTION_TERM_CHANGE, data: term });
+  }
+
+  getCurrentTerm(): string {
+    return this.currentTerm;
+  }
 
   // Search based on url input
   searchCourses(url: string): Observable<any> {
@@ -25,7 +37,7 @@ export class CourseService {
 
   // Gets course list from local storage
   getCourses(): any[] {
-    const courses = JSON.parse(localStorage.getItem(COURSES));
+    const courses = JSON.parse(localStorage.getItem(this.currentTerm));
     if (courses) {
       return courses;
     } else {
@@ -48,6 +60,7 @@ export class CourseService {
       courses = [course];
     }
     this.setCourses(courses);
+    this.dataPassService.sendData({ action: ACTION_ADD, data: course });
     return SUCCESS;
   }
 
@@ -62,7 +75,7 @@ export class CourseService {
   // helper functions
   // Sets courses to local storage
   setCourses(courses: any[]) {
-    localStorage.setItem(COURSES, JSON.stringify(courses));
+    localStorage.setItem(this.currentTerm, JSON.stringify(courses));
   }
 
   // Checks if the newCourse is in course list
