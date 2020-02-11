@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { ApiUrl } from '../api-url';
+import { URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS } from '../constants';
 
 @Component({
   selector: 'app-search-form',
@@ -33,7 +33,6 @@ export class SearchFormComponent implements OnInit {
 
   constructor(
     private httpClient: HttpClient,
-    private apiUrl: ApiUrl,
   ) { }
 
   ngOnInit() {
@@ -71,19 +70,19 @@ export class SearchFormComponent implements OnInit {
   }
 
   getTerms(): Observable<any> {
-    return this.httpClient.get(this.apiUrl.termsUrl);
+    return this.httpClient.get(URL_TERMS);
   }
 
   getPrograms(): Observable<any> {
-    return this.httpClient.get(this.apiUrl.programAreasUrl);
+    return this.httpClient.get(URL_PROGRAM_AREAS);
   }
 
   getInquiryAreas(): Observable<any> {
-    return this.httpClient.get(this.apiUrl.inquiryAreasUrl);
+    return this.httpClient.get(URL_INQUIRY_AREAS);
   }
 
   getCoreAreas(): Observable<any> {
-    return this.httpClient.get(this.apiUrl.coreAreasUrl);
+    return this.httpClient.get(URL_CORE_AREAS);
   }
 
   onSubmit(data: any) {

@@ -1,4 +1,4 @@
-// anguular imports
+// angular imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,26 +12,33 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+
 
 import { CookieService } from 'ngx-cookie-service';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 // local imports
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BoxComponent } from './box/box.component';
-import { TimeTableComponent } from './time-table/time-table.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
-import { ApiUrl } from './api-url';
-import { CourseListerComponent } from './course-lister/course-lister.component';
+import { CourseListerComponent, DialogAmPmComponent } from './course-lister/course-lister.component';
+import { TimeTableComponent } from './time-table/time-table.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BoxComponent,
-    TimeTableComponent,
     SearchFormComponent,
-    CourseListerComponent
+    CourseListerComponent,
+    TimeTableComponent,
+    MyCoursesComponent,
+    DialogAmPmComponent
+  ],
+  entryComponents: [
+    DialogAmPmComponent
   ],
   imports: [
     BrowserModule,
@@ -45,11 +52,13 @@ import { CourseListerComponent } from './course-lister/course-lister.component';
     FormsModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    StorageServiceModule,
+    MatDialogModule,
+    MatRadioModule
   ],
   providers: [
     CookieService,
-    ApiUrl
   ],
   bootstrap: [AppComponent]
 })

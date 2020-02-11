@@ -1,12 +1,25 @@
 <div>
-    <!-- <div *ngFor='let time of times'>
-        <div *ngFor='let day of days'>
-            <app-box id="{{day}}-{{time}}" [day]="day" [time]="time" [color]="colors[0]"></app-box>
+    <!-- time -->
+    <!-- entire row -->
+    <div class="col">
+        <!-- time -->
+        <div class="time-box header">&nbsp;</div>
+        <!-- under time -->
+        <div>
+            <div class="time-box" *ngFor="let n of [7,8,9,10,11,24,13,14,15,16,17,18,19,20,21,22,23]">{{ n > 12 ? (n - 12) + ' pm' : n + ' am' }}</div>
         </div>
-    </div> -->
-    <div *ngFor='let item of colors; let i = index;'>
-        <app-box id="box-{{i}}" [index]="i" [color]="colors[i]"></app-box>
+    </div>
+    <!-- entire row -->
+    <div class="col" *ngFor="let d of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']">
+        <div class="reg-box header">{{ d }}</div>
+        <!-- under day -->
+        <div class="under-day">
+            <!-- under day color -->
+            <div class="color-col" id="color-col-{{d}}">
+                <!-- <div id="color-box" style="background-color: red;"></div> -->
+            </div>
+            <!-- boxes -->
+            <div *ngFor="let n of [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]" class="reg-box"></div>
+        </div>
     </div>
 </div>
-
-<button (click)="test()">test</button>

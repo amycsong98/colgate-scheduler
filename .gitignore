@@ -41,6 +41,13 @@ yarn-error.log
 testem.log
 /typings
 
+# VS Code
+.vscode/
+
 # System Files
 .DS_Store
 Thumbs.db
+
+# Work
+https:/
+change_git_user.sh

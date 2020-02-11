@@ -1,0 +1,37 @@
+.color-col {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.under-day {
+    position: absolute;
+}
+
+.color-box {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    /* height: 50px; */
+    width: 100px;
+    position: absolute;
+    /* top: 6.25%; */
+}
+
+.col {
+    float: left;
+}
+
+.reg-box {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    height: 50px;
+    width: 100px;
+}
+
+.time-box {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    height: 50px;
+    width: 50px;
+}
+
+.header {
+    height: 25px;
+}

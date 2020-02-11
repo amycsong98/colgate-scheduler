@@ -1,8 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+
+import { COURSES, SUCCESS, FAIL, CRN } from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +13,7 @@ import { Observable } from 'rxjs';
 export class CourseService {
 
   constructor(
+    @Inject(SESSION_STORAGE) private storage: StorageService,
     private cookieService: CookieService,
     private httpClient: HttpClient,
   ) { }
@@ -19,60 +23,55 @@ export class CourseService {
     return this.httpClient.get<any>(url);
   }
 
-  // Gets course list from cookie
-  getCourses() {
-    return this.strToList(this.cookieService.get('courses'));
+  // Gets course list from local storage
+  getCourses(): any[] {
+    const courses = JSON.parse(localStorage.getItem(COURSES));
+    if (courses) {
+      return courses;
+    } else {
+      return [];
+    }
   }
 
   // Adds a course to course list (cookie)
-  addCourse(DISPLAY_KEY: string) {
+  // course: object
+  addCourse(course: any) {
     let courses = this.getCourses();
-    // courses is empty
-    if (this.isCoursesEmpty(courses)) {
-      courses = [DISPLAY_KEY];
-      console.log('test:' + courses);
-    } else {
-      if (this.isDuplicate(courses, DISPLAY_KEY)) {
-        return 'fail';
+
+    // 'course' exists in local storage
+    if (courses) {
+      if (this.isDuplicate(courses, course)) {
+        return FAIL;
       }
-      courses.push(DISPLAY_KEY);
+      courses.push(course);
+    } else { // no 'course' in local storage
+      courses = [course];
     }
     this.setCourses(courses);
-    return 'success';
+    return SUCCESS;
   }
 
-  // Removes a course from course list (cookie)
-  removeCourse(DISPLAY_KEY: string) {
+  // Deletes a course from course list (cookie)
+  // needs to be done again
+  deleteCourse(course: any) {
     let courses = this.getCourses();
-
-    courses = courses.filter(e => e !== DISPLAY_KEY);
+    courses = courses.filter(e => e[CRN] !== course[CRN]);
     this.setCourses(courses);
   }
 
   // helper functions
-  // Sets courses to cookie
-  setCourses(courses: string[]) {
-    this.cookieService.set('courses', courses.join('|'), 365, '/');
+  // Sets courses to local storage
+  setCourses(courses: any[]) {
+    localStorage.setItem(COURSES, JSON.stringify(courses));
   }
 
-  // Checks if course list is empty (cookie)
-  isCoursesEmpty(courses: string[]) {
-    return courses === undefined || courses.length === 0 || courses[0] === '';
-  }
-
-  // Checks if the newCourse is in course list (cookie)
-  isDuplicate(courses: string[], newCourse: string) {
+  // Checks if the newCourse is in course list
+  isDuplicate(courses: any[], newCourse: any) {
     for (const course of courses) {
-      if (course === newCourse) {
+      if (course['CRN'] === newCourse['CRN']) {
         return true;
       }
     }
     return false;
-  }
-
-  // Converts string to list (cookie)
-  // delimiter: '|'
-  strToList(str: string) {
-    return str.split('|');
   }
 }

@@ -22,3 +22,8 @@ CATALOG_RESTRICTIONS: null
 STATUS: "Reserved Seats"
 SEATS: "26/24"
 RESERVED_SEATS: "2021 : 4/2, 2022 : 8/8, 2023 : 14/12, General: 0/2"
+
+
+
+mornings: 8~12
+evening: 5~10
