@@ -28,12 +28,11 @@ export class TimeTableComponent implements AfterViewInit {
     this.dataPassService.currentData.subscribe(
       data => {
         if (data[ACTION] === ACTION_HOVER) {
-          console.log(data);
-          // this.displayCourse(data[DATA]);
+
         } else if (data[ACTION] === ACTION_UNHOVER) {
-          console.log(data);
+
         } else if (data[ACTION] === ACTION_ADD) {
-          console.log(data);
+
           this.addCourseToDisplay(data[DATA]);
         } else if (data[ACTION] === ACTION_DELETE ) {
           const course = data[DATA];
@@ -41,6 +40,7 @@ export class TimeTableComponent implements AfterViewInit {
         } else if (data[ACTION] === ACTION_TERM_CHANGE) { // optimize this?
           this.colorCols = [];
           this.initializeColorCols();
+          console.log(this.colorCols);
           this.displayCourses();
         } else {
           console.log(data);
@@ -184,7 +184,6 @@ export class TimeTableComponent implements AfterViewInit {
       parsedTime[0] += 12;
     }
     parsedTime.splice(2, 1);
-    console.log(parsedTime);
     return parsedTime;
   }
 }
