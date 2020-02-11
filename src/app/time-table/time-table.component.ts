@@ -81,18 +81,18 @@ export class TimeTableComponent implements AfterViewInit {
     const eTimes = [];
     if (course[COURSE_DAYS1] !== null) {
       days.push(course[COURSE_DAYS1]);
-      sTimes.push(this.parseTime(course[COURSE_STIME1]));
-      eTimes.push(this.parseTime(course[COURSE_ETIME1]));
+      sTimes.push(this.courseService.parseTime(course[COURSE_STIME1]));
+      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME1]));
     }
     if (course[COURSE_DAYS2] !== null) {
       days.push(course[COURSE_DAYS2]);
-      sTimes.push(this.parseTime(course[COURSE_STIME2]));
-      eTimes.push(this.parseTime(course[COURSE_ETIME2]));
+      sTimes.push(this.courseService.parseTime(course[COURSE_STIME2]));
+      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME2]));
     }
     if (course[COURSE_DAYS3] !== null) {
       days.push(course[COURSE_DAYS3]);
-      sTimes.push(this.parseTime(course[COURSE_STIME3]));
-      eTimes.push(this.parseTime(course[COURSE_ETIME3]));
+      sTimes.push(this.courseService.parseTime(course[COURSE_STIME3]));
+      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME3]));
     }
 
     // Loop through meet time 1, 2, 3
@@ -136,7 +136,7 @@ export class TimeTableComponent implements AfterViewInit {
       this.renderer.setProperty(colorBox, 'id', crn); // to make deleting easy
       this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, 'green', top));
       this.renderer.setProperty(colorBox, 'innerHTML', displayKey);
-      this.renderer.appendChild(this.colorCols[this.dayToIndex(day)], colorBox);
+      this.renderer.appendChild(this.colorCols[this.courseService.dayToIndex(day)], colorBox);
     }
   }
 
@@ -144,22 +144,7 @@ export class TimeTableComponent implements AfterViewInit {
     return 'background-color: ' + backgroundColor + '; height: ' + boxHeight + 'px; top: ' + top + '%;';
   }
 
-  dayToIndex(day: string) {
-    switch (day) {
-      case 'M':
-        return 0;
-      case 'T':
-        return 1;
-      case 'W':
-        return 2;
-      case 'R':
-        return 3;
-      case 'F':
-        return 4;
-      default:
-        return -1;
-    }
-  }
+
 
   calcBoxHeight(duration: number) {
     // 60 min: BOX_HEIGHT (50px)
@@ -173,17 +158,5 @@ export class TimeTableComponent implements AfterViewInit {
     const beginToMin = begin[0] * 60 + begin[1];
 
     return endToMin - beginToMin;
-  }
-
-  // [hour, min, 'am' or 'pm']
-  parseTime(time: any) {
-    const parsedTime = time.split(':');
-    parsedTime[0] = +parsedTime[0];
-    parsedTime[1] = +parsedTime[1];
-    if (parsedTime[2] === 'pm' && parsedTime[0] !== 12) {
-      parsedTime[0] += 12;
-    }
-    parsedTime.splice(2, 1);
-    return parsedTime;
   }
 }

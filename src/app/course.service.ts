@@ -5,7 +5,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
-import { COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE } from './constants';
+import { 
+  COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE,
+  COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3
+} from './constants';
 import { DataPassService } from './data-pass.service';
 
 @Injectable({
@@ -53,7 +56,11 @@ export class CourseService {
     // 'course' exists in local storage
     if (courses) {
       if (this.isDuplicate(courses, course)) {
-        return FAIL;
+        alert('The class is already added ' + course[DISPLAY_KEY] + '.');
+        return { result: FAIL, message: 'The class is already added.' };
+      } else if (this.isTimeDuplicate(courses, course)) {
+        alert('Time conflict found');
+        return { result: FAIL, message: 'Time conflict.' };
       }
       courses.push(course);
     } else { // no 'course' in local storage
@@ -79,7 +86,7 @@ export class CourseService {
   }
 
   // Checks if the newCourse is in course list
-  isDuplicate(courses: any[], newCourse: any) {
+  isDuplicate(courses: any[], newCourse: any): boolean {
     for (const course of courses) {
       if (course[CRN] === newCourse[CRN]) {
         return true;
@@ -88,6 +95,94 @@ export class CourseService {
     return false;
   }
 
+  isTimeDuplicate(courses: any[], newCourse: any): boolean {
+    const allDaysNew = this.getAllCourseDays(newCourse);
+    const allStartTimeNew = this.getAllCourseStartTime(newCourse);
+    const allEndTimeNew = this.getAllCourseEndTime(newCourse);
+    for (const course of courses) {
+      const allDays = this.getAllCourseDays(course);
+      const allStartTime = this.getAllCourseStartTime(course);
+      const allEndTime = this.getAllCourseEndTime(course);
+
+      for (const daysNew of allDaysNew) {
+        for (const days of allDays) {
+          if (this.daysConflict(daysNew, days)) {
+            for (let i = 0; i < allStartTimeNew.length; i++) {
+              for (let j = 0; j < allStartTime.length; j++) {
+                if (this.timesConflict(allStartTimeNew[i], allEndTimeNew[i], allStartTime[j], allEndTime[j])) {
+                  return true;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  getAllCourseDays(course: any): string[] {
+    const allDays = [course[COURSE_DAYS1], course[COURSE_DAYS2], course[COURSE_DAYS3]];
+    return allDays.filter(e => e); // filter nulls
+  }
+
+  getAllCourseStartTime(course: any): number[][] {
+    const allStartTime = [this.parseTime(course[COURSE_STIME1]), this.parseTime(course[COURSE_STIME2]), this.parseTime(course[COURSE_STIME3])];
+    return allStartTime.filter(e => e);
+  }
+
+  getAllCourseEndTime(course: any): number[][] {
+    const allEndTime = [this.parseTime(course[COURSE_ETIME1]), this.parseTime(course[COURSE_ETIME2]), this.parseTime(course[COURSE_ETIME3])];
+    return allEndTime.filter(e => e);
+  }
+
+  // days: "MWF"
+  daysConflict(days1: string, days2: string) {
+    const conflictChecker = [0, 0, 0, 0, 0];
+    for (const day of days1) {
+      conflictChecker[this.dayToIndex(day)]++;
+    }
+    for (const day of days2) {
+      conflictChecker[this.dayToIndex(day)]++;
+    }
+    for (const count of conflictChecker) {
+      if (count === 2) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  timesConflict(parsedStart1: number[], parsedEnd1: number[], parsedStart2: number[], parsedEnd2: number[]): boolean {
+    const startToMin1 = this.parsedToMin(parsedStart1);
+    const endToMin1 = this.parsedToMin(parsedEnd1);
+    const startToMin2 = this.parsedToMin(parsedStart2);
+    const endToMin2 = this.parsedToMin(parsedEnd2);
+
+    if (startToMin1 >= startToMin2 && startToMin1 <= endToMin2 || endToMin1 >= startToMin2 && endToMin1 <= endToMin2) {
+      return true;
+    }
+    return false;
+  }
+
+  parsedToMin(parsedTime: number[]): number {
+    return parsedTime[0] * 60 + parsedTime[1];
+  }
+
+  // [hour, min, 'am' or 'pm'] => [hour, min] in 24 hour format
+  parseTime(time: any): number[] {
+    if (time) {
+      const parsedTime = time.split(':');
+      parsedTime[0] = +parsedTime[0];
+      parsedTime[1] = +parsedTime[1];
+      if (parsedTime[2] === 'pm' && parsedTime[0] !== 12) {
+        parsedTime[0] += 12;
+      }
+      parsedTime.splice(2, 1);
+      return parsedTime;
+    }
+    return null;
+  }
 
   getTerms(): Observable<any> {
     return this.httpClient.get(URL_TERMS);
@@ -103,5 +198,22 @@ export class CourseService {
 
   getCoreAreas(): Observable<any> {
     return this.httpClient.get(URL_CORE_AREAS);
+  }
+
+  dayToIndex(day: string) {
+    switch (day) {
+      case 'M':
+        return 0;
+      case 'T':
+        return 1;
+      case 'W':
+        return 2;
+      case 'R':
+        return 3;
+      case 'F':
+        return 4;
+      default:
+        return -1;
+    }
   }
 }
