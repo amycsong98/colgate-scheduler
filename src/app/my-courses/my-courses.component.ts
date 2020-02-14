@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
 import {
@@ -11,13 +13,14 @@ import {
   styleUrls: ['./my-courses.component.css']
 })
 export class MyCoursesComponent implements OnInit {
-  displayedColumns: string[] = ['Course',	'Title',	'Meets',	'Status',	'Restrictions', 'delete'];
+  displayedColumns: string[] = ['Course',	'Title',	'Meets',	'Status',	'Restrictions', 'delete', 'settings'];
 
   courses: object[];
 
   constructor(
     private courseService: CourseService,
     private dataPassService: DataPassService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -50,4 +53,35 @@ export class MyCoursesComponent implements OnInit {
     this.dataPassService.sendData({ action: ACTION_DELETE, data: course });
     return this.courseService.deleteCourse(course);
   }
+
+  changeCourse(course: any) {
+
+    const dialogRef = this.dialog.open(DialogCourseSettingsComponent, {
+      data: { }
+    });
+
+    dialogRef.afterClosed().subscribe(
+      res => {
+        if (res) { // if ampms are correctly input
+          console.log(res);
+        }
+      }
+    );
+  }
 }
+
+@Component({
+  selector: 'app-course-settings',
+  templateUrl: './course-settings.dialog.html',
+})
+export class DialogCourseSettingsComponent {
+  constructor(
+    public dialogRef: MatDialogRef<DialogCourseSettingsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+

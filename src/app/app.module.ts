@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 import { CookieService } from 'ngx-cookie-service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -26,7 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { CourseListerComponent, DialogAmPmComponent } from './course-lister/course-lister.component';
 import { TimeTableComponent } from './time-table/time-table.component';
-import { MyCoursesComponent } from './my-courses/my-courses.component';
+import { MyCoursesComponent, DialogCourseSettingsComponent } from './my-courses/my-courses.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
 
 @NgModule({
@@ -37,10 +38,12 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
     TimeTableComponent,
     MyCoursesComponent,
     DialogAmPmComponent,
-    HeaderMenuComponent
+    HeaderMenuComponent,
+    DialogCourseSettingsComponent
   ],
   entryComponents: [
-    DialogAmPmComponent
+    DialogAmPmComponent,
+    DialogCourseSettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +61,8 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
     StorageServiceModule,
     MatDialogModule,
     MatRadioModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [
     CookieService,
