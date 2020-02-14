@@ -228,4 +228,18 @@ export class CourseService {
         return -1;
     }
   }
+
+  /*
+    start:
+      [10:20~11:59] => am
+      [12:00~7:55) => pm
+      [7:55~10:20) => ambiguous
+    end:
+      (10:20~11:59] => am
+      [12:00~7:55] => pm
+      (7:55~10:20] => ambiguous
+  */
+  guessAmPm(time: number[], start: boolean) {
+    
+  }
 }
