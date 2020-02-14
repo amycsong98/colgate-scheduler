@@ -25,6 +25,9 @@ export const COURSE_ETIME1 = 'MEET1_END_TIME12';
 export const COURSE_ETIME2 = 'MEET2_END_TIME12';
 export const COURSE_ETIME3 = 'MEET3_END_TIME12';
 
+// Course fields new
+export const COLOR = 'COLOR';
+
 // Data passing fields
 export const DATA = 'data';
 export const ACTION = 'action';

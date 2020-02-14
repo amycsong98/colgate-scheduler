@@ -4,7 +4,7 @@ import { CourseService } from '../course.service';
 import {
   COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, TIME_START,
   ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
-  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE
+  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE, COLOR
 } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
@@ -32,7 +32,6 @@ export class TimeTableComponent implements AfterViewInit {
         } else if (data[ACTION] === ACTION_UNHOVER) {
 
         } else if (data[ACTION] === ACTION_ADD) {
-
           this.addCourseToDisplay(data[DATA]);
         } else if (data[ACTION] === ACTION_DELETE ) {
           const course = data[DATA];
@@ -107,7 +106,7 @@ export class TimeTableComponent implements AfterViewInit {
 
       // calculate where the box starts
       const top = this.calcTop(sTimes[i]);
-      this.colorTable(days[i], top, boxHeight, innerHTML, crn);
+      this.colorTable(days[i], top, boxHeight, innerHTML, crn, course[COLOR]);
     }
   }
 
@@ -129,12 +128,12 @@ export class TimeTableComponent implements AfterViewInit {
     return beginMin / totalMin * 100;
   }
 
-  colorTable(days: string, top: number, boxHeight: number, displayKey: string, crn: string) {
+  colorTable(days: string, top: number, boxHeight: number, displayKey: string, crn: string, color: string) {
     for (const day of days) {
       const colorBox = this.renderer.createElement('div');
       this.renderer.addClass(colorBox, 'color-box');
       this.renderer.setProperty(colorBox, 'id', crn); // to make deleting easy
-      this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, 'green', top));
+      this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, color, top));
       this.renderer.setProperty(colorBox, 'innerHTML', displayKey);
       this.renderer.appendChild(this.colorCols[this.courseService.dayToIndex(day)], colorBox);
     }

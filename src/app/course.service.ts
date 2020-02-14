@@ -7,7 +7,8 @@ import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
 import { 
   COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE,
-  COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3
+  COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3,
+  COLOR
 } from './constants';
 import { DataPassService } from './data-pass.service';
 
@@ -16,6 +17,7 @@ import { DataPassService } from './data-pass.service';
 })
 export class CourseService {
   currentTerm: string;
+  colors = ['#f7e8f0', '#f1c6de', '#e89da2', '#ecb390', '#fcf8e8', '#ccedd2', '#b9cced', '#e1ccec', '#ececec', '#c7b198'];
 
   constructor(
     @Inject(SESSION_STORAGE) private storage: StorageService,
@@ -48,9 +50,19 @@ export class CourseService {
     }
   }
 
+  addColor(course: any) {
+    const max = this.colors.length - 1;
+    const min = 0;
+    const rand = Math.floor(Math.random() * (max - min) + min);
+    console.log(rand);
+    course[COLOR] = this.colors[rand];
+  }
+
   // Adds a course to course list (cookie)
   // course: object
   addCourse(course: any) {
+    this.addColor(course);
+  
     let courses = this.getCourses();
 
     // 'course' exists in local storage
