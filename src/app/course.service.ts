@@ -229,6 +229,32 @@ export class CourseService {
     }
   }
 
+  guessAmPmAndAppend(course: any) {
+    const allStartTimeNew = this.getAllCourseStartTime(course);
+    const allEndTimeNew = this.getAllCourseEndTime(course);
+    const startAmPms = [];
+    const endAmPms = [];
+
+    // guess ampm
+    for (let i = 0; i < allStartTimeNew.length; i++) {
+      const ampm = this.guessAmPm(allStartTimeNew[i], true);
+      startAmPms.push(ampm);
+      if (ampm === 'pm') {
+        endAmPms.push('pm');
+      } else {
+        endAmPms.push(this.guessAmPm(allEndTimeNew[i], false));
+      }
+    }
+
+    // append ampm; hard coded fix later
+    course[COURSE_STIME1] = course[COURSE_STIME1] + ':' + startAmPms[0];
+    course[COURSE_STIME2] = course[COURSE_STIME2] + ':' + startAmPms[1];
+    course[COURSE_STIME3] = course[COURSE_STIME3] + ':' + startAmPms[2];
+    course[COURSE_ETIME1] = course[COURSE_ETIME1] + ':' + endAmPms[0];
+    course[COURSE_ETIME2] = course[COURSE_ETIME2] + ':' + endAmPms[1];
+    course[COURSE_ETIME3] = course[COURSE_ETIME3] + ':' + endAmPms[2];
+  }
+
   /*
     start:
       [10:20~11:59] => am
@@ -238,8 +264,28 @@ export class CourseService {
       (10:20~11:59] => am
       [12:00~7:55] => pm
       (7:55~10:20] => ambiguous
+
+    come up with a good return
   */
-  guessAmPm(time: number[], start: boolean) {
-    
+  guessAmPm(time: number[], start: boolean): string {
+    const min = this.parsedToMin(time);
+    // start time
+    if (start) {
+      if (min >= 620 && min <= 719) { // am
+        return 'am';
+      } else if (min >= 720 && min <= 779 || min >= 60 && min <= 474) { // pm
+        return 'pm';
+      } else {
+        return 'ambiguous';
+      }
+    } else {
+      if (min >= 621 && min <= 719) { // am
+        return 'am';
+      } else if (min >= 720 && min <= 779 || min >= 60 && min <= 475) { // pm
+        return 'pm';
+      } else {
+        return 'ambiguous';
+      }
+    }
   }
 }

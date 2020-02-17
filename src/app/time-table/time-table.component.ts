@@ -28,7 +28,8 @@ export class TimeTableComponent implements AfterViewInit {
     this.dataPassService.currentData.subscribe(
       data => {
         if (data[ACTION] === ACTION_HOVER) {
-
+          const course = data[DATA];
+          // this.courseService.guessAmPm(course[])
         } else if (data[ACTION] === ACTION_UNHOVER) {
 
         } else if (data[ACTION] === ACTION_ADD) {
