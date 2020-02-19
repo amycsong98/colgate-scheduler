@@ -54,7 +54,6 @@ export class CourseService {
     const max = this.colors.length - 1;
     const min = 0;
     const rand = Math.floor(Math.random() * (max - min) + min);
-    console.log(rand);
     course[COLOR] = this.colors[rand];
   }
 
@@ -67,7 +66,7 @@ export class CourseService {
 
     // 'course' exists in local storage
     if (courses) {
-      if (this.isDuplicate(courses, course)) {
+      if (this.isDuplicate(course)) {
         alert('The class is already added ' + course[DISPLAY_KEY] + '.');
         return { result: FAIL, message: 'The class is already added.' };
       } else if (this.isTimeDuplicate(courses, course)) {
@@ -98,7 +97,9 @@ export class CourseService {
   }
 
   // Checks if the newCourse is in course list
-  isDuplicate(courses: any[], newCourse: any): boolean {
+  isDuplicate(newCourse: any): boolean {
+    const courses = this.getCourses();
+
     for (const course of courses) {
       if (course[CRN] === newCourse[CRN]) {
         return true;
@@ -229,7 +230,18 @@ export class CourseService {
     }
   }
 
+  ampmAppended(course: any): boolean {
+    if (course[COURSE_STIME1].split(':').length > 2) {
+      return true;
+    }
+    return false;
+  }
+
   guessAmPmAndAppend(course: any) {
+    if (this.ampmAppended(course)) {
+      return course;
+    }
+
     const allStartTimeNew = this.getAllCourseStartTime(course);
     const allEndTimeNew = this.getAllCourseEndTime(course);
     const startAmPms = [];

@@ -29,7 +29,6 @@ export class CourseListerComponent implements OnInit {
   ngOnInit() {
     this.courseService.searchCourses(URL_TEST).subscribe(
       res => {
-        console.log(res);
         this.courses = res;
       }
     );
@@ -83,11 +82,17 @@ export class CourseListerComponent implements OnInit {
   }
 
   hoverCourse(course: any) {
-    this.dataPassService.sendData({ action: ACTION_HOVER, data: course });
+    if (!this.courseService.isDuplicate(course)) {
+      this.courseService.guessAmPmAndAppend(course);
+      this.dataPassService.sendData({ action: ACTION_HOVER, data: course });
+    }
   }
 
   unhoverCourse(course: any) {
-    this.dataPassService.sendData({ action: ACTION_UNHOVER, data: course });
+    if (!this.courseService.isDuplicate(course)) {
+      this.courseService.guessAmPmAndAppend(course);
+      this.dataPassService.sendData({ action: ACTION_UNHOVER, data: course });
+    }
   }
 }
 

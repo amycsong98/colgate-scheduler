@@ -29,9 +29,10 @@ export class TimeTableComponent implements AfterViewInit {
       data => {
         if (data[ACTION] === ACTION_HOVER) {
           const course = data[DATA];
-          // this.courseService.guessAmPm(course[])
+          this.addCourseToDisplay(course);
         } else if (data[ACTION] === ACTION_UNHOVER) {
-
+          const course = data[DATA];
+          this.removeCourseFromDisplay(course);
         } else if (data[ACTION] === ACTION_ADD) {
           this.addCourseToDisplay(data[DATA]);
         } else if (data[ACTION] === ACTION_DELETE ) {
@@ -40,7 +41,6 @@ export class TimeTableComponent implements AfterViewInit {
         } else if (data[ACTION] === ACTION_TERM_CHANGE) { // optimize this?
           this.colorCols = [];
           this.initializeColorCols();
-          console.log(this.colorCols);
           this.displayCourses();
         } else {
           console.log(data);
@@ -66,7 +66,6 @@ export class TimeTableComponent implements AfterViewInit {
       if (this.colorCols[i].childNodes.length > 0) {
         for (let j = 0; j < this.colorCols[i].childNodes.length; j++) {
           if (this.colorCols[i].childNodes[j].id === crn) {
-            console.log('delete: ' + crn);
             this.renderer.removeChild(this.colorCols[i], this.colorCols[i].childNodes[j]);
           }
         }
@@ -107,6 +106,10 @@ export class TimeTableComponent implements AfterViewInit {
 
       // calculate where the box starts
       const top = this.calcTop(sTimes[i]);
+
+      if (!course[COLOR]) {
+        course[COLOR] = '#808080';
+      }
       this.colorTable(days[i], top, boxHeight, innerHTML, crn, course[COLOR]);
     }
   }
