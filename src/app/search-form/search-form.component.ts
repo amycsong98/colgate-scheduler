@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CourseService } from '../course.service';
+import { DataPassService } from '../data-pass.service';
+import { ACTION_SEARCH, URL_TEST } from '../constants';
 
 @Component({
   selector: 'app-search-form',
@@ -29,6 +31,7 @@ export class SearchFormComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
+    private dataPassService: DataPassService,
   ) { }
 
   ngOnInit() {
@@ -64,7 +67,7 @@ export class SearchFormComponent implements OnInit {
     );
 
   }
-  
+
   onSubmit(data: any) {
     console.log(data);
     console.log(this.programsSelected);
@@ -72,6 +75,9 @@ export class SearchFormComponent implements OnInit {
     console.log(this.timesSelected);
     console.log(this.levelsSelected);
     console.log(this.creditsSelected);
+
+    const url = URL_TEST; // fix this hard coded
+    this.dataPassService.sendData({ action: ACTION_SEARCH, data: url });
   }
 
   // checked box updates

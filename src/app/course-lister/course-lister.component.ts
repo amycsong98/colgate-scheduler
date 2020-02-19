@@ -7,6 +7,7 @@ import { DataPassService } from '../data-pass.service';
 import {
   ACTION_HOVER, ACTION_UNHOVER, COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3,
   COURSE_STIME1, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME1, COURSE_ETIME2, COURSE_ETIME3,
+  ACTION, ACTION_SEARCH, DATA
 
 } from '../constants';
 
@@ -20,6 +21,8 @@ export class CourseListerComponent implements OnInit {
 
   courses: object[];
 
+  searched = false;
+
   constructor(
     private courseService: CourseService,
     private dataPassService: DataPassService,
@@ -27,9 +30,17 @@ export class CourseListerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.courseService.searchCourses(URL_TEST).subscribe(
-      res => {
-        this.courses = res;
+    this.dataPassService.currentData.subscribe(
+      data => {
+        if (data[ACTION] === ACTION_SEARCH) {
+          const url = data[DATA];
+          this.courseService.searchCourses(url).subscribe(
+            res => {
+              this.courses = res;
+              this.searched = true;
+            }
+          );
+        }
       }
     );
   }
@@ -37,33 +48,6 @@ export class CourseListerComponent implements OnInit {
   addCourse(course: any) {
     this.courseService.guessAmPmAndAppend(course);
     this.courseService.addCourse(course);
-
-    // const start1 = course[COURSE_DAYS1] !== null ? course[COURSE_STIME1] : false;
-    // const end1 = course[COURSE_DAYS1] !== null ? course[COURSE_ETIME1] : false;
-    // const start2 = course[COURSE_DAYS2] !== null ? course[COURSE_STIME2] : false;
-    // const end2 = course[COURSE_DAYS2] !== null ? course[COURSE_ETIME2] : false;
-    // const start3 = course[COURSE_DAYS3] !== null ? course[COURSE_STIME3] : false;
-    // const end3 = course[COURSE_DAYS3] !== null ? course[COURSE_ETIME3] : false;
-
-    // if (start1) {
-    //   const dialogRef = this.dialog.open(DialogAmPmComponent, {
-    //     data: {start1, start2, start3, end1, end2, end3, start1AmPm: '', start2AmPm: '',
-    //     start3AmPm: '', end1AmPm: '', end2AmPm: '', end3AmPm: '',
-    //   }
-    //   });
-
-    //   dialogRef.afterClosed().subscribe(
-    //     res => {
-    //       if (res) { // if ampms are correctly input
-    //         console.log(res);
-    //         this.appendAmPm(course, res);
-    //         this.courseService.addCourse(course);
-    //       }
-    //     }
-    //   );
-    // } else {
-
-    // }
   }
 
   appendAmPm(course: any, ampms: any) {

@@ -35,7 +35,8 @@ export const ACTION_HOVER = 'hover';
 export const ACTION_UNHOVER = 'unhover';
 export const ACTION_ADD = 'add';
 export const ACTION_DELETE = 'delete';
-export  const ACTION_TERM_CHANGE = 'term';
+export const ACTION_TERM_CHANGE = 'term';
+export const ACTION_SEARCH = 'search';
 
 // Cookie
 export const COURSES = 'courses';
