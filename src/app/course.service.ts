@@ -237,12 +237,28 @@ export class CourseService {
 
     // guess ampm
     for (let i = 0; i < allStartTimeNew.length; i++) {
-      const ampm = this.guessAmPm(allStartTimeNew[i], true);
-      startAmPms.push(ampm);
-      if (ampm === 'pm') {
-        endAmPms.push('pm');
+      let startAmPm = this.guessAmPm(allStartTimeNew[i], true);
+      let endAmPm = this.guessAmPm(allEndTimeNew[i], false);
+
+      if (startAmPm === 'pm') {
+        endAmPm = 'pm';
+      } else if (startAmPm === 'ambiguous' && endAmPm !== 'ambiguous') {
+        startAmPm = 'am';
+      } else if (endAmPm === 'ambiguous' && startAmPm !== 'ambiguous') {
+        endAmPm = 'pm';
+      }
+
+      if (startAmPm !== 'ambiguous') {
+        startAmPms.push(startAmPm);
+        endAmPms.push(endAmPm);
       } else {
-        endAmPms.push(this.guessAmPm(allEndTimeNew[i], false));
+        const ampm = this.guessAmPmBasedOnTimeSchedule(allStartTimeNew[i], allEndTimeNew[i]);
+        if (ampm !== 'ambiguous') {
+          startAmPms.push(ampm);
+          endAmPms.push(ampm);
+        } else {
+          // final step => ask
+        }
       }
     }
 
@@ -287,5 +303,29 @@ export class CourseService {
         return 'ambiguous';
       }
     }
+  }
+
+  /* 
+    time schedule blocks that is ambiguous on guessAmPm:
+    8:20 ~ 9:10
+    9:20 ~ 10:10
+    10:20 ~ 11:10
+    7:55 ~ 9:10
+    8:30 ~ 9:45
+    9:55 ~ 11:10
+  */
+  guessAmPmBasedOnTimeSchedule(stime: number[], etime: number[]): string {
+    const timeBlockStarts = [[8, 20], [9, 20], [10, 20], [7, 55], [8, 30], [9, 55]];
+    const timeBlockEnds = [[9, 10], [10, 10], [11, 10], [9, 10], [9, 45], [11, 10]];
+
+    for (let i = 0; i < timeBlockStarts.length; i++) {
+      if (
+        this.parsedToMin(stime) === this.parsedToMin(timeBlockStarts[i]) &&
+        this.parsedToMin(etime) === this.parsedToMin(timeBlockEnds[i])
+      ) {
+        return 'am';
+      }
+    }
+    return 'ambiguous';
   }
 }
