@@ -1,5 +1,13 @@
 <form #settingsForm="ngForm">
+    <div *ngIf="data.course['MEET1_DAYS']">
+        <mat-label>{{ data.course['MEET1_BEGIN_TIME12'] | noAmPm }}</mat-label>
+        <mat-radio-group>
+            <mat-radio-button value="am">AM</mat-radio-button>
+            <mat-radio-button value="pm">PM</mat-radio-button>
+        </mat-radio-group>
+    </div>
     
+    <br>
     <mat-form-field style="width: 500px">
         <input matInput name="color" [(ngModel)]="data.course['COLOR']" placeholder="COLOR">
     </mat-form-field>

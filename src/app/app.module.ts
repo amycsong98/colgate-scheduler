@@ -29,6 +29,7 @@ import { CourseListerComponent, DialogAmPmComponent } from './course-lister/cour
 import { TimeTableComponent } from './time-table/time-table.component';
 import { MyCoursesComponent, DialogCourseSettingsComponent } from './my-courses/my-courses.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
+import { NoAmPmPipe } from './no-am-pm.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
     MyCoursesComponent,
     DialogAmPmComponent,
     HeaderMenuComponent,
-    DialogCourseSettingsComponent
+    DialogCourseSettingsComponent,
+    NoAmPmPipe
   ],
   entryComponents: [
     DialogAmPmComponent,
