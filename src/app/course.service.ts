@@ -5,10 +5,11 @@ import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
-import { 
+import {
   COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE,
-  COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3,
-  COLOR
+  COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2,
+  COURSE_ETIME3, COLOR, COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2,
+  COURSE_ETIME_AMPM3
 } from './constants';
 import { DataPassService } from './data-pass.service';
 
@@ -140,12 +141,14 @@ export class CourseService {
   }
 
   getAllCourseStartTime(course: any): number[][] {
-    const allStartTime = [this.parseTime(course[COURSE_STIME1]), this.parseTime(course[COURSE_STIME2]), this.parseTime(course[COURSE_STIME3])];
+    const allStartTime = [this.parseTime(course[COURSE_STIME1], course[COURSE_STIME_AMPM1]), this.parseTime(course[COURSE_STIME2],
+      course[COURSE_STIME_AMPM2]), this.parseTime(course[COURSE_STIME3], course[COURSE_STIME_AMPM3])];
     return allStartTime.filter(e => e);
   }
 
   getAllCourseEndTime(course: any): number[][] {
-    const allEndTime = [this.parseTime(course[COURSE_ETIME1]), this.parseTime(course[COURSE_ETIME2]), this.parseTime(course[COURSE_ETIME3])];
+    const allEndTime = [this.parseTime(course[COURSE_ETIME1], course[COURSE_ETIME_AMPM1]),
+    this.parseTime(course[COURSE_ETIME2], course[COURSE_ETIME_AMPM2]), this.parseTime(course[COURSE_ETIME3], course[COURSE_ETIME_AMPM3])];
     return allEndTime.filter(e => e);
   }
 
@@ -182,16 +185,17 @@ export class CourseService {
     return parsedTime[0] * 60 + parsedTime[1];
   }
 
-  // [hour, min, 'am' or 'pm'] => [hour, min] in 24 hour format
-  parseTime(time: any): number[] {
+  // [hour, min] => [hour, min] in 24 hour format
+  parseTime(time: any, ampm: string): number[] {
     if (time) {
       const parsedTime = time.split(':');
       parsedTime[0] = +parsedTime[0];
       parsedTime[1] = +parsedTime[1];
-      if (parsedTime[2] === 'pm' && parsedTime[0] !== 12) {
+      if (ampm === 'pm' && parsedTime[0] !== 12) {
         parsedTime[0] += 12;
       }
       parsedTime.splice(2, 1);
+      console.log(parsedTime);
       return parsedTime;
     }
     return null;
@@ -231,7 +235,12 @@ export class CourseService {
   }
 
   ampmAppended(course: any): boolean {
-    if (course[COURSE_STIME1].split(':').length > 2) {
+    // if (course[COURSE_STIME1].split(':').length > 2) {
+    //   return true;
+    // }
+    // return false;
+
+    if (course[COURSE_STIME_AMPM1]) {
       return true;
     }
     return false;
@@ -239,6 +248,7 @@ export class CourseService {
 
   guessAmPmAndAppend(course: any) {
     if (this.ampmAppended(course)) {
+      console.log('ampm already appended');
       return course;
     }
 
@@ -275,12 +285,12 @@ export class CourseService {
     }
 
     // append ampm; hard coded fix later
-    course[COURSE_STIME1] = course[COURSE_STIME1] + ':' + startAmPms[0];
-    course[COURSE_STIME2] = course[COURSE_STIME2] + ':' + startAmPms[1];
-    course[COURSE_STIME3] = course[COURSE_STIME3] + ':' + startAmPms[2];
-    course[COURSE_ETIME1] = course[COURSE_ETIME1] + ':' + endAmPms[0];
-    course[COURSE_ETIME2] = course[COURSE_ETIME2] + ':' + endAmPms[1];
-    course[COURSE_ETIME3] = course[COURSE_ETIME3] + ':' + endAmPms[2];
+    course[COURSE_STIME_AMPM1] = startAmPms[0];
+    course[COURSE_STIME_AMPM2] = startAmPms[1];
+    course[COURSE_STIME_AMPM3] = startAmPms[2];
+    course[COURSE_ETIME_AMPM1] = endAmPms[0];
+    course[COURSE_ETIME_AMPM2] = endAmPms[1];
+    course[COURSE_ETIME_AMPM3] = endAmPms[2];
   }
 
   /*

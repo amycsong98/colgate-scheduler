@@ -66,7 +66,8 @@ export class MyCoursesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       res => {
         if (res) {
-          this.courseService.updateCourse(course);
+          // this.courseService.updateCourse(course);
+          console.log(res);
         }
       }
     );

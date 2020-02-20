@@ -4,7 +4,8 @@ import { CourseService } from '../course.service';
 import {
   COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, TIME_START,
   ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
-  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE, COLOR
+  DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE, COLOR,
+  COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2, COURSE_ETIME_AMPM3
 } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
@@ -80,18 +81,18 @@ export class TimeTableComponent implements AfterViewInit {
     const eTimes = [];
     if (course[COURSE_DAYS1] !== null) {
       days.push(course[COURSE_DAYS1]);
-      sTimes.push(this.courseService.parseTime(course[COURSE_STIME1]));
-      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME1]));
+      sTimes.push(this.courseService.parseTime(course[COURSE_STIME1], course[COURSE_STIME_AMPM1]));
+      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME1], course[COURSE_ETIME_AMPM1]));
     }
     if (course[COURSE_DAYS2] !== null) {
       days.push(course[COURSE_DAYS2]);
-      sTimes.push(this.courseService.parseTime(course[COURSE_STIME2]));
-      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME2]));
+      sTimes.push(this.courseService.parseTime(course[COURSE_STIME2], course[COURSE_STIME_AMPM2]));
+      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME2], course[COURSE_ETIME_AMPM2]));
     }
     if (course[COURSE_DAYS3] !== null) {
       days.push(course[COURSE_DAYS3]);
-      sTimes.push(this.courseService.parseTime(course[COURSE_STIME3]));
-      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME3]));
+      sTimes.push(this.courseService.parseTime(course[COURSE_STIME3], course[COURSE_STIME_AMPM3]));
+      eTimes.push(this.courseService.parseTime(course[COURSE_ETIME3], course[COURSE_ETIME_AMPM3]));
     }
 
     // Loop through meet time 1, 2, 3

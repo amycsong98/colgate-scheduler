@@ -1,9 +1,49 @@
 <form #settingsForm="ngForm">
     <div *ngIf="data.course['MEET1_DAYS']">
-        <mat-label>{{ data.course['MEET1_BEGIN_TIME12'] | noAmPm }}</mat-label>
-        <mat-radio-group>
+        <p>Meet Day 1</p>
+        <mat-label>Start Time: {{ data.course['MEET1_BEGIN_TIME12'] | noAmPm }} </mat-label>
+        <mat-radio-group name="stime1" [(ngModel)]="data.course['MEET1_BEGIN_TIME12']">
             <mat-radio-button value="am">AM</mat-radio-button>
-            <mat-radio-button value="pm">PM</mat-radio-button>
+            <mat-radio-button value="pm">PM</mat-radio-button>            
+        </mat-radio-group>
+        <br>
+
+        <mat-label>End Time: {{ data.course['MEET1_END_TIME12'] | noAmPm }} </mat-label>
+        <mat-radio-group>
+            <mat-radio-button value="am" [checked]="data.course['MEET1_END_TIME12'].split(':')[2] === 'am'">AM</mat-radio-button>
+            <mat-radio-button value="pm" [checked]="data.course['MEET1_END_TIME12'].split(':')[2] === 'pm'">PM</mat-radio-button>            
+        </mat-radio-group>
+    </div>
+
+    <div *ngIf="data.course['MEET2_DAYS']">
+        <p>Meet Day 2</p>
+        <mat-label>Start Time: {{ data.course['MEET2_BEGIN_TIME12'] | noAmPm }} </mat-label>
+        <mat-radio-group>
+            <mat-radio-button value="am" [checked]="data.course['MEET2_BEGIN_TIME12'].split(':')[2] === 'am'">AM</mat-radio-button>
+            <mat-radio-button value="pm" [checked]="data.course['MEET2_BEGIN_TIME12'].split(':')[2] === 'pm'">PM</mat-radio-button>            
+        </mat-radio-group>
+        <br>
+
+        <mat-label>End Time: {{ data.course['MEET1_END_TIME12'] | noAmPm }} </mat-label>
+        <mat-radio-group>
+            <mat-radio-button value="am" [checked]="data.course['MEET2_END_TIME12'].split(':')[2] === 'am'">AM</mat-radio-button>
+            <mat-radio-button value="pm" [checked]="data.course['MEET2_END_TIME12'].split(':')[2] === 'pm'">PM</mat-radio-button>            
+        </mat-radio-group>
+    </div>
+
+    <div *ngIf="data.course['MEET3_DAYS']">
+        <p>Meet Day 3</p>
+        <mat-label>Start Time: {{ data.course['MEET3_BEGIN_TIME12'] | noAmPm }} </mat-label>
+        <mat-radio-group>
+            <mat-radio-button value="am" [checked]="data.course['MEET3_BEGIN_TIME12'].split(':')[2] === 'am'">AM</mat-radio-button>
+            <mat-radio-button value="pm" [checked]="data.course['MEET3_BEGIN_TIME12'].split(':')[2] === 'pm'">PM</mat-radio-button>            
+        </mat-radio-group>
+        <br>
+
+        <mat-label>End Time: {{ data.course['MEET3_END_TIME12'] | noAmPm }} </mat-label>
+        <mat-radio-group>
+            <mat-radio-button value="am" [checked]="data.course['MEET3_END_TIME12'].split(':')[2] === 'am'">AM</mat-radio-button>
+            <mat-radio-button value="pm" [checked]="data.course['MEET3_END_TIME12'].split(':')[2] === 'pm'">PM</mat-radio-button>            
         </mat-radio-group>
     </div>
     
