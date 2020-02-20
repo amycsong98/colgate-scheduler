@@ -78,6 +78,10 @@ export class CourseListerComponent implements OnInit {
       this.dataPassService.sendData({ action: ACTION_UNHOVER, data: course });
     }
   }
+
+  doNotDisplayAmPm(time: string) {
+    return time.split(':').slice(0, 2).join(':');
+  }
 }
 
 export interface AmPm {
