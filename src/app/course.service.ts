@@ -279,12 +279,14 @@ export class CourseService {
           startAmPms.push(ampm);
           endAmPms.push(ampm);
         } else {
-          // final step => ask
+          // final step => ask 
+          // just put am for now
+          console.log('ambiguous time');
+          startAmPms.push('am');
+          endAmPms.push('am');
         }
       }
     }
-    console.log(startAmPms);
-    console.log(endAmPms);
 
     // append ampm; hard coded fix later
     course[COURSE_STIME_AMPM1] = startAmPms[0];
@@ -361,3 +363,4 @@ export class CourseService {
     this.dataPassService.sendData({ action: ACTION_ADD, data: course });
   }
 }
+

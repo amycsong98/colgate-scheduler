@@ -25,7 +25,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SearchFormComponent } from './search-form/search-form.component';
-import { CourseListerComponent, DialogAmPmComponent } from './course-lister/course-lister.component';
+import { CourseListerComponent } from './course-lister/course-lister.component';
 import { TimeTableComponent } from './time-table/time-table.component';
 import { MyCoursesComponent, DialogCourseSettingsComponent } from './my-courses/my-courses.component';
 import { HeaderMenuComponent } from './header-menu/header-menu.component';
@@ -37,12 +37,10 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
     CourseListerComponent,
     TimeTableComponent,
     MyCoursesComponent,
-    DialogAmPmComponent,
     HeaderMenuComponent,
     DialogCourseSettingsComponent,
   ],
   entryComponents: [
-    DialogAmPmComponent,
     DialogCourseSettingsComponent
   ],
   imports: [
