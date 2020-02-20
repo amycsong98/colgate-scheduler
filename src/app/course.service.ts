@@ -61,7 +61,7 @@ export class CourseService {
   // course: object
   addCourse(course: any) {
     this.addColor(course);
-  
+
     let courses = this.getCourses();
 
     // 'course' exists in local storage
@@ -339,5 +339,13 @@ export class CourseService {
       }
     }
     return 'ambiguous';
+  }
+
+  updateCourse(course: any) {
+    let courses = this.getCourses();
+    courses = courses.filter(e => e[CRN] !== course[CRN]);
+    courses.push(course);
+    this.setCourses(courses);
+    this.dataPassService.sendData({ action: ACTION_ADD, data: course });
   }
 }

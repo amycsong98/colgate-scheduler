@@ -1,60 +1,11 @@
-<form #ampmForm="ngForm">
-    <div *ngIf="data.start1">
-        <mat-label>Meet Time 1 Start: {{ data.start1 }}</mat-label>
-        <mat-radio-group name="start1AmPm" [(ngModel)]="data.start1AmPm" required>
-            <mat-radio-button value="am">am</mat-radio-button>
-            <mat-radio-button value="pm">pm</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <br>
-
-    <div *ngIf="data.end1">
-        <mat-label>Meet Time 1 End: {{ data.end1 }}</mat-label>
-        <mat-radio-group name="end1AmPm" [(ngModel)]="data.end1AmPm" required>
-            <mat-radio-button value="am">am</mat-radio-button>
-            <mat-radio-button value="pm">pm</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <br>
-
-    <div *ngIf="data.start2">
-        <mat-label>Meet Time 2 Start: {{ data.start2 }}</mat-label>
-        <mat-radio-group name="start2AmPm" [(ngModel)]="data.start2AmPm" required>
-            <mat-radio-button value="am">am</mat-radio-button>
-            <mat-radio-button value="pm">pm</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <br>
+<form #settingsForm="ngForm">
     
-    <div *ngIf="data.end2">
-        <mat-label>Meet Time 2 End: {{ data.end2 }}</mat-label>
-        <mat-radio-group name="end2AmPm" [(ngModel)]="data.end2AmPm" required>
-            <mat-radio-button value="am">am</mat-radio-button>
-            <mat-radio-button value="pm">pm</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <br>
-
-    <div *ngIf="data.start3">
-        <mat-label>Meet Time 3 Start: {{ data.start3 }}</mat-label>
-        <mat-radio-group name="start3AmPm" [(ngModel)]="data.start3AmPm" required>
-            <mat-radio-button value="am">am</mat-radio-button>
-            <mat-radio-button value="pm">pm</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <br>
-
-    <div *ngIf="data.end3">
-        <mat-label>Meet Time 3 End: {{ data.end3 }}</mat-label>
-        <mat-radio-group name="end3AmPm" [(ngModel)]="data.end3AmPm" required>
-            <mat-radio-button value="am">am</mat-radio-button>
-            <mat-radio-button value="pm">pm</mat-radio-button>
-        </mat-radio-group>
-    </div>
-    <br>
+    <mat-form-field style="width: 500px">
+        <input matInput name="color" [(ngModel)]="data.course['COLOR']" placeholder="COLOR">
+    </mat-form-field>
 
     <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Cancel</button>
-        <button mat-button [mat-dialog-close]="data" [disabled]="!ampmForm.valid" cdkFocusInitial>Ok</button>
+        <button mat-button [mat-dialog-close]="data" [disabled]="!settingsForm.valid" cdkFocusInitial>Ok</button>
     </div>
 </form>

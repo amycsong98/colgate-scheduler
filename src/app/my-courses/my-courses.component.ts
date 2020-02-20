@@ -54,16 +54,19 @@ export class MyCoursesComponent implements OnInit {
     return this.courseService.deleteCourse(course);
   }
 
+  /*
+    allowed changes:
+    color, ampm
+  */
   changeCourse(course: any) {
-
     const dialogRef = this.dialog.open(DialogCourseSettingsComponent, {
-      data: { }
+      data: { course }
     });
 
     dialogRef.afterClosed().subscribe(
       res => {
-        if (res) { // if ampms are correctly input
-          console.log(res);
+        if (res) {
+          this.courseService.updateCourse(course);
         }
       }
     );
