@@ -283,6 +283,8 @@ export class CourseService {
         }
       }
     }
+    console.log(startAmPms);
+    console.log(endAmPms);
 
     // append ampm; hard coded fix later
     course[COURSE_STIME_AMPM1] = startAmPms[0];
