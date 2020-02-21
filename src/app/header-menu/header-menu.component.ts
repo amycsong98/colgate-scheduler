@@ -13,19 +13,15 @@ export class HeaderMenuComponent implements OnInit {
   terms: any[];
   currentTerm: string;
 
+  schedules: string[];
+  currentSchedule: string;
+
   constructor(
     private courseService: CourseService,
     private dataPassService: DataPassService,
   ) { }
 
   ngOnInit() {
-    // initialize terms
-    this.courseService.getTerms().subscribe(
-      res => {
-        this.terms = res;
-      }
-    );
-
     // get current term
     this.currentTerm = this.courseService.getCurrentTerm();
     console.log('current term: ' + this.currentTerm);
@@ -33,10 +29,24 @@ export class HeaderMenuComponent implements OnInit {
       this.currentTerm = LASTEST_TERM;
       this.courseService.setCurrentTerm(LASTEST_TERM);
     }
+
+    // initialize terms
+    this.courseService.getTerms().subscribe(
+      res => {
+        this.terms = res;
+      }
+    );
+
+    this.schedules = this.courseService.getSchedules();
+    this.currentSchedule = this.schedules[0];
   }
 
   // When term is changed on the dropdown
   changeCurrentTerm(term: any) {
+    this.currentTerm = term;
     this.courseService.setCurrentTerm(term);
+
+    this.schedules = this.courseService.getSchedules();
+    this.currentSchedule = this.schedules[0];
   }
 }

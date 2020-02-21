@@ -1,10 +1,22 @@
 <mat-toolbar color="primary">
+    <!-- terms -->
     <mat-form-field>
-        <mat-label>TERM</mat-label>
+        <!-- <mat-label>TERM</mat-label> -->
         <mat-select name="currentTerm" [(ngModel)]="currentTerm" (selectionChange)="changeCurrentTerm($event.value)">
             <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
                 {{ term.TERM_DESC }}
             </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <!-- schedule -->
+    <mat-form-field>
+        <mat-select name="currentSchedule" [(ngModel)]="currentSchedule" (selectionChange)="changeCurrentSchedule($event.value)">
+            <mat-option *ngFor="let schedule of schedules" [value]="schedule">
+                {{ schedule }}
+            </mat-option>
+            <mat-option>New</mat-option>
+            <mat-option>Duplicate</mat-option>
         </mat-select>
     </mat-form-field>
 </mat-toolbar>

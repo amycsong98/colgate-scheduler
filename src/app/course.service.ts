@@ -2,14 +2,14 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CookieService } from 'ngx-cookie-service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 
 import {
   COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE,
   COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2,
   COURSE_ETIME3, COLOR, COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2,
-  COURSE_ETIME_AMPM3, ACTION_DELETE
+  COURSE_ETIME_AMPM3, ACTION_DELETE, SCHEDULES
 } from './constants';
 import { DataPassService } from './data-pass.service';
 
@@ -203,6 +203,20 @@ export class CourseService {
 
   getTerms(): Observable<any> {
     return this.httpClient.get(URL_TERMS);
+  }
+
+  getSchedules(): string[] {
+    const schedules = JSON.parse(localStorage.getItem(this.getCurrentTerm() + '_' + SCHEDULES));
+    if (schedules) {
+      return schedules;
+    } else {
+      this.setSchedules(['schedule 1']);
+      return ['schedule 1'];
+    }
+  }
+
+  setSchedules(schedules: string[]) {
+    return localStorage.setItem(this.getCurrentTerm() + '_' + SCHEDULES, JSON.stringify(schedules));
   }
 
   getPrograms(): Observable<any> {
