@@ -58,9 +58,12 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   changeCurrentSchedule(schedule: string) {
-    console.log('change current schedule!');
-    this.currentSchedule = schedule;
-    this.courseService.setCurrentSchedule(schedule);
+    console.log('change current schedule: ' + schedule);
+    if (schedule !== 'add') {
+      this.currentSchedule = schedule;
+      this.courseService.setCurrentSchedule(schedule);
+    }
+
   }
 
   newSchedule() {
@@ -110,7 +113,7 @@ export class HeaderMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       name => {
         if (name) {
-          this.courseService.editSchedule(name);
+          this.courseService.duplicateSchedule(name);
 
           this.schedules = this.courseService.getSchedules();
           this.currentSchedule = name;
