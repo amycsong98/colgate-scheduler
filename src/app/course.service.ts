@@ -382,8 +382,8 @@ export class CourseService {
     if (schedules) {
       return schedules;
     } else {
-      this.setSchedules(['schedule 1']);
-      return ['schedule 1'];
+      this.setSchedules(['schedule1']);
+      return ['schedule1'];
     }
   }
 
@@ -399,6 +399,20 @@ export class CourseService {
     this.setCourses(courses);
 
     this.addNewSchedule(name);
+  }
+
+  deleteSchedule() {
+    let schedules = this.getSchedules();
+    schedules = schedules.filter(e => e !== this.getCurrentSchedule());
+    if (schedules.length === 0) {
+      schedules = ['schedule1'];
+    }
+    this.setSchedules(schedules);
+
+    console.log(this.getCurrentTerm + '_' + this.getCurrentSchedule());
+
+    localStorage.removeItem(this.getCurrentTerm() + '_' + this.getCurrentSchedule());
+    this.setCurrentSchedule(schedules[0]);
   }
 
   setSchedules(schedules: string[]) {
