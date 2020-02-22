@@ -408,11 +408,24 @@ export class CourseService {
       schedules = ['schedule1'];
     }
     this.setSchedules(schedules);
-
-    console.log(this.getCurrentTerm + '_' + this.getCurrentSchedule());
-
     localStorage.removeItem(this.getCurrentTerm() + '_' + this.getCurrentSchedule());
     this.setCurrentSchedule(schedules[0]);
+  }
+
+  editSchedule(name: string) {
+    const schedules = this.getSchedules();
+    for (let i = 0; i < schedules.length; i++) {
+      if (schedules[i] === this.getCurrentSchedule()) {
+        schedules[i] = name;
+      }
+    }
+    this.setSchedules(schedules);
+    console.log(this.currentSchedule);
+
+    localStorage.setItem(this.getCurrentTerm() + '_' + name,
+      localStorage.getItem(this.getCurrentTerm() + '_' + this.getCurrentSchedule()));
+    localStorage.removeItem(this.getCurrentTerm() + '_' + this.getCurrentSchedule());
+    this.setCurrentSchedule(name);
   }
 
   setSchedules(schedules: string[]) {

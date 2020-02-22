@@ -103,6 +103,22 @@ export class HeaderMenuComponent implements OnInit {
     this.schedules = this.courseService.getSchedules();
     this.currentSchedule = this.courseService.getCurrentSchedule();
   }
+
+  editSchedule() {
+    const dialogRef = this.dialog.open(DialogScheduleNameComponent);
+
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name) {
+          this.courseService.editSchedule(name);
+
+          this.schedules = this.courseService.getSchedules();
+          this.currentSchedule = name;
+          this.courseService.setCurrentSchedule(name);
+        }
+      }
+    );
+  }
 }
 
 @Component({
