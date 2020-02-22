@@ -45,6 +45,7 @@ export const ACTION_ADD = 'add';
 export const ACTION_DELETE = 'delete';
 export const ACTION_TERM_CHANGE = 'term';
 export const ACTION_SEARCH = 'search';
+export const ACTION_SCHEDULE_CHANGE = 'schedule';
 
 // Cookie
 export const COURSES = 'courses';

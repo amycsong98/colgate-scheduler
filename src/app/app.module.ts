@@ -28,7 +28,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { CourseListerComponent } from './course-lister/course-lister.component';
 import { TimeTableComponent } from './time-table/time-table.component';
 import { MyCoursesComponent, DialogCourseSettingsComponent } from './my-courses/my-courses.component';
-import { HeaderMenuComponent } from './header-menu/header-menu.component';
+import { HeaderMenuComponent, DialogNewScheduleComponent } from './header-menu/header-menu.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +39,11 @@ import { HeaderMenuComponent } from './header-menu/header-menu.component';
     MyCoursesComponent,
     HeaderMenuComponent,
     DialogCourseSettingsComponent,
+    DialogNewScheduleComponent
   ],
   entryComponents: [
-    DialogCourseSettingsComponent
+    DialogCourseSettingsComponent,
+    DialogNewScheduleComponent
   ],
   imports: [
     BrowserModule,

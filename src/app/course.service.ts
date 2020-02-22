@@ -9,7 +9,7 @@ import {
   COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE,
   COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2,
   COURSE_ETIME3, COLOR, COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2,
-  COURSE_ETIME_AMPM3, ACTION_DELETE, SCHEDULES
+  COURSE_ETIME_AMPM3, ACTION_DELETE, SCHEDULES, ACTION_SCHEDULE_CHANGE
 } from './constants';
 import { DataPassService } from './data-pass.service';
 
@@ -18,6 +18,7 @@ import { DataPassService } from './data-pass.service';
 })
 export class CourseService {
   currentTerm: string;
+  currentSchedule: string;
   colors = ['#f7e8f0', '#f1c6de', '#e89da2', '#ecb390', '#fcf8e8', '#ccedd2', '#b9cced', '#e1ccec', '#ececec', '#c7b198'];
 
   constructor(
@@ -43,7 +44,7 @@ export class CourseService {
 
   // Gets course list from local storage
   getCourses(): any[] {
-    const courses = JSON.parse(localStorage.getItem(this.currentTerm));
+    const courses = JSON.parse(localStorage.getItem(this.currentTerm + '_' + this.currentSchedule));
     if (courses) {
       return courses;
     } else {
@@ -94,7 +95,7 @@ export class CourseService {
   // helper functions
   // Sets courses to local storage
   setCourses(courses: any[]) {
-    localStorage.setItem(this.currentTerm, JSON.stringify(courses));
+    localStorage.setItem(this.currentTerm + '_' + this.currentSchedule, JSON.stringify(courses));
   }
 
   // Checks if the newCourse is in course list
@@ -205,19 +206,7 @@ export class CourseService {
     return this.httpClient.get(URL_TERMS);
   }
 
-  getSchedules(): string[] {
-    const schedules = JSON.parse(localStorage.getItem(this.getCurrentTerm() + '_' + SCHEDULES));
-    if (schedules) {
-      return schedules;
-    } else {
-      this.setSchedules(['schedule 1']);
-      return ['schedule 1'];
-    }
-  }
 
-  setSchedules(schedules: string[]) {
-    return localStorage.setItem(this.getCurrentTerm() + '_' + SCHEDULES, JSON.stringify(schedules));
-  }
 
   getPrograms(): Observable<any> {
     return this.httpClient.get(URL_PROGRAM_AREAS);
@@ -376,6 +365,37 @@ export class CourseService {
     this.setCourses(courses);
     this.dataPassService.sendData({ action: ACTION_DELETE, data: course }); // to update time table & my courses
     this.dataPassService.sendData({ action: ACTION_ADD, data: course });
+  }
+
+
+  // schedules
+  getCurrentSchedule(): string {
+    return this.currentSchedule;
+  }
+
+  setCurrentSchedule(schedule: string) {
+    this.currentSchedule = schedule;
+    this.dataPassService.sendData({ action: ACTION_SCHEDULE_CHANGE, data: schedule });
+  }
+
+  getSchedules(): string[] {
+    const schedules = JSON.parse(localStorage.getItem(this.getCurrentTerm() + '_' + SCHEDULES));
+    if (schedules) {
+      return schedules;
+    } else {
+      this.setSchedules(['schedule 1']);
+      return ['schedule 1'];
+    }
+  }
+
+  addNewSchedule(name: string) {
+    const schedules = JSON.parse(localStorage.getItem(this.getCurrentTerm() + '_' + SCHEDULES));
+    schedules.push(name);
+    this.setSchedules(schedules);
+  }
+
+  setSchedules(schedules: string[]) {
+    return localStorage.setItem(this.getCurrentTerm() + '_' + SCHEDULES, JSON.stringify(schedules));
   }
 }
 

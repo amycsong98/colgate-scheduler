@@ -4,7 +4,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
 import {
-  COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, CRN, ACTION_DELETE, ACTION_TERM_CHANGE
+  COURSE_DAYS1, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME1, COURSE_ETIME1, ACTION_HOVER, ACTION_UNHOVER,
+  ACTION_ADD, ACTION, DATA, CRN, ACTION_DELETE, ACTION_TERM_CHANGE, ACTION_SCHEDULE_CHANGE
 } from '../constants';
 
 @Component({
@@ -38,6 +39,8 @@ export class MyCoursesComponent implements OnInit {
           const course = data[DATA];
           this.courses = this.courses.filter(e => e[CRN] !== course[CRN]);
         } else if (data[ACTION] === ACTION_TERM_CHANGE) {
+          this.courses = this.courseService.getCourses();
+        } else if (data[ACTION] === ACTION_SCHEDULE_CHANGE) {
           this.courses = this.courseService.getCourses();
         } else {
           console.log(data);

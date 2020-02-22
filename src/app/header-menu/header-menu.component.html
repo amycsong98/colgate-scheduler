@@ -15,7 +15,7 @@
             <mat-option *ngFor="let schedule of schedules" [value]="schedule">
                 {{ schedule }}
             </mat-option>
-            <mat-option>New</mat-option>
+            <mat-option (click)="newSchedule()">New</mat-option>
             <mat-option>Duplicate</mat-option>
         </mat-select>
     </mat-form-field>
