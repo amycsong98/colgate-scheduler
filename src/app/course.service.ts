@@ -9,7 +9,7 @@ import {
   COURSES, SUCCESS, FAIL, CRN, URL_PROGRAM_AREAS, URL_CORE_AREAS, URL_TERMS, URL_INQUIRY_AREAS, ACTION_ADD, ACTION_TERM_CHANGE,
   COURSE_DAYS1, COURSE_STIME1, COURSE_ETIME1, COURSE_STIME2, DISPLAY_KEY, COURSE_DAYS2, COURSE_DAYS3, COURSE_STIME3, COURSE_ETIME2,
   COURSE_ETIME3, COLOR, COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2,
-  COURSE_ETIME_AMPM3, ACTION_DELETE, SCHEDULES, ACTION_SCHEDULE_CHANGE
+  COURSE_ETIME_AMPM3, ACTION_DELETE, SCHEDULES, ACTION_SCHEDULE_CHANGE, ACTION_SCHEDULES_CHANGE
 } from './constants';
 import { DataPassService } from './data-pass.service';
 
@@ -430,6 +430,14 @@ export class CourseService {
 
   setSchedules(schedules: string[]) {
     return localStorage.setItem(this.getCurrentTerm() + '_' + SCHEDULES, JSON.stringify(schedules));
+  }
+
+  changeDefaultSchedule() {
+    let schedules = this.getSchedules();
+    schedules = schedules.filter(e => e !== this.getCurrentSchedule());
+    schedules.unshift(this.getCurrentSchedule());
+    this.setSchedules(schedules);
+    this.dataPassService.sendData({ action: ACTION_SCHEDULES_CHANGE, data: schedules });
   }
 }
 

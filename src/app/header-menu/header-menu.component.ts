@@ -3,7 +3,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CourseService } from '../course.service';
-import { LASTEST_TERM, ACTION_TERM_CHANGE, SCHEDULE_NAME_ERROR_MSG, ACTION_OK } from '../constants';
+import { 
+  LASTEST_TERM, ACTION_TERM_CHANGE, SCHEDULE_NAME_ERROR_MSG, ACTION_OK, ACTION, ACTION_SCHEDULES_CHANGE,
+  DATA, SCHEDULE_DEFAULT_CHANGE_SUCCESS_MSG
+} from '../constants';
 import { DataPassService } from '../data-pass.service';
 
 @Component({
@@ -26,6 +29,17 @@ export class HeaderMenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    // datapass
+    this.dataPassService.currentData.subscribe(
+      data => {
+        if (data[ACTION] === ACTION_SCHEDULES_CHANGE) {
+          this.schedules = data[DATA];
+        } else {
+          console.log(data);
+        }
+      }
+    );
+
     // get current term
     this.currentTerm = this.courseService.getCurrentTerm();
     if (this.currentTerm === undefined) {
@@ -83,9 +97,7 @@ export class HeaderMenuComponent implements OnInit {
             this.currentSchedule = name;
             this.courseService.setCurrentSchedule(name);
           } else {
-            this.snackBar.open(SCHEDULE_NAME_ERROR_MSG, ACTION_OK, {
-              duration: 2000,
-            });
+            this.displayMessage(SCHEDULE_NAME_ERROR_MSG);
           }
         }
       }
@@ -105,9 +117,7 @@ export class HeaderMenuComponent implements OnInit {
             this.currentSchedule = name;
             this.courseService.setCurrentSchedule(name);
           } else {
-            this.snackBar.open(SCHEDULE_NAME_ERROR_MSG, ACTION_OK, {
-              duration: 2000,
-            });
+            this.displayMessage(SCHEDULE_NAME_ERROR_MSG);
           }
         }
       }
@@ -143,12 +153,21 @@ export class HeaderMenuComponent implements OnInit {
           this.currentSchedule = name;
           this.courseService.setCurrentSchedule(name);
         } else {
-          this.snackBar.open(SCHEDULE_NAME_ERROR_MSG, ACTION_OK, {
-            duration: 2000,
-          });
+          this.displayMessage(SCHEDULE_NAME_ERROR_MSG);
         }
       }
     );
+  }
+
+  changeDefaultSchedule() {
+    this.courseService.changeDefaultSchedule();
+    this.displayMessage(SCHEDULE_DEFAULT_CHANGE_SUCCESS_MSG);
+  }
+
+  displayMessage(message: string) {
+    this.snackBar.open(message, ACTION_OK, {
+      duration: 2000,
+    });
   }
 }
 

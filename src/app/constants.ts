@@ -46,6 +46,7 @@ export const ACTION_DELETE = 'delete';
 export const ACTION_TERM_CHANGE = 'term';
 export const ACTION_SEARCH = 'search';
 export const ACTION_SCHEDULE_CHANGE = 'schedule';
+export const ACTION_SCHEDULES_CHANGE = 'schedules';
 
 // Cookie
 export const COURSES = 'courses';
@@ -63,6 +64,9 @@ export const NUM_ROW = 17;
 
 // Local Storage
 export const SCHEDULES = 'schedules';
+
+// Message
+export const SCHEDULE_DEFAULT_CHANGE_SUCCESS_MSG = 'Default schedule changed successfully';
 
 // Error Message
 export const SCHEDULE_NAME_ERROR_MSG = 'The name already exists';
