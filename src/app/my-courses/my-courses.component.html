@@ -62,13 +62,13 @@
                 <!-- Delete Column -->
                 <ng-container matColumnDef="delete">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let course"> <button (click)="deleteCourse(course)">x</button> </td>
+                    <td mat-cell *matCellDef="let course"><mat-icon (click)="deleteCourse(course)">delete</mat-icon></td>
                 </ng-container>
 
                 <!-- Settings Column -->
                 <ng-container matColumnDef="settings">
                     <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let course"> <button (click)="changeCourse(course)"><mat-icon>settings</mat-icon></button> </td>
+                    <td mat-cell *matCellDef="let course"><mat-icon (click)="changeCourse(course)">settings</mat-icon></td>
                 </ng-container>
             </div>
 
