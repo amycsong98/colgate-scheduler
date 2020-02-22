@@ -16,7 +16,7 @@
                 {{ schedule }}
             </mat-option>
             <mat-option (click)="newSchedule()">New</mat-option>
-            <mat-option>Duplicate</mat-option>
+            <mat-option (click)="duplicateSchedule()" [(value)]="currentSchedule">Duplicate</mat-option>
         </mat-select>
     </mat-form-field>
 </mat-toolbar>

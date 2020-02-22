@@ -26,7 +26,6 @@ export class HeaderMenuComponent implements OnInit {
   ngOnInit() {
     // get current term
     this.currentTerm = this.courseService.getCurrentTerm();
-    console.log('current term: ' + this.currentTerm);
     if (this.currentTerm === undefined) {
       this.currentTerm = LASTEST_TERM;
       this.courseService.setCurrentTerm(LASTEST_TERM);
@@ -59,14 +58,12 @@ export class HeaderMenuComponent implements OnInit {
   }
 
   changeCurrentSchedule(schedule: string) {
-    console.log(schedule);
-
     this.currentSchedule = schedule;
     this.courseService.setCurrentSchedule(schedule);
   }
 
   newSchedule() {
-    const dialogRef = this.dialog.open(DialogNewScheduleComponent);
+    const dialogRef = this.dialog.open(DialogScheduleNameComponent);
 
     dialogRef.afterClosed().subscribe(
       name => {
@@ -79,7 +76,22 @@ export class HeaderMenuComponent implements OnInit {
         }
       }
     );
+  }
 
+  duplicateSchedule() {
+    const dialogRef = this.dialog.open(DialogScheduleNameComponent);
+
+    dialogRef.afterClosed().subscribe(
+      name => {
+        if (name) {
+          this.courseService.duplicateSchedule(name);
+
+          this.schedules = this.courseService.getSchedules();
+          this.currentSchedule = name;
+          this.courseService.setCurrentSchedule(name);
+        }
+      }
+    );
   }
 }
 
@@ -87,9 +99,9 @@ export class HeaderMenuComponent implements OnInit {
   selector: 'app-new-schedule',
   templateUrl: './new-schedule.dialog.html',
 })
-export class DialogNewScheduleComponent {
+export class DialogScheduleNameComponent {
   constructor(
-    public dialogRef: MatDialogRef<DialogNewScheduleComponent>
+    public dialogRef: MatDialogRef<DialogScheduleNameComponent>
   ) {}
 
   onNoClick(): void {

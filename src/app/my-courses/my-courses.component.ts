@@ -30,9 +30,7 @@ export class MyCoursesComponent implements OnInit {
     this.dataPassService.currentData.subscribe(
       data => {
         if (data[ACTION] === ACTION_HOVER) {
-          console.log(data);
         } else if (data[ACTION] === ACTION_UNHOVER) {
-          console.log(data);
         } else if (data[ACTION] === ACTION_ADD) {
           this.courses = this.courses.concat([data[DATA]]); //
         } else if (data[ACTION] === ACTION_DELETE) {
@@ -70,7 +68,6 @@ export class MyCoursesComponent implements OnInit {
       res => {
         if (res) {
           this.courseService.updateCourse(course);
-          console.log(res);
         }
       }
     );

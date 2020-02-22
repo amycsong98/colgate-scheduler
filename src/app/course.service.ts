@@ -196,7 +196,6 @@ export class CourseService {
         parsedTime[0] += 12;
       }
       parsedTime.splice(2, 1);
-      console.log(parsedTime);
       return parsedTime;
     }
     return null;
@@ -389,9 +388,17 @@ export class CourseService {
   }
 
   addNewSchedule(name: string) {
-    const schedules = JSON.parse(localStorage.getItem(this.getCurrentTerm() + '_' + SCHEDULES));
+    const schedules = this.getSchedules();
     schedules.push(name);
     this.setSchedules(schedules);
+  }
+
+  duplicateSchedule(name: string) {
+    const courses = this.getCourses();
+    this.setCurrentSchedule(name);
+    this.setCourses(courses);
+
+    this.addNewSchedule(name);
   }
 
   setSchedules(schedules: string[]) {

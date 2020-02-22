@@ -1,10 +1,10 @@
 <form #newScheduleForm="ngForm">
     <mat-form-field style="width: 500px">
-        <input matInput name="newScheduleName" [(ngModel)]="newScheduleName" placeholder="name" required>
+        <input matInput name="newScheduleName" [(ngModel)]="newScheduleName" placeholder="name" required autofocus>
     </mat-form-field>
 
     <div mat-dialog-actions>
         <button mat-button (click)="onNoClick()">Cancel</button>
-        <button mat-button [mat-dialog-close]="newScheduleName" [disabled]="!newScheduleForm.valid" cdkFocusInitial>Ok</button>
+        <button mat-button [mat-dialog-close]="newScheduleName" [disabled]="!newScheduleForm.valid">Ok</button>
     </div>
 </form>
