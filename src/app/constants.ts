@@ -63,3 +63,9 @@ export const NUM_ROW = 17;
 
 // Local Storage
 export const SCHEDULES = 'schedules';
+
+// Error Message
+export const SCHEDULE_NAME_ERROR_MSG = 'The name already exists';
+
+// Snack Bar
+export const ACTION_OK = 'OK';

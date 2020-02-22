@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CourseService } from '../course.service';
-import { LASTEST_TERM, ACTION_TERM_CHANGE } from '../constants';
+import { LASTEST_TERM, ACTION_TERM_CHANGE, SCHEDULE_NAME_ERROR_MSG, ACTION_OK } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class HeaderMenuComponent implements OnInit {
     private courseService: CourseService,
     private dataPassService: DataPassService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -72,13 +74,19 @@ export class HeaderMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       name => {
         if (name) {
-          console.log(name);
+          if (!this.scheduleNameExists(name)) {
+            console.log(name);
 
-          this.courseService.addNewSchedule(name);
+            this.courseService.addNewSchedule(name);
 
-          this.schedules = this.courseService.getSchedules();
-          this.currentSchedule = name;
-          this.courseService.setCurrentSchedule(name);
+            this.schedules = this.courseService.getSchedules();
+            this.currentSchedule = name;
+            this.courseService.setCurrentSchedule(name);
+          } else {
+            this.snackBar.open(SCHEDULE_NAME_ERROR_MSG, ACTION_OK, {
+              duration: 2000,
+            });
+          }
         }
       }
     );
@@ -90,14 +98,30 @@ export class HeaderMenuComponent implements OnInit {
     dialogRef.afterClosed().subscribe(
       name => {
         if (name) {
-          this.courseService.duplicateSchedule(name);
+          if (!this.scheduleNameExists(name)) {
+            this.courseService.duplicateSchedule(name);
 
-          this.schedules = this.courseService.getSchedules();
-          this.currentSchedule = name;
-          this.courseService.setCurrentSchedule(name);
+            this.schedules = this.courseService.getSchedules();
+            this.currentSchedule = name;
+            this.courseService.setCurrentSchedule(name);
+          } else {
+            this.snackBar.open(SCHEDULE_NAME_ERROR_MSG, ACTION_OK, {
+              duration: 2000,
+            });
+          }
         }
       }
     );
+  }
+
+  scheduleNameExists(name: string) {
+    const schedules = this.courseService.getSchedules();
+    for (const schedule of schedules) {
+      if (schedule === name) {
+        return true;
+      }
+    }
+    return false;
   }
 
   deleteSchedule() {
@@ -112,12 +136,16 @@ export class HeaderMenuComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       name => {
-        if (name) {
+        if (!this.scheduleNameExists(name)) {
           this.courseService.duplicateSchedule(name);
 
           this.schedules = this.courseService.getSchedules();
           this.currentSchedule = name;
           this.courseService.setCurrentSchedule(name);
+        } else {
+          this.snackBar.open(SCHEDULE_NAME_ERROR_MSG, ACTION_OK, {
+            duration: 2000,
+          });
         }
       }
     );
