@@ -6,7 +6,7 @@ import {
   ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
   DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE, COLOR,
   COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2, COURSE_ETIME_AMPM3,
-  ACTION_SCHEDULE_CHANGE
+  ACTION_SCHEDULE_CHANGE, OPACITY
 } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
@@ -31,12 +31,12 @@ export class TimeTableComponent implements AfterViewInit {
       data => {
         if (data[ACTION] === ACTION_HOVER) {
           const course = data[DATA];
-          this.addCourseToDisplay(course);
+          this.addCourseToDisplay(course, true);
         } else if (data[ACTION] === ACTION_UNHOVER) {
           const course = data[DATA];
           this.removeCourseFromDisplay(course);
         } else if (data[ACTION] === ACTION_ADD) {
-          this.addCourseToDisplay(data[DATA]);
+          this.addCourseToDisplay(data[DATA], false);
         } else if (data[ACTION] === ACTION_DELETE ) {
           const course = data[DATA];
           this.removeCourseFromDisplay(course);
@@ -79,7 +79,7 @@ export class TimeTableComponent implements AfterViewInit {
     }
   }
 
-  addCourseToDisplay(course: any) {
+  addCourseToDisplay(course: any, hover: boolean) {
     const crn = course[CRN];
     const days = [];
     const sTimes = [];
@@ -116,7 +116,7 @@ export class TimeTableComponent implements AfterViewInit {
       if (!course[COLOR]) {
         course[COLOR] = '#808080';
       }
-      this.colorTable(days[i], top, boxHeight, innerHTML, crn, course[COLOR]);
+      this.colorTable(days[i], top, boxHeight, innerHTML, crn, course[COLOR], hover);
     }
   }
 
@@ -124,7 +124,7 @@ export class TimeTableComponent implements AfterViewInit {
     const courses = this.courseService.getCourses();
 
     for (const course of courses) {
-      this.addCourseToDisplay(course);
+      this.addCourseToDisplay(course, false);
     }
   }
 
@@ -138,18 +138,21 @@ export class TimeTableComponent implements AfterViewInit {
     return beginMin / totalMin * 100;
   }
 
-  colorTable(days: string, top: number, boxHeight: number, displayKey: string, crn: string, color: string) {
+  colorTable(days: string, top: number, boxHeight: number, displayKey: string, crn: string, color: string, hover: boolean) {
     for (const day of days) {
       const colorBox = this.renderer.createElement('div');
       this.renderer.addClass(colorBox, 'color-box');
       this.renderer.setProperty(colorBox, 'id', crn); // to make deleting easy
-      this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, color, top));
+      this.renderer.setAttribute(colorBox, 'style', this.formStyle(boxHeight, color, top, hover));
       this.renderer.setProperty(colorBox, 'innerHTML', displayKey);
       this.renderer.appendChild(this.colorCols[this.courseService.dayToIndex(day)], colorBox);
     }
   }
 
-  formStyle(boxHeight: number, backgroundColor: string, top: number) {
+  formStyle(boxHeight: number, backgroundColor: string, top: number, hover: boolean) {
+    if (hover) {
+      return 'background-color: ' + backgroundColor + '; height: ' + boxHeight + 'px; top: ' + top + '%; opacity: ' + OPACITY + ';';
+    }
     return 'background-color: ' + backgroundColor + '; height: ' + boxHeight + 'px; top: ' + top + '%;';
   }
 

@@ -61,6 +61,7 @@ export const TIME_END = 23;
 export const BOX_MIN = 60; // one box = 60 minutes
 export const BOX_HEIGHT = 50;
 export const NUM_ROW = 17;
+export const OPACITY = 0.3;
 
 // Local Storage
 export const SCHEDULES = 'schedules';
