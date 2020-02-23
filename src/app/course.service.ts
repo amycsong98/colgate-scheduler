@@ -73,6 +73,7 @@ export class CourseService {
         return { result: FAIL, message: 'The class is already added.' };
       } else if (this.isTimeDuplicate(courses, course)) {
         alert('Time conflict found');
+        course[COLOR] = '';
         return { result: FAIL, message: 'Time conflict.' };
       }
       courses.push(course);
