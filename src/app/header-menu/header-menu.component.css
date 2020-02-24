@@ -3,3 +3,8 @@
         visibility: hidden;
     }
 }
+
+.floatRight {
+    position: absolute;
+    right: 0px;
+}
