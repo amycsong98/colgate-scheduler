@@ -164,6 +164,10 @@ export class HeaderMenuComponent implements OnInit {
     this.displayMessage(SCHEDULE_DEFAULT_CHANGE_SUCCESS_MSG);
   }
 
+  printSchedule() {
+    window.print();
+  }
+
   displayMessage(message: string) {
     this.snackBar.open(message, ACTION_OK, {
       duration: 2000,
