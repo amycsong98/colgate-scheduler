@@ -1,3 +1,5 @@
+<mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
+
 <div class="example-container mat-elevation-z8" *ngIf="searched">
     <table mat-table [dataSource]="courses" id="course_table">
         <div id="row">

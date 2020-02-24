@@ -17,6 +17,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CookieService } from 'ngx-cookie-service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -64,7 +65,8 @@ import { HeaderMenuComponent, DialogScheduleNameComponent } from './header-menu/
     MatRadioModule,
     MatToolbarModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     CookieService,

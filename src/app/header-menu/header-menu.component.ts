@@ -168,6 +168,10 @@ export class HeaderMenuComponent implements OnInit {
     window.print();
   }
 
+  reload() {
+    location.reload();
+  }
+
   displayMessage(message: string) {
     this.snackBar.open(message, ACTION_OK, {
       duration: 2000,

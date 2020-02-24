@@ -17,6 +17,8 @@ import {
   styleUrls: ['./course-lister.component.css']
 })
 export class CourseListerComponent implements OnInit {
+  isLoading: boolean;
+
   displayedColumns: string[] = ['Course',	'Title',	'Meets',	'Status',	'Restrictions'];
 
   courses: object[];
@@ -30,12 +32,17 @@ export class CourseListerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoading = false;
+
     this.dataPassService.currentData.subscribe(
       data => {
         if (data[ACTION] === ACTION_SEARCH) {
+          this.isLoading = true;
+
           const url = data[DATA];
           this.courseService.searchCourses(url).subscribe(
             res => {
+              this.isLoading = false;
               this.courses = res;
               this.searched = true;
             }
