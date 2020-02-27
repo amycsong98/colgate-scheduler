@@ -4,7 +4,53 @@
     }
 }
 
+#header-menu {
+    background-color: rgb(130, 16, 24);
+    height: 60px;
+}
+
 .floatRight {
     position: absolute;
     right: 0px;
+}
+
+.header-menu-icon {
+    padding: 0.5%;
+}
+
+#logo {
+    padding: 1%;
+}
+
+#term {
+    width: 110px;
+    padding: 1%;
+    font-size: 14px;
+}
+
+#schedule {
+    width: 150px;
+    padding: 1%;
+    font-size: 14px;
+}
+
+/* global */
+.capitalize { 
+    text-transform: capitalize;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    /* background-color: ; */
+}
+
+::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+::ng-deep .mat-form-field-wrapper{
+    margin-bottom: -1.25em;
 }

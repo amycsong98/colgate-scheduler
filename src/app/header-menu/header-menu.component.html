@@ -1,34 +1,31 @@
-<mat-toolbar color="primary">
-    <p (click)="reload()">Colgate Scheduler</p>
+<mat-toolbar id="header-menu" color="primary">
+    <p id="logo" class="clickable" (click)="reload()">Colgate Scheduler</p>
 
     <!-- terms -->
-    <mat-form-field>
+    <mat-form-field id="term">
         <!-- <mat-label>TERM</mat-label> -->
         <mat-select name="currentTerm" [(ngModel)]="currentTerm" (selectionChange)="changeCurrentTerm($event.value)">
             <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
-                {{ term.TERM_DESC }}
+                {{ term.TERM_DESC | uppercase }}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
     <!-- schedule -->
-    <mat-form-field>
+    <mat-form-field id="schedule">
         <mat-select name="currentSchedule" [(ngModel)]="currentSchedule" (selectionChange)="changeCurrentSchedule($event.value)">
             <mat-option *ngFor="let schedule of schedules" [value]="schedule">
-                {{ schedule }}
+                {{ schedule | uppercase }}
             </mat-option>
         </mat-select>
     </mat-form-field>
 
-    <div class="dontPrint">
-        <mat-icon (click)="changeDefaultSchedule()">favorite</mat-icon>
-        <mat-icon (click)="newSchedule()">add</mat-icon>
-        <mat-icon (click)="duplicateSchedule()">file_copy</mat-icon>
-        <mat-icon (click)="deleteSchedule()">delete</mat-icon>
-        <mat-icon (click)="editSchedule()">edit</mat-icon>
-    </div>
-
-    <div class="dontPrint floatRight">
-        <mat-icon (click)="printSchedule()">print</mat-icon>
-    </div>
+    <mat-icon class="clickable header-menu-icon dontPrint" (click)="changeDefaultSchedule()">favorite</mat-icon>
+    <mat-icon class="clickable header-menu-icon dontPrint" (click)="newSchedule()">add</mat-icon>
+    <mat-icon class="clickable header-menu-icon dontPrint" (click)="duplicateSchedule()">file_copy</mat-icon>
+    <mat-icon class="clickable header-menu-icon dontPrint" (click)="deleteSchedule()">delete</mat-icon>
+    <mat-icon class="clickable header-menu-icon dontPrint" (click)="editSchedule()">edit</mat-icon>
+    
+    <!-- float right -->
+    <mat-icon class="clickable header-menu-icon dontPrint floatRight" (click)="printSchedule()">print</mat-icon>
 </mat-toolbar>
