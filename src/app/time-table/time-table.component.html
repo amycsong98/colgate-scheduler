@@ -1,4 +1,4 @@
-<div>
+<div class="timetable">
     <!-- time -->
     <!-- entire row -->
     <div class="col">
@@ -6,7 +6,7 @@
         <div class="time-box header">&nbsp;</div>
         <!-- under time -->
         <div>
-            <div class="time-box" *ngFor="let n of [7,8,9,10,11,24,13,14,15,16,17,18,19,20,21,22,23]">{{ n > 12 ? (n - 12) + ' pm' : n + ' am' }}</div>
+            <div class="time-box box-{{n}}" *ngFor="let n of [7,8,9,10,11,24,13,14,15,16,17,18,19,20,21,22,23]">{{ n > 12 ? (n - 12) + ' pm' : n + ' am' }}</div>
         </div>
     </div>
     <!-- entire row -->
@@ -16,10 +16,9 @@
         <div class="under-day">
             <!-- under day color -->
             <div class="color-col" id="color-col-{{d}}">
-                <!-- <div id="color-box" style="background-color: red;"></div> -->
             </div>
             <!-- boxes -->
-            <div *ngFor="let n of [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]" class="reg-box"></div>
+            <div *ngFor="let n of [7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]" class="reg-box box-{{n}}"></div>
         </div>
     </div>
 </div>

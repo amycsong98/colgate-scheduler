@@ -1,3 +1,8 @@
+.timetable {
+    padding: 3%;
+    width: 100%;
+}
+
 .color-col {
     position: absolute;
     height: 100%;
@@ -11,7 +16,7 @@
 .color-box {
     border: 1px solid rgba(0, 0, 0, 0.12);
     /* height: 50px; */
-    width: 100px;
+    min-width: 100px;
     position: absolute;
     /* top: 6.25%; */
 }
@@ -20,18 +25,35 @@
     float: left;
 }
 
+
+
 .reg-box {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    height: 50px;
-    width: 100px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 40px;
+    min-width: 100px;
 }
 
 .time-box {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    height: 50px;
-    width: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    min-height: 40px;
+    min-width: 50px;
+    border-left: none;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
 }
 
 .header {
-    height: 25px;
+    min-height: 20px;
+    text-align: center;
+    border-right: none;
+    text-align: center;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.box-23 {
+    border-bottom: none;
 }

@@ -1,3 +1,8 @@
 #table {
     float: left;
+    width: 50%;
+}
+
+.right-panel {
+    float: right;
 }
