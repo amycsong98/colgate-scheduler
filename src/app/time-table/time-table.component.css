@@ -14,11 +14,12 @@
 }
 
 .color-box {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    /* height: 50px; */
+    border: 0.5px solid rgba(0, 0, 0, 0.12);
     min-width: 100px;
     position: absolute;
-    /* top: 6.25%; */
+    border-radius: 10%;
+    font-size: 14px;
+    text-align: center;
 }
 
 .col {
