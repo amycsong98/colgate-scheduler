@@ -7,11 +7,15 @@
 #header-menu {
     background-color: rgb(130, 16, 24);
     height: 60px;
+    padding: 0 5%;
 }
 
-.floatRight {
-    position: absolute;
-    right: 0px;
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
 }
 
 .header-menu-icon {
@@ -19,20 +23,30 @@
 }
 
 #logo {
-    padding: 1%;
+    padding: 1% 1% 1% 0.5%;
 }
 
 #term {
-    width: 110px;
-    padding: 1%;
+    padding: 0.3% 0.5% 0.3% 1%;
     font-size: 14px;
+    width: fit-content;
 }
 
 #schedule {
-    width: 150px;
-    padding: 1%;
+    padding: 0.3% 0.5% 0.3% 1%;
     font-size: 14px;
+    width: fit-content;
 }
+
+::ng-deep mat-select .mat-select-value {
+    width: fit-content;
+    min-width: 2ch;
+    max-width: 25ch;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
 
 /* global */
 .capitalize { 
@@ -43,14 +57,10 @@
     cursor: pointer;
 }
 
-.clickable:hover {
-    /* background-color: ; */
+.border-radius-10 {
+    border-radius: 10px;
 }
 
-::ng-deep .mat-form-field-underline {
-    display: none;
-}
-
-::ng-deep .mat-form-field-wrapper{
-    margin-bottom: -1.25em;
+.hoverable:hover {
+    background-color: rgb(116, 12, 20);
 }

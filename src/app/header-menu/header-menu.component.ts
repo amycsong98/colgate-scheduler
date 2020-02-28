@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { CourseService } from '../course.service';
-import { 
+import {
   LASTEST_TERM, ACTION_TERM_CHANGE, SCHEDULE_NAME_ERROR_MSG, ACTION_OK, ACTION, ACTION_SCHEDULES_CHANGE,
   DATA, SCHEDULE_DEFAULT_CHANGE_SUCCESS_MSG
 } from '../constants';
@@ -21,11 +21,15 @@ export class HeaderMenuComponent implements OnInit {
   schedules: string[];
   currentSchedule: string;
 
+  // HTML width
+  scheduleWidth: number;
+
   constructor(
     private courseService: CourseService,
     private dataPassService: DataPassService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private renderer: Renderer2,
   ) { }
 
   ngOnInit() {
@@ -71,6 +75,7 @@ export class HeaderMenuComponent implements OnInit {
     this.schedules = this.courseService.getSchedules();
     this.currentSchedule = this.schedules[0];
     this.courseService.setCurrentSchedule(this.schedules[0]);
+    
   }
 
   changeCurrentSchedule(schedule: string) {
@@ -79,7 +84,6 @@ export class HeaderMenuComponent implements OnInit {
       this.currentSchedule = schedule;
       this.courseService.setCurrentSchedule(schedule);
     }
-
   }
 
   newSchedule() {

@@ -2,30 +2,35 @@
     <p id="logo" class="clickable" (click)="reload()">Colgate Scheduler</p>
 
     <!-- terms -->
-    <mat-form-field id="term">
-        <!-- <mat-label>TERM</mat-label> -->
-        <mat-select name="currentTerm" [(ngModel)]="currentTerm" (selectionChange)="changeCurrentTerm($event.value)">
-            <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
-                {{ term.TERM_DESC | uppercase }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <!-- <mat-label>TERM</mat-label> -->
+    <mat-select id="term" class="clickable hoverable border-radius-10" name="currentTerm" [(ngModel)]="currentTerm" (selectionChange)="changeCurrentTerm($event.value)">
+        <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
+            {{ term.TERM_DESC | uppercase }}
+        </mat-option>
+    </mat-select>
 
     <!-- schedule -->
-    <mat-form-field id="schedule">
-        <mat-select name="currentSchedule" [(ngModel)]="currentSchedule" (selectionChange)="changeCurrentSchedule($event.value)">
-            <mat-option *ngFor="let schedule of schedules" [value]="schedule">
-                {{ schedule | uppercase }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-icon class="clickable header-menu-icon dontPrint" (click)="changeDefaultSchedule()">favorite</mat-icon>
-    <mat-icon class="clickable header-menu-icon dontPrint" (click)="newSchedule()">add</mat-icon>
-    <mat-icon class="clickable header-menu-icon dontPrint" (click)="duplicateSchedule()">file_copy</mat-icon>
-    <mat-icon class="clickable header-menu-icon dontPrint" (click)="deleteSchedule()">delete</mat-icon>
-    <mat-icon class="clickable header-menu-icon dontPrint" (click)="editSchedule()">edit</mat-icon>
+    <mat-select id="schedule" class="clickable hoverable border-radius-10" name="currentSchedule" [(ngModel)]="currentSchedule" (selectionChange)="changeCurrentSchedule($event.value)">
+        <mat-option *ngFor="let schedule of schedules" [value]="schedule">
+            {{ schedule | uppercase }}
+        </mat-option>
+    </mat-select>
     
+
+    <mat-icon class="clickable hoverable header-menu-icon border-radius-10 dontPrint" (click)="changeDefaultSchedule()"
+        matTooltip="make default" matTooltipPosition="below">favorite</mat-icon>
+    <mat-icon class="clickable hoverable header-menu-icon border-radius-10 dontPrint" (click)="newSchedule()"
+        matTooltip="new" matTooltipPosition="below">add</mat-icon>
+    <mat-icon class="clickable hoverable header-menu-icon border-radius-10 dontPrint" (click)="duplicateSchedule()"
+        matTooltip="clone" matTooltipPosition="below">file_copy</mat-icon>
+    <mat-icon class="clickable hoverable header-menu-icon border-radius-10 dontPrint" (click)="deleteSchedule()"
+        matTooltip="delete" matTooltipPosition="below">delete</mat-icon>
+    <mat-icon class="clickable hoverable header-menu-icon border-radius-10 dontPrint" (click)="editSchedule()"
+        matTooltip="rename" matTooltipPosition="below">edit</mat-icon>
+    
+    <span class="example-spacer"></span>
+    <span flex></span>
     <!-- float right -->
-    <mat-icon class="clickable header-menu-icon dontPrint floatRight" (click)="printSchedule()">print</mat-icon>
+    <mat-icon class="clickable hoverable header-menu-icon border-radius-10 dontPrint float-right" (click)="printSchedule()"
+        matTooltip="print" matTooltipPosition="below">print</mat-icon>
 </mat-toolbar>
