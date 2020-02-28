@@ -1,6 +1,7 @@
 .timetable {
     padding: 3%;
     width: 100%;
+    display: flex;
 }
 
 .color-col {
@@ -23,10 +24,8 @@
 }
 
 .col {
-    float: left;
+    /* float: left;  */
 }
-
-
 
 .reg-box {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
