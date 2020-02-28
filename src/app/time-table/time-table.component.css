@@ -1,5 +1,4 @@
 .timetable {
-    padding: 3%;
     width: 100%;
     display: flex;
 }
@@ -21,6 +20,7 @@
     border-radius: 10px;
     font-size: 14px;
     text-align: center;
+    font-weight: bold;
 }
 
 .col {
