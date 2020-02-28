@@ -12,7 +12,10 @@ import { DataPassService } from '../data-pass.service';
 @Component({
   selector: 'app-header-menu',
   templateUrl: './header-menu.component.html',
-  styleUrls: ['./header-menu.component.css']
+  styleUrls: [
+    './header-menu.component.css',
+    '../colgate-scheduler.css'
+  ]
 })
 export class HeaderMenuComponent implements OnInit {
   terms: any[];

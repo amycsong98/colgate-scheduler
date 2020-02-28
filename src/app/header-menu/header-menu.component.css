@@ -10,18 +10,6 @@
     padding: 0 5%;
 }
 
-.float-left {
-    float: left;
-}
-
-.float-right {
-    float: right;
-}
-
-.header-menu-icon {
-    padding: 0.5%;
-}
-
 #logo {
     padding: 1% 1% 1% 0.5%;
 }
@@ -38,27 +26,8 @@
     width: fit-content;
 }
 
-::ng-deep mat-select .mat-select-value {
-    width: fit-content;
-    min-width: 2ch;
-    max-width: 25ch;
-}
-
-.example-spacer {
-    flex: 1 1 auto;
-  }
-
-/* global */
-.capitalize { 
-    text-transform: capitalize;
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-.border-radius-10 {
-    border-radius: 10px;
+.header-menu-icon {
+    padding: 0.5%;
 }
 
 .hoverable:hover {
