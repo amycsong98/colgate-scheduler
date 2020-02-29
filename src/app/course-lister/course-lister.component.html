@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
 
-<div class="example-container mat-elevation-z8" *ngIf="searched">
+<div *ngIf="searched">
     <table mat-table [dataSource]="courses" id="course_table">
         <div id="row">
             <!-- Course Column -->
@@ -59,4 +59,4 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="addCourse(row)" (mouseenter)="hoverCourse(row)" (mouseleave)="unhoverCourse(row)"></tr>
     </table>
-  </div>
+</div>

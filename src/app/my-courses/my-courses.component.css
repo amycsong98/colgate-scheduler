@@ -1,6 +1,4 @@
-table {
-  width: 100%;
-}
+
 
 @media print {
   :not(.printMe) {
