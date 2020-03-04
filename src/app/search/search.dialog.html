@@ -1,0 +1,98 @@
+<div class="container">
+    <form (ngSubmit)="onSubmit(search.value)" #search="ngForm">
+        <!-- Keyword -->
+        <mat-form-field style="width: 500px">
+            <input matInput name="keyword" [(ngModel)]="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
+        </mat-form-field>
+        <br>
+
+        <!-- Department/Program -->
+        <mat-expansion-panel expaned="false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Department/Program</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
+        </mat-expansion-panel>
+
+        <!-- Day and Time -->
+        <mat-expansion-panel expaned="false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>Day and Time</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <mat-label>DAY</mat-label><br>
+            <mat-checkbox (change)="updateCheckedDays('M', $event)">Monday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('T', $event)">Tuesday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('W', $event)">Wednesday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('R', $event)">Thursday</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedDays('F', $event)">Friday</mat-checkbox>
+            <br>
+
+            <mat-label>TIME</mat-label><br>
+            <mat-checkbox (change)="updateCheckedTimes('Morning', $event)">Morning (before noon)</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedTimes('Afternoon', $event)">Afternoon (12–5 p.m.)</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedTimes('Evening', $event)">Evening (after 5 p.m.)</mat-checkbox>
+        </mat-expansion-panel>
+
+        <!-- More Course Filters -->
+        <mat-expansion-panel expaned="false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>More Course Filters</mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <!-- Open Courses Only -->
+            <mat-checkbox name="open_course_only" [(ngModel)]="open_course_only">Open Courses Only</mat-checkbox>
+            <br>
+
+            <!-- Core Area -->
+            <mat-form-field>
+                <mat-label>CORE AREA</mat-label>
+                <mat-select name="core_area" [(ngModel)]="core_area">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option *ngFor="let area of coreAreas" [value]="area.CORE_AREA">
+                        {{ area.CORE_AREA }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+
+            <!-- Area of Inquiry -->
+            <mat-form-field>
+                <mat-label>AREA OF INQUIRY</mat-label>
+                <mat-select name="inquiry_area" [(ngModel)]="inquiry_area">
+                    <mat-option value="All">All</mat-option>
+                    <mat-option *ngFor="let area of inquiryAreas" [value]="area.INQUIRY_AREA">
+                        {{ area.INQUIRY_AREA }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+
+            <!-- Course Level -->
+            <mat-label>COURSE LEVEL</mat-label>
+            <mat-checkbox (change)="updateCheckedLevels('100', $event)">100</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedLevels('200', $event)">200</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedLevels('300', $event)">300</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedLevels('400', $event)">400</mat-checkbox>
+            <br>
+
+            <!-- Number of Credits -->
+            <mat-label>NUMBER OF CREDITS</mat-label>
+            <mat-checkbox (change)="updateCheckedCredits('0.25', $event)">0.25</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedCredits('0.5', $event)">0.5</mat-checkbox>
+            <mat-checkbox (change)="updateCheckedCredits('1.0', $event)">1.0</mat-checkbox>
+            <br>
+
+        </mat-expansion-panel>
+        <br>
+
+        <div mat-dialog-actions>
+            <button mat-button type="button" (click)="onNoClick()">Cancel</button>
+            <button mat-button type="submit" [mat-dialog-close]="true">Search</button>
+        </div>
+        
+    </form>
+
+    <!-- {{terms | json}} -->
+</div>

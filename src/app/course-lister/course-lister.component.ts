@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { URL_TEST, ACTION_ADD } from '../constants';
+import { ACTION_ADD } from '../constants';
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
 import {
