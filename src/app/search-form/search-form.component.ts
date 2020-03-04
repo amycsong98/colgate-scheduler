@@ -76,45 +76,52 @@ export class SearchFormComponent implements OnInit {
     console.log(this.levelsSelected);
     console.log(this.creditsSelected);
 
-      const prefix = "https://api.colgate.edu/v1/courses/search?";
-      if (this.keyword) this.keyword = this.keyword.replace(/ /g, "+")
-      let keywordCode = "keyword="
-      keywordCode += this.keyword? this.keyword : "";
-      
-      let termCode = "&termCode=";
-      termCode += this.termSelected? this.termSelected : "";
-  
-      let programCode = "";
-      for (const program of this.programsSelected) {
-        programCode += "&program[]=" + program;
-      }
-
-      let coreCode = "&coreArea=";
-      coreCode += data['core_area'] ? data['core_area'] : "";
-
-      let inquiryCode = "&inquiryArea=" 
-      inquiryCode += data['inquiryArea'] ? this.inquiryAreas : "";
-  
-      let dayCode = "";
-      for (const day of this.daysSelected) {
-        dayCode += "&meetDays[]=" + day;
-      }
-  
-      var timeCode;
-      for (const time of this.timesSelected) {
-        timeCode = time == "Morning" ? "&meetTimeMorning=Y" : "&meetTimeMorning=false";
-        timeCode += time == "Afternoon" ? "&meetTimeAfternoon=Y" : "&meetTimeAfternoon=";
-        timeCode += time == "Evening" ? "&meetTimeEvening=Y" : "&meetTimeEvening=";
-      }
-
-      if (this.timesSelected.length == 0) timeCode = "&meetTimeMorning=false&meetTimeAfternoon=&meetTimeEvening="
-     
-      var openOnlyCode = this.isOpenCourseOnly? "&openCoursesOnly=Y" : "&openCoursesOnly=";
-  
-      const url = prefix + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
-    
-
+    const searchUrl = this.formSearchUrl(data); 
     this.dataPassService.sendData({ action: ACTION_SEARCH, data: url });
+  }
+
+  formSearchUrl(data: any) {
+    const prefix = 'https://api.colgate.edu/v1/courses/search?';
+    if (this.keyword) {
+      this.keyword = this.keyword.replace(/ /g, '+');
+    }
+
+    let keywordCode = 'keyword=';
+    keywordCode += this.keyword ? this.keyword : '';
+
+    let termCode = '&termCode=';
+    termCode += this.courseService.getCurrentTerm();
+
+    let programCode = '';
+    for (const program of this.programsSelected) {
+      programCode += '&program[]=' + program;
+    }
+
+    let coreCode = '&coreArea=';
+    coreCode += data['core_area'] ? data['core_area'] : '';
+
+    let inquiryCode = '&inquiryArea=';
+    inquiryCode += data['inquiryArea'] ? this.inquiryAreas : '';
+
+    let dayCode = '';
+    for (const day of this.daysSelected) {
+      dayCode += '&meetDays[]=' + day;
+    }
+
+    let timeCode;
+    for (const time of this.timesSelected) {
+      timeCode = time === 'Morning' ? '&meetTimeMorning=Y' : '&meetTimeMorning=false';
+      timeCode += time === 'Afternoon' ? '&meetTimeAfternoon=Y' : '&meetTimeAfternoon=';
+      timeCode += time === 'Evening' ? '&meetTimeEvening=Y' : '&meetTimeEvening=';
+    }
+
+    if (this.timesSelected.length == 0) {
+      timeCode = '&meetTimeMorning=false&meetTimeAfternoon=&meetTimeEvening=';
+    }
+
+    const openOnlyCode = this.isOpenCourseOnly ? '&openCoursesOnly=Y' : '&openCoursesOnly=';
+
+    const url = prefix + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
   }
 
   // checked box updates

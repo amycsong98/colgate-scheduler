@@ -10,17 +10,6 @@
                 <input matInput name="keyword" [(ngModel)]="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
             </mat-form-field>
             <br>
-        
-            <!-- Term -->
-            <mat-form-field>
-                <mat-label>TERM</mat-label>
-                <mat-select name="term" [(ngModel)]="termSelected">
-                    <mat-option *ngFor="let term of terms" [value]="term.TERM_CODE">
-                        {{ term.TERM_DESC }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <br>
 
             <!-- Department/Program -->
             <mat-expansion-panel>
