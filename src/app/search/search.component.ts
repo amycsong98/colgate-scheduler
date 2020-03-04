@@ -23,15 +23,7 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    const dialogRef = this.dialog.open(DialogSearchComponent, {
-      data: {  }
-    });
-
-    dialogRef.afterClosed().subscribe(
-      res => {
-        console.log(res);
-      }
-    );
+    this.dialog.open(DialogSearchComponent);
   }
 }
 
@@ -39,8 +31,7 @@ export class SearchComponent implements OnInit {
   selector: 'app-search-dialog',
   templateUrl: './search.dialog.html',
 })
-export class DialogSearchComponent {
-  terms: any[]; // array of {TERM_CODE: "201902", TERM_DESC: "Spring 2020"}
+export class DialogSearchComponent implements OnInit {
   programs: any[]; // array of {"AREA_CODE":"ALS1","AREA_DESC":"African American Studies"}
   coreAreas: any[]; // array of {CORE_AREA: "Challenges of Modernity"}
   inquiryAreas: any[]; //
@@ -55,24 +46,24 @@ export class DialogSearchComponent {
   creditsSelected = [];
   isOpenCourseOnly: boolean;
 
+  //
+  dataReady: boolean;
+
   constructor(
     public dialogRef: MatDialogRef<DialogSearchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private courseService: CourseService,
     private dataPassService: DataPassService,
   ) {
-    // initialize terms
-    this.courseService.getTerms().subscribe(
-      res => {
-        this.terms = res;
-      }
-    );
+  }
 
+  ngOnInit() {
     // initialize department / program
     this.courseService.getPrograms().subscribe(
       res => {
         this.programs = res;
         console.log(this.programs);
+        this.dataReady = true;
       }
     );
 
@@ -91,8 +82,6 @@ export class DialogSearchComponent {
         console.log(this.inquiryAreas);
       }
     );
-
-    // this.panelOpenState = true;
   }
 
   onNoClick(): void {

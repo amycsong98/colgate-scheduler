@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="dataReady">
     <form (ngSubmit)="onSubmit(search.value)" #search="ngForm">
         <!-- Keyword -->
-        <mat-form-field style="width: 500px">
+        <mat-form-field>
             <input matInput name="keyword" [(ngModel)]="keyword" placeholder="DEPARTMENT, COURSE NUMBER, OR INSTRUCTOR LAST NAME">
         </mat-form-field>
         <br>
@@ -83,7 +83,6 @@
             <mat-checkbox (change)="updateCheckedCredits('0.5', $event)">0.5</mat-checkbox>
             <mat-checkbox (change)="updateCheckedCredits('1.0', $event)">1.0</mat-checkbox>
             <br>
-
         </mat-expansion-panel>
         <br>
 
