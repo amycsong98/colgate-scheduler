@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
-import { ACTION_SEARCH, URL_TEST } from '../constants';
+import { ACTION_SEARCH, URL_PREFIX } from '../constants';
 
 @Component({
   selector: 'app-search-form',
@@ -76,12 +76,11 @@ export class SearchFormComponent implements OnInit {
     console.log(this.levelsSelected);
     console.log(this.creditsSelected);
 
-    const searchUrl = this.formSearchUrl(data); 
-    this.dataPassService.sendData({ action: ACTION_SEARCH, data: url });
+    const searchUrl = this.formSearchUrl(data);
+    this.dataPassService.sendData({ action: ACTION_SEARCH, data: searchUrl });
   }
 
   formSearchUrl(data: any) {
-    const prefix = 'https://api.colgate.edu/v1/courses/search?';
     if (this.keyword) {
       this.keyword = this.keyword.replace(/ /g, '+');
     }
@@ -121,7 +120,8 @@ export class SearchFormComponent implements OnInit {
 
     const openOnlyCode = this.isOpenCourseOnly ? '&openCoursesOnly=Y' : '&openCoursesOnly=';
 
-    const url = prefix + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
+    const url = URL_PREFIX + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
+    return url;
   }
 
   // checked box updates

@@ -7,8 +7,8 @@ export const URL_CORE_AREAS = 'https://api.colgate.edu/v1/courses/search/core-ar
 export const URL_TERMS = 'https://api.colgate.edu/v1/courses/search/terms';
 export const URL_INQUIRY_AREAS = 'https://api.colgate.edu/v1/courses/search/inquiry-areas';
 
-// export const testSearch = 'https://api.colgate.edu/v1/courses/search?keyword=&termCode=201902&program[]=COSC&coreArea=&inquiryArea=&meetTimeMorning=&meetTimeAfternoon=&meetTimeEvening=&openCoursesOnly=';
-export const URL_TEST = 'https://api.colgate.edu/v1/courses/search?keyword=&termCode=201902&coreArea=&inquiryArea=&meetTimeMorning=&meetTimeAfternoon=&meetTimeEvening=&openCoursesOnly=';
+export const URL_PREFIX = 'https://api.colgate.edu/v1/courses/search?';
+export const URL_ALL = 'https://api.colgate.edu/v1/courses/search?keyword=&termCode=201902&coreArea=&inquiryArea=&meetTimeMorning=&meetTimeAfternoon=&meetTimeEvening=&openCoursesOnly=';
 
 // Course fields
 export const CRN = 'CRN';
