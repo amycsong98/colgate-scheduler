@@ -33,3 +33,10 @@
 .hoverable:hover {
     background-color: rgb(116, 12, 20);
 }
+
+
+mat-select .mat-select-value {
+    width: fit-content;
+    min-width: 2ch;
+    max-width: 25ch;
+}

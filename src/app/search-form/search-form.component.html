@@ -1,4 +1,4 @@
-<mat-expansion-panel [expanded]="true">
+<mat-expansion-panel [expanded]="panelOpenState">
     <mat-expansion-panel-header>
         <mat-panel-title>Search</mat-panel-title>
     </mat-expansion-panel-header>
@@ -19,7 +19,6 @@
 
                 <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
             </mat-expansion-panel>
-            <br>
 
             <!-- Day and Time -->
             <mat-expansion-panel>
@@ -40,7 +39,6 @@
                 <mat-checkbox (change)="updateCheckedTimes('Afternoon', $event)">Afternoon (12–5 p.m.)</mat-checkbox>
                 <mat-checkbox (change)="updateCheckedTimes('Evening', $event)">Evening (after 5 p.m.)</mat-checkbox>
             </mat-expansion-panel>
-            <br>
 
             <!-- More Course Filters -->
             <mat-expansion-panel>

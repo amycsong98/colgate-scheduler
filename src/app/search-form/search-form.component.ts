@@ -27,7 +27,7 @@ export class SearchFormComponent implements OnInit {
   isOpenCourseOnly: boolean;
 
   //
-  panelOpenState = false;
+  panelOpenState;
 
   constructor(
     private courseService: CourseService,
@@ -66,6 +66,7 @@ export class SearchFormComponent implements OnInit {
       }
     );
 
+    this.panelOpenState = true;
   }
 
   onSubmit(data: any) {
@@ -78,6 +79,8 @@ export class SearchFormComponent implements OnInit {
 
     const searchUrl = this.formSearchUrl(data);
     this.dataPassService.sendData({ action: ACTION_SEARCH, data: searchUrl });
+    
+    this.panelOpenState = false;
   }
 
   formSearchUrl(data: any) {
