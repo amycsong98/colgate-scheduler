@@ -3,15 +3,18 @@
         <mat-panel-title>My Courses</mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div class="example-container">
+    <div>
+        
+    </div>
+
+    <div>
         <table mat-table [dataSource]="courses" id="course_table">
             <div id="row">
                 <!-- Course Column -->
                 <ng-container matColumnDef="Course">
                     <th mat-header-cell *matHeaderCellDef> Course </th>
                     <td mat-cell *matCellDef="let course"> 
-                        {{ course.DISPLAY_KEY }} <br>
-                        CRN: {{ course.CRN }}
+                        {{ course.DISPLAY_KEY }}
                     </td>
                 </ng-container>
                 
@@ -19,8 +22,7 @@
                 <ng-container matColumnDef="Title">
                     <th mat-header-cell *matHeaderCellDef> Title </th>
                     <td mat-cell *matCellDef="let course">
-                        <a href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a><br>
-                        Instructor: {{ course.INSTRUCTOR1_NAME }}<span *ngIf="course.INSTRUCTOR2_NAME">, {{ course.INSTRUCTOR2_NAME }}</span><span *ngIf="course.INSTRUCTOR3_NAME">, {{ course.INSTRUCTOR3_NAME }}</span>
+                        <a href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a>
                     </td>
                 </ng-container>
 
