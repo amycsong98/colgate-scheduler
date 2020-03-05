@@ -16,7 +16,7 @@
             <ng-container matColumnDef="Title">
                 <th mat-header-cell *matHeaderCellDef> Title </th>
                 <td mat-cell *matCellDef="let course">
-                    <a href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a><br>
+                    <a target="_blank" href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a><br>
                     Instructor: {{ course.INSTRUCTOR1_NAME }}<span *ngIf="course.INSTRUCTOR2_NAME">, {{ course.INSTRUCTOR2_NAME }}</span><span *ngIf="course.INSTRUCTOR3_NAME">, {{ course.INSTRUCTOR3_NAME }}</span>
                 </td>
             </ng-container>

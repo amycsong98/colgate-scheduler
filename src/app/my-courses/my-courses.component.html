@@ -6,7 +6,8 @@
     <div>
         <mat-list *ngFor="let course of courses">
             <mat-list-item>
-                {{ course.DISPLAY_KEY }} - {{ course.TITLE }}
+                {{ course.DISPLAY_KEY }} - &nbsp;
+                <a target="_blank" href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}">{{ course.TITLE }}</a>
                 <span class="spacer"></span>
                 <span flex></span>
                 <mat-icon (click)="deleteCourse(course)">delete</mat-icon>
