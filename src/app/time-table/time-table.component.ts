@@ -6,7 +6,7 @@ import {
   ACTION_HOVER, ACTION_UNHOVER, ACTION_ADD, ACTION, DATA, BOX_HEIGHT, BOX_MIN, NUM_ROW,
   DISPLAY_KEY, COURSE_STIME2, COURSE_STIME3, COURSE_ETIME2, COURSE_ETIME3, ACTION_DELETE, CRN, ACTION_TERM_CHANGE, COLOR,
   COURSE_STIME_AMPM1, COURSE_STIME_AMPM2, COURSE_STIME_AMPM3, COURSE_ETIME_AMPM1, COURSE_ETIME_AMPM2, COURSE_ETIME_AMPM3,
-  ACTION_SCHEDULE_CHANGE, OPACITY
+  ACTION_SCHEDULE_CHANGE, OPACITY, ACTION_UPDATE
 } from '../constants';
 import { DataPassService } from '../data-pass.service';
 
@@ -40,6 +40,12 @@ export class TimeTableComponent implements AfterViewInit {
         } else if (data[ACTION] === ACTION_DELETE ) {
           const course = data[DATA];
           this.removeCourseFromDisplay(course);
+        } else if (data[ACTION] === ACTION_UPDATE) {
+          
+          const course = data[DATA];
+          console.log(course);
+          this.removeCourseFromDisplay(course);
+          this.addCourseToDisplay(data[DATA], false);
         } else if (data[ACTION] === ACTION_TERM_CHANGE) { // optimize this?
           this.colorCols = [];
           this.initializeColorCols();
