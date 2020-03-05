@@ -1,20 +1,18 @@
 <mat-expansion-panel id="my-courses" [expanded]="true">
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header [collapsedHeight]="'45px'" [expandedHeight]="'45px'">
         <mat-panel-title>My Courses</mat-panel-title>
     </mat-expansion-panel-header>
 
-    <div>
-        <mat-list *ngFor="let course of courses">
-            <mat-list-item>
-                {{ course.DISPLAY_KEY }} - &nbsp;
-                <a target="_blank" href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}">{{ course.TITLE }}</a>
-                <span class="spacer"></span>
-                <span flex></span>
-                <mat-icon (click)="deleteCourse(course)">delete</mat-icon>
-                <mat-icon (click)="changeCourse(course)">settings</mat-icon>
-
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </mat-list>
-    </div>
+    <mat-list *ngFor="let course of courses">
+        <mat-list-item id="list">
+            <span [style.background-color]="course['COLOR']"> &nbsp; </span> &nbsp;
+            {{ course.DISPLAY_KEY }} - &nbsp;
+            <a target="_blank" href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}">{{ course.TITLE }}</a>
+            <span class="spacer"></span>
+            <span flex></span>
+            <mat-icon class="icon clickable" (click)="deleteCourse(course)">delete</mat-icon>
+            <mat-icon class="icon clickable" (click)="changeCourse(course)">settings</mat-icon>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
 </mat-expansion-panel>

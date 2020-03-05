@@ -8,3 +8,20 @@
   min-width: 600px;
 }
 
+#list {
+  height: 30px;
+}
+
+:host ::ng-deep .mat-expansion-panel-body {
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-bottom: 4px;
+}
+
+:host ::ng-deep .mat-list-item-content {
+  padding: 0;
+}
+
+.icon {
+  margin-left: 1%;
+}
