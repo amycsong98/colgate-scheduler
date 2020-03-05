@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" [@.disabled]="disableAnimation">
     <form (ngSubmit)="onSubmit(search.value)" #search="ngForm">
         <!-- Keyword -->
         <mat-form-field>
@@ -7,7 +7,7 @@
         <br>
 
         <!-- Department/Program -->
-        <mat-expansion-panel expaned="false">
+        <mat-expansion-panel [expanded]="false">
             <mat-expansion-panel-header>
                 <mat-panel-title>Department/Program</mat-panel-title>
             </mat-expansion-panel-header>
@@ -16,7 +16,7 @@
         </mat-expansion-panel>
 
         <!-- Day and Time -->
-        <mat-expansion-panel expaned="false">
+        <mat-expansion-panel [expanded]="false">
             <mat-expansion-panel-header>
                 <mat-panel-title>Day and Time</mat-panel-title>
             </mat-expansion-panel-header>
@@ -36,7 +36,7 @@
         </mat-expansion-panel>
 
         <!-- More Course Filters -->
-        <mat-expansion-panel expaned="false">
+        <mat-expansion-panel [expanded]="false">
             <mat-expansion-panel-header>
                 <mat-panel-title>More Course Filters</mat-panel-title>
             </mat-expansion-panel-header>

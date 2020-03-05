@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CourseService } from '../course.service';
 import { DataPassService } from '../data-pass.service';
@@ -64,7 +64,7 @@ export class SearchComponent implements OnInit {
   selector: 'app-search-dialog',
   templateUrl: './search.dialog.html',
 })
-export class DialogSearchComponent  {
+export class DialogSearchComponent implements AfterViewInit {
   // search form variables
   keyword: string;
   termSelected: string;
@@ -75,12 +75,20 @@ export class DialogSearchComponent  {
   creditsSelected = [];
   isOpenCourseOnly: boolean;
 
+  // for the bug: https://stackoverflow.com/questions/53518380/angular-7-material-expansion-panel-flicker
+  disableAnimation = true;
+
   constructor(
     public dialogRef: MatDialogRef<DialogSearchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dataPassService: DataPassService,
     private courseService: CourseService
   ) {
+  }
+
+  ngAfterViewInit(): void {
+    // timeout required to avoid the dreaded 'ExpressionChangedAfterItHasBeenCheckedError'
+    setTimeout(() => this.disableAnimation = false);
   }
 
   onNoClick(): void {
