@@ -1,7 +1,10 @@
-
-
 @media print {
   :not(.printMe) {
     visibility: hidden;
   }
 }
+
+#my-courses {
+  min-width: 600px;
+}
+

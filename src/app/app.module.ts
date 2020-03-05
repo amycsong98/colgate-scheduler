@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
 
 import { CookieService } from 'ngx-cookie-service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -72,7 +74,9 @@ import { SearchComponent, DialogSearchComponent } from './search/search.componen
     MatIconModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule,
+    MatListModule,
   ],
   providers: [
     CookieService,

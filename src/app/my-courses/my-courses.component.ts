@@ -11,7 +11,10 @@ import {
 @Component({
   selector: 'app-my-courses',
   templateUrl: './my-courses.component.html',
-  styleUrls: ['./my-courses.component.css']
+  styleUrls: [
+    './my-courses.component.css',
+    '../colgate-scheduler.css'
+  ]
 })
 export class MyCoursesComponent implements OnInit {
   displayedColumns: string[] = ['Course',	'Title',	'Meets',	'Status',	'Restrictions', 'delete', 'settings'];

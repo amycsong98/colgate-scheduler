@@ -1,83 +1,19 @@
-<mat-expansion-panel [expanded]="true">
+<mat-expansion-panel id="my-courses" [expanded]="true">
     <mat-expansion-panel-header>
         <mat-panel-title>My Courses</mat-panel-title>
     </mat-expansion-panel-header>
 
     <div>
-        
+        <mat-list *ngFor="let course of courses">
+            <mat-list-item>
+                {{ course.DISPLAY_KEY }} - {{ course.TITLE }}
+                <span class="spacer"></span>
+                <span flex></span>
+                <mat-icon (click)="deleteCourse(course)">delete</mat-icon>
+                <mat-icon (click)="changeCourse(course)">settings</mat-icon>
+
+            </mat-list-item>
+            <mat-divider></mat-divider>
+        </mat-list>
     </div>
-
-    <div>
-        <table mat-table [dataSource]="courses" id="course_table">
-            <div id="row">
-                <!-- Course Column -->
-                <ng-container matColumnDef="Course">
-                    <th mat-header-cell *matHeaderCellDef> Course </th>
-                    <td mat-cell *matCellDef="let course"> 
-                        {{ course.DISPLAY_KEY }}
-                    </td>
-                </ng-container>
-                
-                <!-- Title Column -->
-                <ng-container matColumnDef="Title">
-                    <th mat-header-cell *matHeaderCellDef> Title </th>
-                    <td mat-cell *matCellDef="let course">
-                        <a href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a>
-                    </td>
-                </ng-container>
-
-                <!-- Meets Column -->
-                <ng-container matColumnDef="Meets">
-                    <th mat-header-cell *matHeaderCellDef> Meets </th>
-                    <td mat-cell *matCellDef="let course"> 
-                        <p *ngIf="course.MEET1_DAYS"> {{course.MEET1_DAYS}} <br> {{course.MEET1_BEGIN_TIME12}} {{course.MEET1_BEGIN_TIME12_AMPM}} - {{course.MEET1_END_TIME12}} {{course.MEET1_END_TIME12_AMPM}} </p> 
-                        <p *ngIf="!course.MEET1_DAYS">TBD</p>
-                        <p *ngIf="course.MEET2_DAYS"> {{course.MEET2_DAYS}} <br> {{course.MEET2_BEGIN_TIME12}} {{course.MEET2_BEGIN_TIME12_AMPM}} - {{course.MEET2_END_TIME12}} {{course.MEET2_END_TIME12_AMPM}} </p> 
-                        <p *ngIf="course.MEET3_DAYS"> {{course.MEET3_DAYS}} <br> {{course.MEET3_BEGIN_TIME12}} {{course.MEET3_BEGIN_TIME12_AMPM}} - {{course.MEET3_END_TIME12}} {{course.MEET3_END_TIME12_AMPM}} </p> 
-
-                    </td>
-                    <ng-template #elsespan>"TBD"</ng-template>
-                </ng-container>
-
-
-                <!-- Status Column -->
-                <ng-container matColumnDef="Status">
-                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let course"> {{course.STATUS}} 
-                        <p *ngIf="course.SEATS">{{course.SEATS}}</p>
-                        <p *ngIf="course.RESERVED_SEATS">{{course.RESERVED_SEATS}} </p>
-                    </td>
-                </ng-container>
-
-                <!-- Restrictions Column -->
-                <ng-container matColumnDef="Restrictions">
-                    <th mat-header-cell *matHeaderCellDef> Pre-Req/Restrictions </th>
-                    <td mat-cell *matCellDef="let course"> 
-                        <p *ngIf="course.PRE_REQS">{{course.PRE_REQS}} <br> </p>
-                        <p *ngIf="course.CLASS_YEAR_RESTRICTIONS">{{course.CLASS_YEAR_RESTRICTIONS}} <br> </p>
-                        <p *ngIf="course.MAJOR_RESTRICTIONS">{{course.MAJOR_RESTRICTIONS}} <br> </p>
-                        <p *ngIf="course.SPECIAL_APPROVAL">{{course.SPECIAL_APPROVAL}} <br> </p>
-                        <p *ngIf="course.CATALOG_RESTRICTIONS">{{course.CATALOG_RESTRICTIONS}} <br> </p>
-                    </td>
-                </ng-container>
-
-                <!-- Delete Column -->
-                <ng-container matColumnDef="delete">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let course"><mat-icon (click)="deleteCourse(course)">delete</mat-icon></td>
-                </ng-container>
-
-                <!-- Settings Column -->
-                <ng-container matColumnDef="settings">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let course"><mat-icon (click)="changeCourse(course)">settings</mat-icon></td>
-                </ng-container>
-            </div>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-    </div>
-
-
 </mat-expansion-panel>
