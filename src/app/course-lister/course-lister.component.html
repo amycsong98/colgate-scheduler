@@ -1,6 +1,6 @@
 <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
 
-<div *ngIf="searched">
+<div id="course-lister" *ngIf="searched">
     <table mat-table [dataSource]="courses" id="course_table">
         <div id="row">
             <!-- Course Column -->

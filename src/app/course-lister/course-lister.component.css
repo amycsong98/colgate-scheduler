@@ -4,6 +4,11 @@
   left: 50%;
 }
 
+#course-lister {
+  height: 500px;
+  overflow: auto;
+}
+
 @media print {
   :not(.printMe) {
     visibility: hidden;
