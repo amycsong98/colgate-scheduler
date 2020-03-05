@@ -14,48 +14,14 @@ import { URL_PREFIX, ACTION_SEARCH } from '../constants';
   ]
 })
 export class SearchComponent implements OnInit {
-
-  constructor(
-    public dialog: MatDialog
-  ) { }
-
-  ngOnInit() {
-  }
-
-  search() {
-    this.dialog.open(DialogSearchComponent);
-  }
-}
-
-@Component({
-  selector: 'app-search-dialog',
-  templateUrl: './search.dialog.html',
-})
-export class DialogSearchComponent implements OnInit {
   programs: any[]; // array of {"AREA_CODE":"ALS1","AREA_DESC":"African American Studies"}
   coreAreas: any[]; // array of {CORE_AREA: "Challenges of Modernity"}
   inquiryAreas: any[]; //
 
-  // search form variables
-  keyword: string;
-  termSelected: string;
-  programsSelected = [];
-  daysSelected = [];
-  timesSelected = [];
-  levelsSelected = [];
-  creditsSelected = [];
-  isOpenCourseOnly: boolean;
-
-  //
-  dataReady: boolean;
-
   constructor(
-    public dialogRef: MatDialogRef<DialogSearchComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialog: MatDialog,
     private courseService: CourseService,
-    private dataPassService: DataPassService,
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     // initialize department / program
@@ -63,7 +29,6 @@ export class DialogSearchComponent implements OnInit {
       res => {
         this.programs = res;
         console.log(this.programs);
-        this.dataReady = true;
       }
     );
 
@@ -82,6 +47,40 @@ export class DialogSearchComponent implements OnInit {
         console.log(this.inquiryAreas);
       }
     );
+  }
+
+  search() {
+    this.dialog.open(DialogSearchComponent, {
+      data: {
+        programs: this.programs,
+        coreAreas: this.coreAreas,
+        inquiryAreas: this.inquiryAreas
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'app-search-dialog',
+  templateUrl: './search.dialog.html',
+})
+export class DialogSearchComponent  {
+  // search form variables
+  keyword: string;
+  termSelected: string;
+  programsSelected = [];
+  daysSelected = [];
+  timesSelected = [];
+  levelsSelected = [];
+  creditsSelected = [];
+  isOpenCourseOnly: boolean;
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogSearchComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dataPassService: DataPassService,
+    private courseService: CourseService
+  ) {
   }
 
   onNoClick(): void {
@@ -120,7 +119,7 @@ export class DialogSearchComponent implements OnInit {
     coreCode += data['core_area'] ? data['core_area'] : '';
 
     let inquiryCode = '&inquiryArea=';
-    inquiryCode += data['inquiryArea'] ? this.inquiryAreas : '';
+    inquiryCode += data['inquiryArea'] ? data.inquiryAreas : '';
 
     let dayCode = '';
     for (const day of this.daysSelected) {

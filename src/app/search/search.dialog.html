@@ -1,4 +1,4 @@
-<div class="container" *ngIf="dataReady">
+<div class="container">
     <form (ngSubmit)="onSubmit(search.value)" #search="ngForm">
         <!-- Keyword -->
         <mat-form-field>
@@ -12,7 +12,7 @@
                 <mat-panel-title>Department/Program</mat-panel-title>
             </mat-expansion-panel-header>
 
-            <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
+            <mat-checkbox *ngFor="let program of data.programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
         </mat-expansion-panel>
 
         <!-- Day and Time -->
@@ -50,7 +50,7 @@
                 <mat-label>CORE AREA</mat-label>
                 <mat-select name="core_area" [(ngModel)]="core_area">
                     <mat-option value="All">All</mat-option>
-                    <mat-option *ngFor="let area of coreAreas" [value]="area.CORE_AREA">
+                    <mat-option *ngFor="let area of data.coreAreas" [value]="area.CORE_AREA">
                         {{ area.CORE_AREA }}
                     </mat-option>
                 </mat-select>
@@ -62,7 +62,7 @@
                 <mat-label>AREA OF INQUIRY</mat-label>
                 <mat-select name="inquiry_area" [(ngModel)]="inquiry_area">
                     <mat-option value="All">All</mat-option>
-                    <mat-option *ngFor="let area of inquiryAreas" [value]="area.INQUIRY_AREA">
+                    <mat-option *ngFor="let area of data.inquiryAreas" [value]="area.INQUIRY_AREA">
                         {{ area.INQUIRY_AREA }}
                     </mat-option>
                 </mat-select>
