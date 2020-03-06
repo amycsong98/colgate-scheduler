@@ -21,6 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { CookieService } from 'ngx-cookie-service';
 import { StorageServiceModule } from 'angular-webstorage-service';
@@ -79,6 +80,7 @@ import { ColorPickerComponent } from './color-picker/color-picker.component';
     MatTooltipModule,
     MatCardModule,
     MatListModule,
+    MatButtonToggleModule,
   ],
   providers: [
     CookieService,
