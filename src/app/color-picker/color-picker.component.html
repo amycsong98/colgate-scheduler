@@ -8,7 +8,7 @@
             <span id="chosen" [ngStyle]="{'background': color}"></span>
             <p>Hex Code</p>
             <div class="g-input">
-                <input type="text" maxlength="7" [value]="color" #paintInput />
+                <input type="text" maxlength="7" [value]="color" (keyup)="changeColorManual(colorInput.value)" #colorInput/>
             </div>
         </div>
     </div>

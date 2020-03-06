@@ -1,5 +1,6 @@
 #chosen {
     width: 10px;
+    box-shadow: 0 7px 13px 0 rgba(86, 95, 102, 0.07);
 }
 
 p {
