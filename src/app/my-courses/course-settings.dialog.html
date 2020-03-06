@@ -8,24 +8,23 @@
         </mat-button-toggle-group>
         <br>
 
-        <mat-label><span class="col1">End Time</span> <span class="col2">{{ data.courseCopy['MEET1_END_TIME12'] }}</span>
+        <mat-label><span class="col1">End Time</span> <span class="col2">{{ data.courseCopy['MEET1_END_TIME12'] }}</span></mat-label>
         <mat-button-toggle-group name="etime1" [(ngModel)]="data.courseCopy['MEET1_END_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>     
         </mat-button-toggle-group>
-    </mat-label>
     </div>
 
     <div *ngIf="data.courseCopy['MEET2_DAYS']">
         <p>Meet Day 2</p>
-        <mat-label>Start Time: {{ data.courseCopy['MEET2_BEGIN_TIME12'] }} </mat-label>
+        <mat-label><span class="col1">Start Time</span> <span class="col2">{{ data.courseCopy['MEET2_BEGIN_TIME12'] }}</span></mat-label>
         <mat-button-toggle-group name="stime2" [(ngModel)]="data.courseCopy['MEET2_BEGIN_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>         
         </mat-button-toggle-group>
         <br>
 
-        <mat-label>End Time: {{ data.courseCopy['MEET1_END_TIME12'] }} </mat-label>
+        <mat-label><span class="col1">End Time</span> <span class="col2">{{ data.courseCopy['MEET2_END_TIME12'] }}</span></mat-label>
         <mat-button-toggle-group name="etime2" [(ngModel)]="data.courseCopy['MEET2_END_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>        
@@ -34,14 +33,14 @@
 
     <div *ngIf="data.courseCopy['MEET3_DAYS']">
         <p>Meet Day 3</p>
-        <mat-label>Start Time: {{ data.courseCopy['MEET3_BEGIN_TIME12'] }} </mat-label>
+        <mat-label><span class="col1">Start Time</span> <span class="col2">{{ data.courseCopy['MEET3_BEGIN_TIME12'] }}</span></mat-label>
         <mat-button-toggle-group name="stime3" [(ngModel)]="data.courseCopy['MEET3_BEGIN_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>         
         </mat-button-toggle-group>
         <br>
 
-        <mat-label>End Time: {{ data.courseCopy['MEET3_END_TIME12'] }} </mat-label>
+        <mat-label><span class="col1">Start Time</span> <span class="col2">{{ data.courseCopy['MEET3_END_TIME12'] }}</span></mat-label>
         <mat-button-toggle-group name="etime3" [(ngModel)]="data.courseCopy['MEET3_END_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>           
