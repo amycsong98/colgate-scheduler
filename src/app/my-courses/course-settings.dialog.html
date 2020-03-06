@@ -55,7 +55,7 @@
         <input matInput name="color" [(ngModel)]="data.courseCopy['COLOR']" placeholder="COLOR">
     </mat-form-field> -->
 
-    <div mat-dialog-actions>
+    <div mat-dialog-actions align="end">
         <button mat-button (click)="onNoClick()">Cancel</button>
         <button mat-button [mat-dialog-close]="data" [disabled]="!settingsForm.valid" cdkFocusInitial>Ok</button>
     </div>

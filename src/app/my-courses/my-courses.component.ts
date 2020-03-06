@@ -86,6 +86,10 @@ export class MyCoursesComponent implements OnInit {
 @Component({
   selector: 'app-course-settings',
   templateUrl: './course-settings.dialog.html',
+  styleUrls: [
+    './course-settings.dialog.css',
+    '../colgate-scheduler.css'
+  ]
 })
 export class DialogCourseSettingsComponent {
   constructor(
