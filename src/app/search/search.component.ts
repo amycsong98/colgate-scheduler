@@ -55,7 +55,8 @@ export class SearchComponent implements OnInit {
         programs: this.programs,
         coreAreas: this.coreAreas,
         inquiryAreas: this.inquiryAreas
-      }
+      },
+      panelClass: 'search-dialog'
     });
   }
 }
@@ -63,6 +64,10 @@ export class SearchComponent implements OnInit {
 @Component({
   selector: 'app-search-dialog',
   templateUrl: './search.dialog.html',
+  styleUrls: [
+    './search.dialog.css',
+    '../colgate-scheduler.css'
+  ]
 })
 export class DialogSearchComponent implements AfterViewInit {
   // search form variables

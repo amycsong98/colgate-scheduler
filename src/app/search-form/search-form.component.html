@@ -17,7 +17,9 @@
                     <mat-panel-title>Department/Program</mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
+                <div id="checkbox">
+                    <mat-checkbox *ngFor="let program of programs" value="program.AREA_CODE" (change)="updateCheckedPrograms(program, $event)">{{ program.AREA_DESC }}</mat-checkbox>
+                </div>  
             </mat-expansion-panel>
 
             <!-- Day and Time -->

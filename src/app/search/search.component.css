@@ -1,3 +1,7 @@
 #search {
     min-width: 600px;
 }
+
+::ng-deep .search-dialog .mat-dialog-container {
+    padding: 12px 24px 3px 24px;
+}

@@ -1,0 +1,27 @@
+#dialog {
+    width: 850px;
+    height: auto;
+}
+
+#dialog-title {
+    margin: 0;
+}
+
+#keyword {
+    width: 100%;
+}
+
+.checkbox-program {
+    border: 1px transparent solid;
+    float: left;
+    min-width: 250px;
+}
+
+.checkbox {
+    margin-right: 2%;
+}
+
+.mat-dialog-actions {
+    padding: 0;
+    margin: 0;
+}
