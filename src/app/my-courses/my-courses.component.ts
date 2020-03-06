@@ -65,14 +65,18 @@ export class MyCoursesComponent implements OnInit {
     color, ampm
   */
   changeCourse(course: any) {
+    // to prevent background of &nbsp; from changing
+    const courseCopy = Object.assign({}, course);
+
     const dialogRef = this.dialog.open(DialogCourseSettingsComponent, {
-      data: { course }
+      data: { courseCopy }
     });
 
     dialogRef.afterClosed().subscribe(
       res => {
+        console.log(res);
         if (res) {
-          this.courseService.updateCourse(course);
+          this.courseService.updateCourse(courseCopy);
         }
       }
     );

@@ -1,0 +1,15 @@
+<div class="color-picker">
+    <div class="opened">
+        <div class="colors">
+            <div (click)="changeColor(color)" *ngFor="let color of defaultColors" class="circle" [ngStyle]="{'background': color}"></div>
+        </div>
+
+        <div class="hex-code">
+            <span id="chosen" [ngStyle]="{'background': color}"></span>
+            <p>Hex Code</p>
+            <div class="g-input">
+                <input type="text" maxlength="7" [value]="color" #paintInput />
+            </div>
+        </div>
+    </div>
+</div>
