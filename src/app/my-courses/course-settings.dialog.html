@@ -1,18 +1,19 @@
 <form #settingsForm="ngForm">
     <div *ngIf="data.courseCopy['MEET1_DAYS']">
         <p>Meet Day 1</p>
-        <mat-label>Start Time: {{ data.courseCopy['MEET1_BEGIN_TIME12'] }}</mat-label>
+        <mat-label><span class="col1">Start Time</span> <span class="col2">{{ data.courseCopy['MEET1_BEGIN_TIME12'] }}</span></mat-label>
         <mat-button-toggle-group name="stime1" [(ngModel)]="data.courseCopy['MEET1_BEGIN_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>
         </mat-button-toggle-group>
         <br>
 
-        <mat-label>End Time: {{ data.courseCopy['MEET1_END_TIME12'] }} </mat-label>
+        <mat-label><span class="col1">End Time</span> <span class="col2">{{ data.courseCopy['MEET1_END_TIME12'] }}</span>
         <mat-button-toggle-group name="etime1" [(ngModel)]="data.courseCopy['MEET1_END_TIME12_AMPM']">
             <mat-button-toggle value="am">AM</mat-button-toggle>
             <mat-button-toggle value="pm">PM</mat-button-toggle>     
         </mat-button-toggle-group>
+    </mat-label>
     </div>
 
     <div *ngIf="data.courseCopy['MEET2_DAYS']">

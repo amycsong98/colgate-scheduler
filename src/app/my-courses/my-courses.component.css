@@ -4,6 +4,10 @@
   }
 }
 
+#color {
+  width: 6px;
+}
+
 #my-courses {
   min-width: 600px;
 }

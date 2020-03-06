@@ -1,0 +1,22 @@
+.col1 {
+    display: inline-block;
+    width: 80px;
+}
+
+.col2 {
+    display: inline-block;
+    width: 50px;
+}
+
+mat-button-toggle-group {
+    height: 30px;
+}
+
+::ng-deep .mat-button-toggle-button {
+    height: 30px;
+}
+
+:host ::ng-deep .mat-button-toggle-label-content {
+    height: 30px;
+    line-height: 30px !important;
+}
