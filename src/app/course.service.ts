@@ -391,9 +391,11 @@ export class CourseService {
   }
 
   addNewSchedule(name: string) {
-    const schedules = this.getSchedules();
-    schedules.push(name);
-    this.setSchedules(schedules);
+    if (name) {
+      const schedules = this.getSchedules();
+      schedules.push(name);
+      this.setSchedules(schedules);
+    }
   }
 
   duplicateSchedule(name: string) {
