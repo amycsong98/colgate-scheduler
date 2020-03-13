@@ -361,12 +361,17 @@ export class CourseService {
   updateCourse(course: any) {
     const courses = this.getCourses();
 
-    const index = courses.findIndex(x => x[CRN] === course[CRN]);
+    // check for duplicate time
+    if (this.isTimeDuplicate(courses, course)) {
+      alert('Conflicting time. Please try again');
+    } else {
+      const index = courses.findIndex(x => x[CRN] === course[CRN]);
 
-    courses[index] = course;
+      courses[index] = course;
 
-    this.setCourses(courses);
-    this.dataPassService.sendData({ action: ACTION_UPDATE, data: course });
+      this.setCourses(courses);
+      this.dataPassService.sendData({ action: ACTION_UPDATE, data: course });
+    }
   }
 
 
