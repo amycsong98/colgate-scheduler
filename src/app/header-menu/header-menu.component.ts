@@ -195,6 +195,9 @@ export class DialogScheduleNameComponent {
     public dialogRef: MatDialogRef<DialogScheduleNameComponent>
   ) {}
 
+  //
+  newScheduleName;
+
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -83,6 +83,11 @@ export class DialogSearchComponent implements AfterViewInit {
   // for the bug: https://stackoverflow.com/questions/53518380/angular-7-material-expansion-panel-flicker
   disableAnimation = true;
 
+  //
+  open_course_only;
+  core_area;
+  inquiry_area;
+
   constructor(
     public dialogRef: MatDialogRef<DialogSearchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,

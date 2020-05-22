@@ -96,17 +96,17 @@ export interface AmPm {
   end3AmPm: string;
 }
 
-@Component({
-  selector: 'app-am-pm',
-  templateUrl: './am-pm.dialog.html',
-})
-export class DialogAmPmComponent {
-  constructor(
-    public dialogRef: MatDialogRef<DialogAmPmComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AmPm,
-    ) {}
+// @Component({
+//   selector: 'app-am-pm',
+//   templateUrl: './am-pm.dialog.html',
+// })
+// export class DialogAmPmComponent {
+//   constructor(
+//     public dialogRef: MatDialogRef<DialogAmPmComponent>,
+//     @Inject(MAT_DIALOG_DATA) public data: AmPm,
+//     ) {}
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-}
+//   onNoClick(): void {
+//     this.dialogRef.close();
+//   }
+// }

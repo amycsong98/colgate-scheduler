@@ -29,6 +29,12 @@ export class SearchFormComponent implements OnInit {
   //
   panelOpenState;
 
+
+  //
+  open_course_only;
+  core_area;
+  inquiry_area;
+
   constructor(
     private courseService: CourseService,
     private dataPassService: DataPassService,
