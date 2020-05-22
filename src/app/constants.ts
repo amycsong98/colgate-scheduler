@@ -1,5 +1,5 @@
 // variables
-export const LASTEST_TERM = '201902';
+export const LASTEST_TERM = '202001';
 
 // URLS
 export const URL_PROGRAM_AREAS = 'https://api.colgate.edu/v1/courses/search/program-areas';
