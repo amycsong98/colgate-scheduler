@@ -112,6 +112,8 @@ export class CourseService {
   }
 
   isTimeDuplicate(courses: any[], newCourse: any): boolean {
+
+
     const allDaysNew = this.getAllCourseDays(newCourse);
     const allStartTimeNew = this.getAllCourseStartTime(newCourse);
     const allEndTimeNew = this.getAllCourseEndTime(newCourse);
@@ -126,7 +128,9 @@ export class CourseService {
             for (let i = 0; i < allStartTimeNew.length; i++) {
               for (let j = 0; j < allStartTime.length; j++) {
                 if (this.timesConflict(allStartTimeNew[i], allEndTimeNew[i], allStartTime[j], allEndTime[j])) {
-                  return true;
+                  if (course[CRN] !== newCourse[CRN]) {
+                    return true;
+                  }
                 }
               }
             }
