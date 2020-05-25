@@ -52,6 +52,8 @@ export class CourseListerComponent implements OnInit {
     );
   }
 
+  
+
   addCourse(course: any) {
     this.courseService.guessAmPmAndAppend(course);
     this.courseService.addCourse(course);

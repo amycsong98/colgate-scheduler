@@ -1,16 +1,21 @@
 .spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
 }
 
 #course-lister {
-  height: 500px;
-  overflow: auto;
+    height: 500px;
+    overflow: auto;
+}
+
+.no-courses-found {
+    font-size: small;
+    color: grey;
 }
 
 @media print {
-  :not(.printMe) {
-    visibility: hidden;
-  }
+     :not(.printMe) {
+        visibility: hidden;
+    }
 }

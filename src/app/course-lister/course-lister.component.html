@@ -1,34 +1,37 @@
 <mat-spinner *ngIf="isLoading" class="spinner"></mat-spinner>
 
-<div id="course-lister" *ngIf="searched">
+<div *ngIf="searched && courses?.length == 0">
+    <p class="no-courses-found">No courses found</p>
+</div>
+
+<div *ngIf="courses?.length > 0 && searched" id="course-lister">
     <table mat-table [dataSource]="courses" id="course_table">
         <div id="row">
             <!-- Course Column -->
             <ng-container matColumnDef="Course">
                 <th mat-header-cell *matHeaderCellDef> Course </th>
-                <td mat-cell *matCellDef="let course"> 
-                    {{ course.DISPLAY_KEY }} <br>
-                    CRN: {{ course.CRN }}
+                <td mat-cell *matCellDef="let course">
+                    {{ course.DISPLAY_KEY }} <br> CRN: {{ course.CRN }}
                 </td>
             </ng-container>
-            
+
             <!-- Title Column -->
             <ng-container matColumnDef="Title">
                 <th mat-header-cell *matHeaderCellDef> Title </th>
                 <td mat-cell *matCellDef="let course">
-                    <a target="_blank" href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a><br>
-                    Instructor: {{ course.INSTRUCTOR1_NAME }}<span *ngIf="course.INSTRUCTOR2_NAME">, {{ course.INSTRUCTOR2_NAME }}</span><span *ngIf="course.INSTRUCTOR3_NAME">, {{ course.INSTRUCTOR3_NAME }}</span>
+                    <a target="_blank" href="https://www.colgate.edu/academics/course-offerings#/{{course.TERM_CODE}}/{{course.CRN}}"> {{ course.TITLE }} </a><br> Instructor: {{ course.INSTRUCTOR1_NAME }}<span *ngIf="course.INSTRUCTOR2_NAME">, {{ course.INSTRUCTOR2_NAME }}</span>
+                    <span *ngIf="course.INSTRUCTOR3_NAME">, {{ course.INSTRUCTOR3_NAME }}</span>
                 </td>
             </ng-container>
 
             <!-- Meets Column -->
             <ng-container matColumnDef="Meets">
                 <th mat-header-cell *matHeaderCellDef> Meets </th>
-                <td mat-cell *matCellDef="let course"> 
-                    <p *ngIf="course.MEET1_DAYS"> {{course.MEET1_DAYS}} <br> {{course.MEET1_BEGIN_TIME12}} - {{course.MEET1_END_TIME12}} </p> 
+                <td mat-cell *matCellDef="let course">
+                    <p *ngIf="course.MEET1_DAYS"> {{course.MEET1_DAYS}} <br> {{course.MEET1_BEGIN_TIME12}} - {{course.MEET1_END_TIME12}} </p>
                     <p *ngIf="!course.MEET1_DAYS">TBD</p>
-                    <p *ngIf="course.MEET2_DAYS"> {{course.MEET2_DAYS}} <br> {{course.MEET2_BEGIN_TIME12}} - {{course.MEET2_END_TIME12}} </p> 
-                    <p *ngIf="course.MEET3_DAYS"> {{course.MEET3_DAYS}} <br> {{course.MEET3_BEGIN_TIME12}} - {{course.MEET3_END_TIME12}} </p> 
+                    <p *ngIf="course.MEET2_DAYS"> {{course.MEET2_DAYS}} <br> {{course.MEET2_BEGIN_TIME12}} - {{course.MEET2_END_TIME12}} </p>
+                    <p *ngIf="course.MEET3_DAYS"> {{course.MEET3_DAYS}} <br> {{course.MEET3_BEGIN_TIME12}} - {{course.MEET3_END_TIME12}} </p>
 
                 </td>
                 <ng-template #elsespan>"TBD"</ng-template>
@@ -38,7 +41,7 @@
             <!-- Status Column -->
             <ng-container matColumnDef="Status">
                 <th mat-header-cell *matHeaderCellDef> Status </th>
-                <td mat-cell *matCellDef="let course"> {{course.STATUS}} 
+                <td mat-cell *matCellDef="let course"> {{course.STATUS}}
                     <p *ngIf="course.SEATS">{{course.SEATS}}</p>
                     <p *ngIf="course.RESERVED_SEATS">{{course.RESERVED_SEATS}} </p>
                 </td>
@@ -47,7 +50,7 @@
             <!-- Restrictions Column -->
             <ng-container matColumnDef="Restrictions">
                 <th mat-header-cell *matHeaderCellDef> Pre-Req/Restrictions </th>
-                <td mat-cell *matCellDef="let course"> 
+                <td mat-cell *matCellDef="let course">
                     <p *ngIf="course.PRE_REQS">{{course.PRE_REQS}} <br> </p>
                     <p *ngIf="course.CLASS_YEAR_RESTRICTIONS">{{course.CLASS_YEAR_RESTRICTIONS}} <br> </p>
                     <p *ngIf="course.MAJOR_RESTRICTIONS">{{course.MAJOR_RESTRICTIONS}} <br> </p>
@@ -55,8 +58,8 @@
                     <p *ngIf="course.CATALOG_RESTRICTIONS">{{course.CATALOG_RESTRICTIONS}} <br> </p>
                 </td>
             </ng-container>
-        </div>   
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="addCourse(row)" (mouseenter)="hoverCourse(row)" (mouseleave)="unhoverCourse(row)"></tr>
+        </div>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="addCourse(row)" (mouseenter)="hoverCourse(row)" (mouseleave)="unhoverCourse(row)"></tr>
     </table>
 </div>
