@@ -134,7 +134,9 @@ export class DialogSearchComponent implements AfterViewInit {
     }
 
     // Fix bug with core area communities & identities (ampersand replacement)
-    data['core_area'] = data['core_area'].replace('&', '%26');
+    if (data['core_area']) {
+      data['core_area'] = data['core_area'].replace('&', '%26');
+    }
 
     let coreCode = '&coreArea=';
     coreCode += data['core_area'] ? data['core_area'] : '';
