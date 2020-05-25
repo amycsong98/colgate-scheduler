@@ -11,7 +11,11 @@
 
 .no-courses-found {
     font-size: small;
-    color: grey;
+    color: sgrey;
+}
+
+.col {
+    padding-right: 3%;
 }
 
 @media print {
