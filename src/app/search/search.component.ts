@@ -165,7 +165,7 @@ export class DialogSearchComponent implements AfterViewInit {
       timeCode = '&meetTimeMorning=false&meetTimeAfternoon=&meetTimeEvening=';
     }
 
-    const openOnlyCode = this.isOpenCourseOnly ? '&openCoursesOnly=Y' : '&openCoursesOnly=';
+    const openOnlyCode = data['open_course_only'] ? '&openCoursesOnly=Y' : '&openCoursesOnly=';
 
     const url = URL_PREFIX + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
 
