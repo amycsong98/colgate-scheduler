@@ -141,8 +141,13 @@ export class DialogSearchComponent implements AfterViewInit {
     let coreCode = '&coreArea=';
     coreCode += data['core_area'] ? data['core_area'] : '';
 
+    // ampersand replacement
+    if (data['inquiry_area']) {
+      data['inquiry_area'] = data['inquiry_area'].replace('&', '%26');
+    }
+
     let inquiryCode = '&inquiryArea=';
-    inquiryCode += data['inquiryArea'] ? data.inquiryAreas : '';
+    inquiryCode += data['inquiry_area'] ? data['inquiry_area'] : '';
 
     let dayCode = '';
     for (const day of this.daysSelected) {
@@ -163,6 +168,9 @@ export class DialogSearchComponent implements AfterViewInit {
     const openOnlyCode = this.isOpenCourseOnly ? '&openCoursesOnly=Y' : '&openCoursesOnly=';
 
     const url = URL_PREFIX + keywordCode + termCode + programCode + coreCode + inquiryCode + dayCode + timeCode + openOnlyCode;
+
+    console.log(data);
+    console.log(url);
     return url;
   }
 
