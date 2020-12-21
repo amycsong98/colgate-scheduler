@@ -47,19 +47,23 @@ export class HeaderMenuComponent implements OnInit {
       }
     );
 
-    // get current term
     this.currentTerm = this.courseService.getCurrentTerm();
-    if (this.currentTerm === undefined) {
-      this.currentTerm = LASTEST_TERM;
-      this.courseService.setCurrentTerm(LASTEST_TERM);
-    }
 
     // initialize terms
     this.courseService.getTerms().subscribe(
       res => {
         this.terms = res;
+        console.log(this.terms)
+
+        // get current term
+        if (this.currentTerm === undefined) {
+          this.currentTerm = this.terms[0].TERM_CODE;
+          this.courseService.setCurrentTerm(this.currentTerm);
+        }
       }
     );
+
+    
 
     // initialize schedules
     this.schedules = this.courseService.getSchedules();
